@@ -4,6 +4,7 @@
     <string name="tab_text_2">GRAPH</string>
     <string name="tab_text_3">CALCULATE</string>
     <string name="action_settings">Settings</string>
+    <string name="action_Edit_Equip">Edit equipment</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="euip_use">Electricity usage</string>
     <string name="unit"> XXX watt</string>

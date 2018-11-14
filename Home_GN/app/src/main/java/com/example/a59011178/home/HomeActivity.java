@@ -72,7 +72,6 @@ public class HomeActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(HomeActivity.this, AddItemActivity.class);
                         startActivity(intent);
-                        finish();
                     }
                 }
 
@@ -91,11 +90,14 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // as you specify a parent activity in AndroidManifest.xml. action_Edit_Equip
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.action_Edit_Equip) {
             return true;
         }
 

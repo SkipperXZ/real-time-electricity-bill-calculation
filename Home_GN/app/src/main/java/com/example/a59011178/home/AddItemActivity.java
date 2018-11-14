@@ -80,10 +80,13 @@ public class AddItemActivity extends AppCompatActivity {
                             mhelper.addItem(item);
                         } else {
                             item.setId(ID);
+                            //mHelper.updateFriend(friend);
                         }
 
-                        Intent intent = new Intent(AddItemActivity.this, HomeActivity.class);
-                        startActivity(intent);
+                        Intent BackpressedIntent = new Intent();
+                        BackpressedIntent .setClass(getApplicationContext(),HomeActivity.class);
+                        BackpressedIntent .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(BackpressedIntent );
                         finish();
                     }
                 });
