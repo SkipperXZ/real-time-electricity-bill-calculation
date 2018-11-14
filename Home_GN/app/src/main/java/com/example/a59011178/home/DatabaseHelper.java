@@ -98,6 +98,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(Item.Column.NAME,item.getName());
         values.put(Item.Column.TYPE,item.getType());
         values.put(Item.Column.ABILITY,item.getAbility());
+        values.put(Item.Column.DATE,item.getDate());
+        values.put(Item.Column.HRperDay,item.getHrPerDay());
+        values.put(Item.Column.DAYperMONTH,item.getDayPerMonth());
 
         sqLiteDatabase.insert(Item.TABLE,null,values);
 
