@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.a59011178.home.DatabaseHelper;
 import com.example.a59011178.home.Item;
@@ -32,6 +34,7 @@ public class TabEquip extends Fragment {
 
         adapter = new ItemListAdapter_equip(this.getActivity(), mItemList);
         lvItem.setAdapter(adapter);
+
 
         return rootView;
 
