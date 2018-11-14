@@ -42,14 +42,14 @@ public class ItemListAdapter_cal extends BaseAdapter {
         TextView itemName = (TextView)v.findViewById(R.id.name_cal);
         TextView itemPower = (TextView)v.findViewById(R.id.power_cal);
 
-//        TextView itemType = (TextView)v.findViewById(R.id.Type);
-//        TextView itemAbility = (TextView)v.findViewById(R.id.Ability);
+        TextView itemHRPerDay = (TextView)v.findViewById(R.id.hrPerDay);
+        TextView itemDayPerMonth = (TextView)v.findViewById(R.id.dayPerMonth);
 
         itemName.setText(mItemList.get(position).getName());
         itemPower.setText(String.valueOf(mItemList.get(position).getPower()) + " WATT");
 
-//        itemType.setText(mItemList.get(position).getType());
-//        itemAbility.setText(mItemList.get(position).getAbility());
+        itemHRPerDay.setText("Use " + String.valueOf(mItemList.get(position).getHrPerDay()) + " Hour/Day");
+        itemDayPerMonth.setText("Use " + String.valueOf(mItemList.get(position).getDayPerMonth()) + " Day/Month");
 
         v.setTag(mItemList.get(position).getId());
         return v;

@@ -22,14 +22,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_ITEM_TABLE = String.format("CREATE TABLE %s" + "(%s INTEGER PRIMARY KEY  AUTOINCREMENT, %s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s TEXT)",
+        String CREATE_ITEM_TABLE = String.format("CREATE TABLE %s" + "(%s INTEGER PRIMARY KEY  AUTOINCREMENT, %s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s INTEGER, %s INTEGER, %s INTEGER, %s INTEGER, %s TEXT)",
                 Item.TABLE,
                 Item.Column.ID,
                 Item.Column.POWER,
                 Item.Column.HR,
                 Item.Column.NAME,
                 Item.Column.TYPE,
-                Item.Column.ABILITY);
+                Item.Column.ABILITY,
+                Item.Column.HRperDay,
+                Item.Column.DAYperMONTH,
+                Item.Column.TIME,
+                Item.Column.TOTALMONEY,
+                Item.Column.DATE);
 
         Log.i(TAG, CREATE_ITEM_TABLE);
 
@@ -61,12 +66,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         while(!cursor.isAfterLast()) {
 
-            items_list.add(new Item(cursor.getInt(cursor.getColumnIndex(Item.Column.ID)),
-                    cursor.getInt(cursor.getColumnIndex(Item.Column.POWER)),
+            //cursor.getInt(cursor.getColumnIndex(Item.Column.POWER)),
+            // cursor.getString(cursor.getColumnIndex(Item.Column.ABILITY)),
+
+            items_list.add(new Item(cursor.getInt(cursor.getColumnIndex(Item.Column.POWER)),
                     cursor.getInt(cursor.getColumnIndex(Item.Column.HR)),
+                    cursor.getInt(cursor.getColumnIndex(Item.Column.ID)),
+                    cursor.getInt(cursor.getColumnIndex(Item.Column.HRperDay)),
+                    cursor.getInt(cursor.getColumnIndex(Item.Column.DAYperMONTH)),
+                    cursor.getInt(cursor.getColumnIndex(Item.Column.TIME)),
+                    cursor.getInt(cursor.getColumnIndex(Item.Column.TOTALMONEY)),
                     cursor.getString(cursor.getColumnIndex(Item.Column.NAME)),
                     cursor.getString(cursor.getColumnIndex(Item.Column.TYPE)),
-                    cursor.getString(cursor.getColumnIndex(Item.Column.ABILITY))));
+                    cursor.getString(cursor.getColumnIndex(Item.Column.ABILITY)),
+                    cursor.getString(cursor.getColumnIndex(Item.Column.DATE))));
 
             cursor.moveToNext();
         }
