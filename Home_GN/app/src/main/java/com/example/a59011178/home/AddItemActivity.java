@@ -72,6 +72,9 @@ public class AddItemActivity extends AppCompatActivity {
                         item.setType(type.getText().toString());
                         item.setPower(Integer.parseInt(power.getText().toString()));
                         item.setAbility(myAbility);
+                        item.setHrPerDay(8);
+                        item.setDayPerMonth(30);
+                        item.setDate(currentDate);
 
                         if (ID == -1){
                             mhelper.addItem(item);
