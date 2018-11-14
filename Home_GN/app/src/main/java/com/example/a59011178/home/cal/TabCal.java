@@ -14,6 +14,7 @@ import com.example.a59011178.home.AddItemActivity;
 import com.example.a59011178.home.DatabaseHelper;
 import com.example.a59011178.home.Item;
 import com.example.a59011178.home.R;
+import com.example.a59011178.home.edit.EditActivity;
 
 
 import java.util.List;
@@ -44,7 +45,7 @@ public class TabCal extends Fragment implements View.OnClickListener {
     }
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), AddItemActivity.class);
+        Intent intent = new Intent(getActivity(), EditActivity.class);
         startActivity(intent);
     }
 }

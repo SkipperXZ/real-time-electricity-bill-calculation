@@ -48,7 +48,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
 
         itemName.setText(mItemList.get(position).getName());
         itemPower.setText("(" + String.valueOf(mItemList.get(position).getPower()) + "W)");
-        itemMin.setText(String.valueOf(mItemList.get(position).getPower()) + " min.");
+        itemMin.setText(String.valueOf(mItemList.get(position).getHr()) + " min.");
 
 //        itemType.setText(mItemList.get(position).getType());
 //        itemAbility.setText(mItemList.get(position).getAbility());

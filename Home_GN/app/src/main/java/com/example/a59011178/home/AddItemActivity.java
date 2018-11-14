@@ -11,12 +11,14 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.a59011178.home.edit.EditActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class AddItemActivity extends AppCompatActivity {
 
-    private EditText name, power, type;
+    private EditText name, power, type, hrPerDay, dayPerMonth ;
     private RadioGroup ability;
     private Button add;
     private DatabaseHelper mhelper;
@@ -33,8 +35,10 @@ public class AddItemActivity extends AppCompatActivity {
         name = (EditText)findViewById(R.id.item_name);
         type = (EditText) findViewById(R.id.type);
         power = (EditText) findViewById(R.id.power);
-
         ability = (RadioGroup) this.findViewById(R.id.ability);
+
+        hrPerDay = (EditText) findViewById(R.id.a_hrPerDay);
+        dayPerMonth = (EditText) findViewById(R.id.a_dayPerMonth) ;
 
         ability.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
@@ -72,8 +76,8 @@ public class AddItemActivity extends AppCompatActivity {
                         item.setType(type.getText().toString());
                         item.setPower(Integer.parseInt(power.getText().toString()));
                         item.setAbility(myAbility);
-                        item.setHrPerDay(8);
-                        item.setDayPerMonth(30);
+                        item.setHrPerDay(Integer.parseInt(hrPerDay.getText().toString()));
+                        item.setDayPerMonth(Integer.parseInt(dayPerMonth.getText().toString()));
                         item.setDate(currentDate);
 
                         if (ID == -1){

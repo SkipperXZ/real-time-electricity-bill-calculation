@@ -19,10 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddItemActivity"
+        <activity
+            android:name=".AddItemActivity"
             android:label="@string/add_title"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            ></activity>
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity android:name=".edit.EditActivity"></activity>
     </application>
 
 </manifest>
