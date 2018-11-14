@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class AddItemActivity extends AppCompatActivity {
 
     private EditText name, power, type;
@@ -55,11 +58,15 @@ public class AddItemActivity extends AppCompatActivity {
                 builder.setTitle(getString(R.string.add_data_title));
                 builder.setMessage(getString(R.string.add_data_message));
 
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyy");
+                final String currentDate = df.format(c.getTime());
+
                 builder.setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Item item = new Item(0,0,0, null, null, myAbility);
+                        Item item = new Item(0,0,0,8,30,0,0,null,null,null, currentDate);
 
                         item.setName(name.getText().toString());
                         item.setType(type.getText().toString());
