@@ -34,6 +34,7 @@
     <string name="add_data_title">Add more equipment?</string>
     <string name="add_title">Add Equipment</string>
     <string name="add_data_message">Are you sure to add this equipment?</string>
-
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
 
 </resources>
