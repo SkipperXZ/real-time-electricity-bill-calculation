@@ -19,6 +19,9 @@
     <string name="use1">use XXX watts/day</string>
     <string name="use2">use XXX days/month</string>
     <string name="use3">use XXX hr/day</string>
+    <string name="timeunit1">hr/day</string>
+    <string name="timeunit2">day/month</string>
+    <string name="use4">Use</string>
     <string name="month">Month</string>
     <string name="show_data">Show All Data</string>
     <string name="type">Type</string>
@@ -29,7 +32,9 @@
     <string name="timeoffset">Time Offset</string>
     <string name="add">Add</string>
     <string name="add_data_title">Add more equipment?</string>
+    <string name="add_title">Add Equipment</string>
     <string name="add_data_message">Are you sure to add this equipment?</string>
-
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
 
 </resources>

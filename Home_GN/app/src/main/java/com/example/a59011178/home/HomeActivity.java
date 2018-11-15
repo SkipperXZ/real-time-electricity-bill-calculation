@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.a59011178.home.cal.TabCal;
+import com.example.a59011178.home.edit.EditActivity;
 import com.example.a59011178.home.equip.TabEquip;
 import com.example.a59011178.home.graph.TabGraph;
 
@@ -45,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -55,16 +57,7 @@ public class HomeActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
+        
         FloatingActionButton buttonAddMore = (FloatingActionButton)findViewById(R.id.fab);
 
         buttonAddMore.setOnClickListener( new View.OnClickListener() {
@@ -91,17 +84,16 @@ public class HomeActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml. action_Edit_Equip
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(new Intent(HomeActivity.this, AddItemActivity.class));
+                break;
+            case R.id.action_Edit_Equip:
+                startActivity(new Intent(HomeActivity.this, EditActivity.class));
+                break;
         }
-        if (id == R.id.action_Edit_Equip) {
-            return true;
-        }
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     //delete PlaceholderFragment
