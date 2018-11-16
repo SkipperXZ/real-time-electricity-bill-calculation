@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.a59011178.home.edit.EditActivity;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -36,7 +34,7 @@ public class AddItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.addequipment);
+        setContentView(R.layout.activity_addequipment);
 
         name = (EditText)findViewById(R.id.item_name);
         type = (AutoCompleteTextView) findViewById(R.id.type);

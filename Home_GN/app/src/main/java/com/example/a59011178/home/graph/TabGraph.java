@@ -12,7 +12,7 @@ public class TabGraph extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tabgraph, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tabgraph, container, false);
         return rootView;
     }
 }

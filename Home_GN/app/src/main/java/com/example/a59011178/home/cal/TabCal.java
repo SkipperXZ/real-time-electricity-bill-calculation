@@ -10,11 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.a59011178.home.AddItemActivity;
 import com.example.a59011178.home.DatabaseHelper;
 import com.example.a59011178.home.Item;
 import com.example.a59011178.home.R;
-import com.example.a59011178.home.edit.EditActivity;
 
 
 import java.util.List;
@@ -28,7 +26,7 @@ public class TabCal extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tabcal, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tabcal, container, false);
 
         lvItem = (ListView)rootView.findViewById(R.id.listView_cal);
         mHelp = new DatabaseHelper(this.getContext());
@@ -45,7 +43,7 @@ public class TabCal extends Fragment implements View.OnClickListener {
     }
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), EditActivity.class);
+        Intent intent = new Intent(getActivity(), EmptyActivity.class);
         startActivity(intent);
     }
 }

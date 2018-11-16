@@ -139,7 +139,7 @@ public class HomeActivity extends AppCompatActivity {
                 case 1 :
                     return "graph";
                 case 2 :
-                    return "calculate";
+                    return "subList_calculate";
 
             }
                 return null;}
