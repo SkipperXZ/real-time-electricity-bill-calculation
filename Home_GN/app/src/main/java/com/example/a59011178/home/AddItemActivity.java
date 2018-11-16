@@ -26,8 +26,9 @@ public class AddItemActivity extends AppCompatActivity {
     private DatabaseHelper mhelper;
     private AutoCompleteTextView type;
 
-    String[] types = { "electric fan", "Ceiling Fan", "rice cooker", "iron", "water heater", "toster", "hair dryer", "washing machine", "refrigerator", "air-conditioner", "vacuum cleaner", "stove", "television", "DVD player"
+    String[] types = { "Electric fan", "Electric fan", "Exhaust fan","Rice cooker", "Iron", "Water heater", "Toster", "Hair dryer", "Washing machine", "Refrigerator", "Air-conditioner", "Vacuum cleaner", "Stove", "Television", "DVD player"
     };
+    int[] types_power = {75, 104, 25};
 
     String myAbility;
 

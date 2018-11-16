@@ -67,7 +67,7 @@ public class ItemListAdapter_cal extends BaseAdapter {
             private void numberPickerHr(){
                 NumberPicker myNumPick = new NumberPicker(parent.getContext());
                 myNumPick.setMaxValue(24);
-                myNumPick.setMinValue(1);
+                myNumPick.setMinValue(0);
                 NumberPicker.OnValueChangeListener hrChange = new NumberPicker.OnValueChangeListener() {
                     @Override
                     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -76,7 +76,7 @@ public class ItemListAdapter_cal extends BaseAdapter {
                 };
                 myNumPick.setOnValueChangedListener(hrChange);
                 AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext()).setView(myNumPick);
-                builder.setTitle("How many Hours do you use per day?");
+                builder.setTitle("Hours you use per day");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -84,13 +84,13 @@ public class ItemListAdapter_cal extends BaseAdapter {
                             }
                         }
                 );
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        }
-                );
+//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//
+//                            }
+//                        }
+//                );
                 builder.show();
             }
         });
@@ -103,7 +103,7 @@ public class ItemListAdapter_cal extends BaseAdapter {
             private void numberPickerDay(){
                 NumberPicker myNumPick = new NumberPicker(parent.getContext());
                 myNumPick.setMaxValue(31);
-                myNumPick.setMinValue(1);
+                myNumPick.setMinValue(0);
                 NumberPicker.OnValueChangeListener hrChange = new NumberPicker.OnValueChangeListener() {
                     @Override
                     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -112,7 +112,7 @@ public class ItemListAdapter_cal extends BaseAdapter {
                 };
                 myNumPick.setOnValueChangedListener(hrChange);
                 AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext()).setView(myNumPick);
-                builder.setTitle("How many days do you use this equipment per Month?");
+                builder.setTitle("Days you use per month");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -120,13 +120,13 @@ public class ItemListAdapter_cal extends BaseAdapter {
                             }
                         }
                 );
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        }
-                );
+//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//
+//                            }
+//                        }
+//                );
                 builder.show();
             }
         });
