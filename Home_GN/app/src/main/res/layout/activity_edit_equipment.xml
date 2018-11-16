@@ -13,6 +13,4 @@
         android:layout_height="450dp"
         android:layout_marginTop="10dp" />
 
-
-
 </LinearLayout>

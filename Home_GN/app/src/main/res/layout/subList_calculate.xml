@@ -11,22 +11,26 @@
         android:background="@drawable/border3">
 
 
-            <TextView
-                android:id="@+id/name_cal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/euip_name"
-                android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/name_cal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/euip_name"
+            android:textSize="15sp" />
 
 
         <TextView
             android:id="@+id/hrPerDay"
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/use3"/>
-
+            android:layout_above="@+id/power_cal"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:onClick="clickHandler"
+            android:text="@string/use3" />
 
 
         <TextView
@@ -42,9 +46,13 @@
             android:id="@+id/dayPerMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:text="@string/use2"/>
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="13dp"
+            android:clickable="true"
+            android:onClick="clickHandler"
+            android:text="@string/use2" />
 
     </RelativeLayout>
 
