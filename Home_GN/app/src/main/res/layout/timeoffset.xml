@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/offset1"
 
-    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -13,51 +18,55 @@
             android:layout_centerHorizontal="true"
             android:orientation="vertical"
             android:layout_marginTop="50dp"
-            android:background="@drawable/border3">
+            android:background="@drawable/border3">-->
 
-            <TextView
-                android:id="@+id/timeoffset"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/timeoffset"
-                android:textSize="20sp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
-                android:textColor="#d87973"/>
+    <TextView
+        android:id="@+id/timeoffset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/timeoffset"
+        android:textColor="#d87973"
+        android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:inputType="textPersonName"
-                android:text="@string/euip_name"
-                android:background="@drawable/border3"
-                android:textAlignment="center"/>
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/border3"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/euip_name"
+        android:textAlignment="center" />
 
-            <EditText
-                android:id="@+id/editText7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:inputType="time"
-                android:layout_marginBottom="5dp"/>
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:ems="10"
+        android:inputType="time" />
 
-        </LinearLayout>
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/border2"
+        android:text="@string/add"
+        android:textAlignment="center"
+        android:textColor="#ffffff" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/add"
-            android:textColor="#ffffff"
-            android:textAlignment="center"
-            android:background="@drawable/border2"/>
-    </RelativeLayout>
+        <!--</LinearLayout>-->
+
+    <!--</RelativeLayout>-->
 
 </LinearLayout>
