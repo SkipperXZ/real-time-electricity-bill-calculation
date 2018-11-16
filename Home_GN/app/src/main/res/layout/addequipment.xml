@@ -63,14 +63,14 @@
                     android:textColor="#ff8b84"
                     android:textSize="20sp" />
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/border1"
                     android:ems="10"
-                    android:inputType="text" />
+                    android:inputType="text"/>
 
                 <TextView
                     android:id="@+id/textView12"

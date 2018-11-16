@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -18,10 +20,14 @@ import java.util.Calendar;
 
 public class AddItemActivity extends AppCompatActivity {
 
-    private EditText name, power, type, hrPerDay, dayPerMonth ;
+    private EditText name, power,  hrPerDay, dayPerMonth ;
     private RadioGroup ability;
     private Button add;
     private DatabaseHelper mhelper;
+    private AutoCompleteTextView type;
+
+    String[] types = { "electric fan", "Ceiling Fan", "rice cooker", "iron", "water heater", "toster", "hair dryer", "washing machine", "refrigerator", "air-conditioner", "vacuum cleaner", "stove", "television", "DVD player"
+    };
 
     String myAbility;
 
@@ -33,10 +39,19 @@ public class AddItemActivity extends AppCompatActivity {
         setContentView(R.layout.addequipment);
 
         name = (EditText)findViewById(R.id.item_name);
-        type = (EditText) findViewById(R.id.type);
+        type = (AutoCompleteTextView) findViewById(R.id.type);
+
+        //Create Array Adapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, types);
+        //Find TextView control
+        AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(R.id.type);
+        //Set the number of characters the user must type before the drop down list is shown
+        acTextView.setThreshold(1);
+        //Set the adapter
+        acTextView.setAdapter(adapter);
+
         power = (EditText) findViewById(R.id.power);
         ability = (RadioGroup) this.findViewById(R.id.ability);
-
         hrPerDay = (EditText) findViewById(R.id.a_hrPerDay);
         dayPerMonth = (EditText) findViewById(R.id.a_dayPerMonth) ;
 
