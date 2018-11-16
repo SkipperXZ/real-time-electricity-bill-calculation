@@ -20,7 +20,7 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editEquipment);
+        setContentView(R.layout.activity_edit_equipment);
 
         lvItem = (ListView)findViewById(R.id.listView_edit);
 

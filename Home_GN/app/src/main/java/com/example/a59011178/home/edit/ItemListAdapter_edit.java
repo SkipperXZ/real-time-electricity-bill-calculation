@@ -38,7 +38,7 @@ public class ItemListAdapter_edit extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(mContext, R.layout.subList_editEquipment,null);
+        View v = View.inflate(mContext, R.layout.sublist_editequipment,null);
         TextView itemAbility = (TextView)v.findViewById(R.id.edit_ability);
         TextView itemDayPerMonth = (TextView)v.findViewById(R.id.edit_dayPerMonth);
         TextView itemHRPerDay = (TextView)v.findViewById(R.id.edit_hrPerDay);

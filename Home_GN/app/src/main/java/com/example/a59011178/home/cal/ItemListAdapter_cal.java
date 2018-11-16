@@ -40,14 +40,14 @@ public class ItemListAdapter_cal extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(mContext, R.layout.subList_calculate,null);
+        View v = View.inflate(mContext, R.layout.sublist_calculate,null);
         TextView itemName = (TextView)v.findViewById(R.id.name_cal);
         TextView itemPower = (TextView)v.findViewById(R.id.power_cal);
 
         TextView HRPerDay = (TextView)v.findViewById(R.id.hrPerDay);
         TextView itemDayPerMonth = (TextView)v.findViewById(R.id.dayPerMonth);
 
-        LinearLayout mHrPerDay = (LinearLayout)v.findViewById(R.id.hrPerDay_layout);
+        //LinearLayout mHrPerDay = (LinearLayout)v.findViewById(R.id.hrPerDay_layout);
 
         itemName.setText(mItemList.get(position).getName());
         itemPower.setText(String.valueOf(mItemList.get(position).getPower()) + " WATT");
