@@ -36,5 +36,8 @@
     <string name="add_data_message">Are you sure to add this equipment?</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+
 
 </resources>

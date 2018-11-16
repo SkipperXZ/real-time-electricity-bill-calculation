@@ -1,10 +1,13 @@
 package com.example.a59011178.home.cal;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.example.a59011178.home.Item;
@@ -39,13 +42,13 @@ public class ItemListAdapter_cal extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         View v = View.inflate(mContext, R.layout.sublist_calculate,null);
         TextView itemName = (TextView)v.findViewById(R.id.name_cal);
         TextView itemPower = (TextView)v.findViewById(R.id.power_cal);
 
-        TextView HRPerDay = (TextView)v.findViewById(R.id.hrPerDay);
-        TextView itemDayPerMonth = (TextView)v.findViewById(R.id.dayPerMonth);
+        final TextView HRPerDay = (TextView)v.findViewById(R.id.hrPerDay);
+        final TextView DayPerMonth = (TextView)v.findViewById(R.id.dayPerMonth);
 
         //LinearLayout mHrPerDay = (LinearLayout)v.findViewById(R.id.hrPerDay_layout);
 
@@ -53,7 +56,81 @@ public class ItemListAdapter_cal extends BaseAdapter {
         itemPower.setText(String.valueOf(mItemList.get(position).getPower()) + " WATT");
 
         HRPerDay.setText("Use " + String.valueOf(mItemList.get(position).getHrPerDay()) + " Hour/Day");
-        itemDayPerMonth.setText("Use " + String.valueOf(mItemList.get(position).getDayPerMonth()) + " Day/Month");
+        DayPerMonth.setText("Use " + String.valueOf(mItemList.get(position).getDayPerMonth()) + " Day/Month");
+
+        HRPerDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberPickerHr();
+            }
+
+            private void numberPickerHr(){
+                NumberPicker myNumPick = new NumberPicker(parent.getContext());
+                myNumPick.setMaxValue(24);
+                myNumPick.setMinValue(1);
+                NumberPicker.OnValueChangeListener hrChange = new NumberPicker.OnValueChangeListener() {
+                    @Override
+                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                        HRPerDay.setText("Use " + newVal + " Hour/Day");
+                    }
+                };
+                myNumPick.setOnValueChangedListener(hrChange);
+                AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext()).setView(myNumPick);
+                builder.setTitle("How many Hours do you use per day?");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }
+                );
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }
+                );
+                builder.show();
+            }
+        });
+
+        DayPerMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberPickerDay();
+            }
+            private void numberPickerDay(){
+                NumberPicker myNumPick = new NumberPicker(parent.getContext());
+                myNumPick.setMaxValue(31);
+                myNumPick.setMinValue(1);
+                NumberPicker.OnValueChangeListener hrChange = new NumberPicker.OnValueChangeListener() {
+                    @Override
+                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                        DayPerMonth.setText("Use " + newVal + " Day/Month");
+                    }
+                };
+                myNumPick.setOnValueChangedListener(hrChange);
+                AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext()).setView(myNumPick);
+                builder.setTitle("How many days do you use this equipment per Month?");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }
+                );
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }
+                );
+                builder.show();
+            }
+        });
+
         v.setTag(mItemList.get(position).getId());
         return v;
     }

@@ -55,7 +55,7 @@ public class ItemListAdapter_edit extends BaseAdapter {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent( parent.getContext() , AddItemActivity.class);
+                Intent intent = new Intent(parent.getContext() , AddItemActivity.class);
                 mContext.startActivity(intent);
             }
         });

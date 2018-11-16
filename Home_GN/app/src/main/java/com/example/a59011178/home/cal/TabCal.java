@@ -35,7 +35,6 @@ public class TabCal extends Fragment implements View.OnClickListener {
         adapter = new ItemListAdapter_cal(this.getActivity(), mItemList);
         lvItem.setAdapter(adapter);
 
-
         FloatingActionButton cal = (FloatingActionButton)rootView.findViewById(R.id.cal_now);
         cal.setOnClickListener(this);
 
