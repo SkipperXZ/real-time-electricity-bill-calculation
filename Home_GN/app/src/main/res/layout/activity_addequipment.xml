@@ -72,12 +72,15 @@
                     android:ems="10"
                     android:inputType="text"/>
 
-                <TextView
-                    android:id="@+id/textView12"
+                <Button
+                    android:id="@+id/getdefault"
                     android:layout_width="120dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/border2"
+                    android:textSize="9dp"
+                    android:text="Get watt"/>
 
             </LinearLayout>
 
@@ -85,7 +88,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/power_Layout"
+                android:gravity="end">
 
                 <TextView
                     android:id="@+id/textpower"
@@ -103,6 +108,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/border1"
                     android:ems="10"
+                    android:onClick="clickHandler"
+                    android:clickable="true"
                     android:inputType="number" />
 
                 <TextView
