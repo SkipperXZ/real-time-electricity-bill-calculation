@@ -5,9 +5,13 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.a59011178.home.DatabaseHelper;
@@ -17,7 +21,9 @@ import com.example.a59011178.home.R;
 
 import java.util.List;
 
-public class TabCal extends Fragment implements View.OnClickListener {
+import static android.media.CamcorderProfile.get;
+
+public class TabCal extends Fragment implements View.OnClickListener  {
 
     private ListView lvItem;
     private ItemListAdapter_cal adapter;
@@ -34,12 +40,25 @@ public class TabCal extends Fragment implements View.OnClickListener {
 
         adapter = new ItemListAdapter_cal(this.getActivity(), mItemList);
         lvItem.setAdapter(adapter);
+        registerForContextMenu(lvItem);
+
 
         FloatingActionButton cal = (FloatingActionButton)rootView.findViewById(R.id.cal_now);
         cal.setOnClickListener(this);
 
         return rootView;
     }
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+
+        if (v.getId() == R.id.listView_cal) {
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            String[] menuItems = getResources().getStringArray(R.array.menu);
+            for (int i = 0; i < menuItems.length; i++) {
+                menu.add(Menu.NONE, i, i, menuItems[i]);
+            }
+        }
+    }
+
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(getActivity(), EmptyActivity.class);
