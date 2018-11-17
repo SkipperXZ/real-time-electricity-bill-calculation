@@ -97,7 +97,7 @@ public class AddItemActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Item item = new Item(0,0,0,8,30,0,0,null,null,null, currentDate);
+                        Item item = new Item();
 
                         item.setName(name.getText().toString());
                         item.setType(type.getText().toString());
@@ -201,7 +201,7 @@ public class AddItemActivity extends AppCompatActivity {
                 break;
             case "Tablet" :  powerVal = 10;
                 break;
-            case "Power Bank" :  powerVal = 2200;
+            case "Power bank" :  powerVal = 2200;
                 break;
             default:  powerVal = 0; break;
         }

@@ -28,6 +28,10 @@ public class Item {
 
     }
 
+    public Item(){
+
+    }
+
     public Item(int power, int hr, int id, int hrPerDay, int dayPerMonth, int time, int totalMoney, String name, String type, String ability, String date) {
         this.power = power;
         this.hr = hr;

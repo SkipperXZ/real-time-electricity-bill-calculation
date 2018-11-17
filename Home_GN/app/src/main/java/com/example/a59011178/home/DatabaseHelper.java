@@ -107,4 +107,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.close();
 
     }
+
+    public Item getItem(String id){
+
+        sqLiteDatabase = this.getReadableDatabase();
+
+        Cursor cursor = sqLiteDatabase.query(Item.TABLE,
+                null,
+                Item.Column.ID + " = ?",
+                new String[] {id},
+                null,
+                null,
+                null,
+                null
+                );
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        Item item = new Item();
+
+        item.setId((int) cursor.getLong(Integer.parseInt(Item.Column.ID)));
+        item.setPower((int) cursor.getLong(Integer.parseInt(Item.Column.POWER)));
+        item.setName(cursor.getString(Integer.parseInt(Item.Column.NAME)));
+        item.setType(cursor.getString(Integer.parseInt(Item.Column.TYPE)));
+        item.setAbility(cursor.getString(Integer.parseInt(Item.Column.ABILITY)));
+        item.setDate(cursor.getString(Integer.parseInt(Item.Column.DATE)));
+        item.setHrPerDay((int) cursor.getLong(Integer.parseInt(Item.Column.HRperDay)));
+        item.setDayPerMonth((int) cursor.getLong(Integer.parseInt(Item.Column.DAYperMONTH)));
+
+        return item;
+    }
 }

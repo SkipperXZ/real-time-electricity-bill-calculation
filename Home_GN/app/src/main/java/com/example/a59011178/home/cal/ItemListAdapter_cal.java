@@ -6,7 +6,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -43,12 +42,12 @@ public class ItemListAdapter_cal extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
-        View v = View.inflate(mContext, R.layout.sublist_calculate,null);
-        TextView itemName = (TextView)v.findViewById(R.id.name_cal);
-        TextView itemPower = (TextView)v.findViewById(R.id.power_cal);
+        View v = View.inflate(mContext, R.layout.sublist_calculate, null);
+        TextView itemName = (TextView) v.findViewById(R.id.name_cal);
+        TextView itemPower = (TextView) v.findViewById(R.id.power_cal);
 
-        final TextView HRPerDay = (TextView)v.findViewById(R.id.hrPerDay);
-        final TextView DayPerMonth = (TextView)v.findViewById(R.id.dayPerMonth);
+        final TextView HRPerDay = (TextView) v.findViewById(R.id.hrPerDay);
+        final TextView DayPerMonth = (TextView) v.findViewById(R.id.dayPerMonth);
 
         //LinearLayout mHrPerDay = (LinearLayout)v.findViewById(R.id.hrPerDay_layout);
 
@@ -64,7 +63,7 @@ public class ItemListAdapter_cal extends BaseAdapter {
                 numberPickerHr();
             }
 
-            private void numberPickerHr(){
+            private void numberPickerHr() {
                 NumberPicker myNumPick = new NumberPicker(parent.getContext());
                 myNumPick.setMaxValue(24);
                 myNumPick.setMinValue(0);
@@ -100,7 +99,8 @@ public class ItemListAdapter_cal extends BaseAdapter {
             public void onClick(View v) {
                 numberPickerDay();
             }
-            private void numberPickerDay(){
+
+            private void numberPickerDay() {
                 NumberPicker myNumPick = new NumberPicker(parent.getContext());
                 myNumPick.setMaxValue(31);
                 myNumPick.setMinValue(0);
