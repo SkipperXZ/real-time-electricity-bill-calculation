@@ -1,5 +1,6 @@
 package com.example.a59011178.home;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -22,25 +24,29 @@ public class AddItemActivity extends AppCompatActivity {
 
     private EditText name, power,  hrPerDay, dayPerMonth ;
     private RadioGroup ability;
-    private Button add;
+    private Button add,getWatt;
     private DatabaseHelper mhelper;
     private AutoCompleteTextView type;
+    private LinearLayout mpower_Layout;
 
+//<<<<<<< HEAD
     String[] types = { "Electric fan", "Electric fan", "Air 12000 BTU", "Air 15000 BTU", "Air 18000 BTU", "Vacuum bottle", "Electric rice cooker", "Water heater", "Microwave", "Toaster", "Electric iron", "Dry iron", "Incandescent lamb bulbs", "Compact-fluorescent bulbs", "Fluorescent bulbs", "LED lighting", "Television 14 inch.", "Television 20 inch.", "Television 24 inch.", "Computer", "Refrigerator 4 cubic", "Refrigerator 6 cubic", "Refrigerator 12 cubic", "Washing machine", "Hair dryer", "Vacuum cleaner", "Modem, Router", "Telephone", "Tablet", "Power bank"
     };
     int[] types_power = {75,            104,            3500,               4400,           5300,           750,                1000,               3500,           700,        1000,       1000,           1750,           100,                    20,                             36,                 18,             120,                    200,                250,                    550,        70,                     90,                     240,                    1000,               1300,               1000,           10,         10,             10,     2200};
+//=======
+    //String[] types = { "Electric fan", "Exhaust fan","Rice cooker", "Iron", "Water heater", "Toster", "Hair dryer", "Washing machine", "Refrigerator", "Air-conditioner", "Vacuum cleaner", "Stove", "Television", "DVD player"
+    //};
+//>>>>>>> master
 
     String myAbility;
 
     private int ID = -1;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addequipment);
-
-        name = (EditText)findViewById(R.id.item_name);
-        type = (AutoCompleteTextView) findViewById(R.id.type);
 
         //Create Array Adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, types);
@@ -51,10 +57,20 @@ public class AddItemActivity extends AppCompatActivity {
         //Set the adapter
         acTextView.setAdapter(adapter);
 
+        name = (EditText)findViewById(R.id.item_name);
+        type = (AutoCompleteTextView) findViewById(R.id.type);
         power = (EditText) findViewById(R.id.power);
         ability = (RadioGroup) this.findViewById(R.id.ability);
         hrPerDay = (EditText) findViewById(R.id.a_hrPerDay);
-        dayPerMonth = (EditText) findViewById(R.id.a_dayPerMonth) ;
+        dayPerMonth = (EditText) findViewById(R.id.a_dayPerMonth);
+        getWatt = (Button) findViewById(R.id.getdefault);
+
+        getWatt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDefaultPower();
+            }
+        });
 
         ability.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
@@ -122,6 +138,25 @@ public class AddItemActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+    }
+
+    private void showDefaultPower() {
+
+        AutoCompleteTextView childTextView = (AutoCompleteTextView) findViewById(R.id.type);
+        String childTextViewValue = childTextView.getText().toString();
+
+        int powerVal ;
+
+        switch (childTextViewValue){
+            case "Electric fan" :  powerVal = 50;
+                break;
+            case "Exhaust fan" : powerVal = 60;
+                break;
+            case "Rice cooker" : powerVal = 70;
+                break;
+            default:  powerVal = 0; break;
+        }
+        power.setText(String.valueOf(powerVal));
     }
 
 }
