@@ -29,14 +29,9 @@ public class AddItemActivity extends AppCompatActivity {
     private AutoCompleteTextView type;
     private LinearLayout mpower_Layout;
 
-//<<<<<<< HEAD
     String[] types = { "Electric fan", "Electric fan", "Air 12000 BTU", "Air 15000 BTU", "Air 18000 BTU", "Vacuum bottle", "Electric rice cooker", "Water heater", "Microwave", "Toaster", "Electric iron", "Dry iron", "Incandescent lamb bulbs", "Compact-fluorescent bulbs", "Fluorescent bulbs", "LED lighting", "Television 14 inch.", "Television 20 inch.", "Television 24 inch.", "Computer", "Refrigerator 4 cubic", "Refrigerator 6 cubic", "Refrigerator 12 cubic", "Washing machine", "Hair dryer", "Vacuum cleaner", "Modem, Router", "Telephone", "Tablet", "Power bank"
     };
     int[] types_power = {75,            104,            3500,               4400,           5300,           750,                1000,               3500,           700,        1000,       1000,           1750,           100,                    20,                             36,                 18,             120,                    200,                250,                    550,        70,                     90,                     240,                    1000,               1300,               1000,           10,         10,             10,     2200};
-//=======
-    //String[] types = { "Electric fan", "Exhaust fan","Rice cooker", "Iron", "Water heater", "Toster", "Hair dryer", "Washing machine", "Refrigerator", "Air-conditioner", "Vacuum cleaner", "Stove", "Television", "DVD player"
-    //};
-//>>>>>>> master
 
     String myAbility;
 
