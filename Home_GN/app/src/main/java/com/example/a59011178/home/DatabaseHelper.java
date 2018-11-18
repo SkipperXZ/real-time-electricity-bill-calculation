@@ -69,7 +69,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             //cursor.getInt(cursor.getColumnIndex(Item.Column.POWER)),
             // cursor.getString(cursor.getColumnIndex(Item.Column.ABILITY)),
 
-            items_list.add(new Item(cursor.getInt(cursor.getColumnIndex(Item.Column.POWER)),
+            items_list.add(new Item(
+                    cursor.getInt(cursor.getColumnIndex(Item.Column.POWER)),
                     cursor.getInt(cursor.getColumnIndex(Item.Column.HR)),
                     cursor.getInt(cursor.getColumnIndex(Item.Column.ID)),
                     cursor.getInt(cursor.getColumnIndex(Item.Column.HRperDay)),

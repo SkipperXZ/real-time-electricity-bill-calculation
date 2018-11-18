@@ -62,6 +62,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
 
         TextView mShowDialog = (TextView) v.findViewById(R.id.offset);
         mShowDialog.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 android.support.v7.app.AlertDialog.Builder mBuilder = new android.support.v7.app.AlertDialog.Builder(parent.getContext());
