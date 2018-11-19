@@ -75,8 +75,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
 
     @Override
     public void onClick(View v) {
-         
-
+        
         float result = calculatenow();
 
         Intent intent = new Intent(getActivity(), ResultActivity.class);
