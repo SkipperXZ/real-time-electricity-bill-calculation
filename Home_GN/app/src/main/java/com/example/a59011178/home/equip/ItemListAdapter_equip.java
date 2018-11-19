@@ -31,6 +31,18 @@ public class ItemListAdapter_equip extends BaseAdapter {
     }
 
     @Override
+    public int getViewTypeCount() {
+
+        return getCount();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        return position;
+    }
+
+    @Override
     public int getCount() {
         return mItemList.size();
     }
@@ -55,16 +67,9 @@ public class ItemListAdapter_equip extends BaseAdapter {
         final TextView itemMin = (TextView)v.findViewById(R.id.min_equip);
         final Switch   timeSwitch =(Switch)v.findViewById(R.id.on_off);
 
-
-//        TextView itemType = (TextView)v.findViewById(R.id.Type);
-//        TextView itemAbility = (TextView)v.findViewById(R.id.Ability);
-
         itemName.setText(mItemList.get(position).getName());
         itemPower.setText("(" + String.valueOf(mItemList.get(position).getPower()) + "W)");
         itemMin.setText(String.valueOf(mItemList.get(position).getHr()) + " min.");
-
-//        itemType.setText(mItemList.get(position).getType());
-//        itemAbility.setText(mItemList.get(position).getAbility());
 
         v.setTag(mItemList.get(position).getId());
 
@@ -107,6 +112,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
         });
 
         timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 int pos = position;
@@ -133,4 +139,6 @@ public class ItemListAdapter_equip extends BaseAdapter {
 
         return v;
     }
+
+
 }

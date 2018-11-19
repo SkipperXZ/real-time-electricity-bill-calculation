@@ -22,16 +22,14 @@ import java.util.Calendar;
 
 public class AddItemActivity extends AppCompatActivity {
 
-    private EditText name, power,  hrPerDay, dayPerMonth ;
-    private RadioGroup ability;
+    private EditText mName, mPower,  mHrPerDay, mDayPerMonth ;
+    private RadioGroup mAbility;
     private Button add,getWatt;
-    private DatabaseHelper mhelper;
-    private AutoCompleteTextView type;
+    private DatabaseHelper mHelper;
+    private AutoCompleteTextView mType;
     private LinearLayout mpower_Layout;
 
-    String[] types = { "Electric fan", "Electric fan", "Air 12000 BTU", "Air 15000 BTU", "Air 18000 BTU", "Vacuum bottle", "Electric rice cooker", "Water heater", "Microwave", "Toaster", "Electric iron", "Dry iron", "Incandescent lamb bulbs", "Compact-fluorescent bulbs", "Fluorescent bulbs", "LED lighting", "Television 14 inch.", "Television 20 inch.", "Television 24 inch.", "Computer", "Refrigerator 4 cubic", "Refrigerator 6 cubic", "Refrigerator 12 cubic", "Washing machine", "Hair dryer", "Vacuum cleaner", "Modem, Router", "Telephone", "Tablet", "Power bank"
-    };
-    int[] types_power = {75,            104,            3500,               4400,           5300,           750,                1000,               3500,           700,        1000,       1000,           1750,           100,                    20,                             36,                 18,             120,                    200,                250,                    550,        70,                     90,                     240,                    1000,               1300,               1000,           10,         10,             10,     2200};
+    String[] types = { "Electric fan", "Electric fan", "Air 12000 BTU", "Air 15000 BTU", "Air 18000 BTU", "Vacuum bottle", "Electric rice cooker", "Water heater", "Microwave", "Toaster", "Electric iron", "Dry iron", "Incandescent lamb bulbs", "Compact-fluorescent bulbs", "Fluorescent bulbs", "LED lighting", "Television 14 inch.", "Television 20 inch.", "Television 24 inch.", "Computer", "Refrigerator 4 cubic", "Refrigerator 6 cubic", "Refrigerator 12 cubic", "Washing machine", "Hair dryer", "Vacuum cleaner", "Modem, Router", "Telephone", "Tablet", "Power bank"};
 
     String myAbility;
 
@@ -52,13 +50,36 @@ public class AddItemActivity extends AppCompatActivity {
         //Set the adapter
         acTextView.setAdapter(adapter);
 
-        name = (EditText)findViewById(R.id.item_name);
-        type = (AutoCompleteTextView) findViewById(R.id.type);
-        power = (EditText) findViewById(R.id.power);
-        ability = (RadioGroup) this.findViewById(R.id.ability);
-        hrPerDay = (EditText) findViewById(R.id.a_hrPerDay);
-        dayPerMonth = (EditText) findViewById(R.id.a_dayPerMonth);
+        mName = (EditText)findViewById(R.id.item_name);
+        mType = (AutoCompleteTextView) findViewById(R.id.type);
+        mPower = (EditText) findViewById(R.id.power);
+        mAbility = (RadioGroup) this.findViewById(R.id.ability);
+        mHrPerDay = (EditText) findViewById(R.id.a_hrPerDay);
+        mDayPerMonth = (EditText) findViewById(R.id.a_dayPerMonth);
         getWatt = (Button) findViewById(R.id.getdefault);
+
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null) {
+
+            ID = bundle.getInt(Item.Column.ID);
+
+            int getPower = bundle.getInt(Item.Column.POWER);
+            int getHrPerDay = bundle.getInt(Item.Column.HRperDay);
+            int getDayPerMount = bundle.getInt(Item.Column.DAYperMONTH);
+            String getName = bundle.getString(Item.Column.NAME);
+            String getType = bundle.getString(Item.Column.TYPE);
+            String getAbility = bundle.getString(Item.Column.ABILITY);
+
+            mName.setText(getName);
+            mType.setText(getType);
+            mPower.setText(String.valueOf(getPower));
+            mHrPerDay.setText(String.valueOf(getHrPerDay));
+            mDayPerMonth.setText(String.valueOf(getDayPerMount));
+
+            //mAbility
+
+        }
 
         getWatt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +88,7 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
-        ability.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        mAbility.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -76,7 +97,7 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
-        mhelper = new DatabaseHelper(this);
+        mHelper = new DatabaseHelper(this);
 
         add = (Button) findViewById(R.id.add);
 
@@ -99,19 +120,19 @@ public class AddItemActivity extends AppCompatActivity {
 
                         Item item = new Item();
 
-                        item.setName(name.getText().toString());
-                        item.setType(type.getText().toString());
-                        item.setPower(Integer.parseInt(power.getText().toString()));
+                        item.setName(mName.getText().toString());
+                        item.setType(mType.getText().toString());
+                        item.setPower(Integer.parseInt(mPower.getText().toString()));
                         item.setAbility(myAbility);
-                        item.setHrPerDay(Integer.parseInt(hrPerDay.getText().toString()));
-                        item.setDayPerMonth(Integer.parseInt(dayPerMonth.getText().toString()));
+                        item.setHrPerDay(Integer.parseInt(mHrPerDay.getText().toString()));
+                        item.setDayPerMonth(Integer.parseInt(mDayPerMonth.getText().toString()));
                         item.setDate(currentDate);
 
                         if (ID == -1){
-                            mhelper.addItem(item);
+                            mHelper.addItem(item);
                         } else {
                             item.setId(ID);
-                            //mHelper.updateFriend(friend);
+                            mHelper.updateItem(item);
                         }
 
                         Intent BackpressedIntent = new Intent();
@@ -205,7 +226,7 @@ public class AddItemActivity extends AppCompatActivity {
                 break;
             default:  powerVal = 0; break;
         }
-        power.setText(String.valueOf(powerVal));
+        mPower.setText(String.valueOf(powerVal));
     }
 
 }
