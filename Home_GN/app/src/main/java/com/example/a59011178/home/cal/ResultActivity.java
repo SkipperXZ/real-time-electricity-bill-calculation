@@ -33,7 +33,7 @@ public class ResultActivity extends AppCompatActivity {
 
 
         TextView bahtresult = (TextView)findViewById(R.id.bahtresult);
-        bahtresult.setText(String.valueOf(result));
+        bahtresult.setText(String.valueOf(result)+ "Baht");
         Button backcal = (Button)findViewById(R.id.backcal);
 
         backcal.setOnClickListener(new View.OnClickListener() {
