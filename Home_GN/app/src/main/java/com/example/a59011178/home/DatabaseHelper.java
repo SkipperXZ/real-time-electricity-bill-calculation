@@ -53,6 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Item> getItemList() {
+
         List<Item> items_list = new ArrayList<>();
 
         sqLiteDatabase = this.getWritableDatabase();
@@ -70,13 +71,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // cursor.getString(cursor.getColumnIndex(Item.Column.ABILITY)),
 
             items_list.add(new Item(
+                    cursor.getInt(cursor.getColumnIndex(Item.Column.ID)),
                     cursor.getInt(cursor.getColumnIndex(Item.Column.POWER)),
                     cursor.getInt(cursor.getColumnIndex(Item.Column.HR)),
-                    cursor.getInt(cursor.getColumnIndex(Item.Column.ID)),
                     cursor.getInt(cursor.getColumnIndex(Item.Column.HRperDay)),
                     cursor.getInt(cursor.getColumnIndex(Item.Column.DAYperMONTH)),
                     cursor.getInt(cursor.getColumnIndex(Item.Column.TIME)),
                     cursor.getInt(cursor.getColumnIndex(Item.Column.TOTALMONEY)),
+
                     cursor.getString(cursor.getColumnIndex(Item.Column.NAME)),
                     cursor.getString(cursor.getColumnIndex(Item.Column.TYPE)),
                     cursor.getString(cursor.getColumnIndex(Item.Column.ABILITY)),

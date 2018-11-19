@@ -4,7 +4,7 @@ import android.provider.BaseColumns;
 
 import java.util.Date;
 
-public class Item {
+public class Item implements Comparable<Item> {
 
     private int power, hr ,id, hrPerDay, dayPerMonth, time, totalMoney;
     private String name, type, ability, date;
@@ -12,6 +12,11 @@ public class Item {
     public static final String DATABASE_NAME = "eve_item.db";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE = "item";
+
+    @Override
+    public int compareTo(Item other) {
+        return (int) (id - other.getId());
+    }
 
     public class Column {
         public static final String ID = BaseColumns._ID;
@@ -32,10 +37,10 @@ public class Item {
 
     }
 
-    public Item(int power, int hr, int id, int hrPerDay, int dayPerMonth, int time, int totalMoney, String name, String type, String ability, String date) {
+    public Item(int id, int power, int hr, int hrPerDay, int dayPerMonth, int time, int totalMoney, String name, String type, String ability, String date) {
+        this.id = id;
         this.power = power;
         this.hr = hr;
-        this.id = id;
         this.hrPerDay = hrPerDay;
         this.dayPerMonth = dayPerMonth;
         this.time = time;

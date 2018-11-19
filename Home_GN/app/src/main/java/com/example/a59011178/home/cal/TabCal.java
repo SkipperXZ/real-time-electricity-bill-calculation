@@ -21,8 +21,6 @@ import com.example.a59011178.home.R;
 
 
 import java.util.List;
-
-import static android.content.Intent.getIntent;
 import static android.media.CamcorderProfile.get;
 
 public class TabCal extends Fragment implements View.OnClickListener  {
@@ -32,15 +30,14 @@ public class TabCal extends Fragment implements View.OnClickListener  {
     private List<Item> mItemList;
     private DatabaseHelper mHelp;
     private Bundle bundle;
-    private Item item;
-    private  String id;
-    private Item subArrName;
+    private Item item, objectItme, subArrName;
+    private String id, name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tabcal, container, false);
 
-        // Bundle bundle  = getIntent().getExtras();
+//        Bundle bundle  = getIntent().getExtras();
 
         if (bundle != null) {
             id = bundle.getString(Item.Column.ID);
@@ -53,10 +50,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
         adapter = new ItemListAdapter_cal(this.getActivity(), mItemList);
         list.setAdapter(adapter);
 
-        subArrName = mItemList.get(7);
-
         registerForContextMenu(list);
-
 
         FloatingActionButton cal = (FloatingActionButton)rootView.findViewById(R.id.cal_now);
         cal.setOnClickListener(this);
@@ -68,10 +62,18 @@ public class TabCal extends Fragment implements View.OnClickListener  {
 
 //        item = mHelp.getItem(id);
 
+        int j = list.getSelectedItemPosition() + 1 ;
+
+//        objectItme = (Item)list.getSelectedItem();
+
+        objectItme = (Item) list.getAdapter().getItem(j);
+
+        name = objectItme.getName().toString();
+
         if (v.getId() == R.id.listView_cal) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
             // menu.setHeaderTitle(item.getName());
-            menu.setHeaderTitle(subArrName.getName().toString());
+            menu.setHeaderTitle(name);
             String[] menuItems = getResources().getStringArray(R.array.menu);
             for (int i = 0; i < menuItems.length; i++) {
                 menu.add(Menu.NONE, i, i, menuItems[i]);
@@ -81,7 +83,6 @@ public class TabCal extends Fragment implements View.OnClickListener  {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int menuItemIndex = item.getItemId();

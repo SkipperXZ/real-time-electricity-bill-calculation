@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
         TextView itemName = (TextView)v.findViewById(R.id.name_equip);
         TextView itemPower = (TextView)v.findViewById(R.id.power_equip);
         TextView itemMin = (TextView)v.findViewById(R.id.min_equip);
+        Switch itemOnOff = (Switch)v.findViewById(R.id.on_off);
 
 //        TextView itemType = (TextView)v.findViewById(R.id.Type);
 //        TextView itemAbility = (TextView)v.findViewById(R.id.Ability);
@@ -72,28 +74,29 @@ public class ItemListAdapter_equip extends BaseAdapter {
                 View mView =  inflater.inflate(R.layout.timeoffset, null);
                 final EditText mName = (EditText) mView.findViewById(R.id.editText);
                 final EditText mTime = (EditText) mView.findViewById(R.id.editText7);
-                Button mAdd = (Button) mView.findViewById(R.id.button3);
-                //final Intent intent = new Intent(AddTime.this,);
-
-                //Intent intent = new Intent(parent.getContext(),AddTime2.class);
-                //mContext.startActivity(intent);
-
-                mAdd.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Toast.makeText(HomeActivity.this, "success", Toast.LENGTH_LONG).show();
-                        if (!mName.getText().toString().isEmpty() && !mTime.getText().toString().isEmpty()) {
-                            Toast.makeText(parent.getContext(), "done", Toast.LENGTH_SHORT).show();
-                        }
-
-                        Intent intent = new Intent(parent.getContext(), AddTime2.class);
-                        mContext.startActivity(intent);
-
-                    }
-                });
+//                Button mAdd = (Button) mView.findViewById(R.id.button3);
+//                final Intent intent = new Intent(AddTime.this,);
+//
+//                Intent intent = new Intent(parent.getContext(),AddTime2.class);
+//                mContext.startActivity(intent);
+//
+//                mAdd.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        //Toast.makeText(HomeActivity.this, "success", Toast.LENGTH_LONG).show();
+//                        if (!mName.getText().toString().isEmpty() && !mTime.getText().toString().isEmpty()) {
+//                            Toast.makeText(parent.getContext(), "done", Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                        Intent intent = new Intent(parent.getContext(), AddTime2.class);
+//                        mContext.startActivity(intent);
+//
+//                    }
+//                });
                 mBuilder.setView(mView);
                 android.support.v7.app.AlertDialog dialog = mBuilder.create();
                 dialog.show();
+
             }
         });
 

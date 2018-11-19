@@ -1,14 +1,18 @@
 package com.example.a59011178.home.cal;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.example.a59011178.home.DatabaseHelper;
 import com.example.a59011178.home.Item;
 import com.example.a59011178.home.R;
 
@@ -16,13 +20,23 @@ import java.util.List;
 
 public class ItemListAdapter_cal extends BaseAdapter {
 
+    DatabaseHelper mHelper;
+    LayoutInflater li;
+    private String id = "";
+    private Item mItem;
+
     private Context mContext;
     private List<Item> mItemList;
+    private TextView itemName;
+    private TextView itemPower;
+    private TextView HRPerDay;
+    private TextView DayPerMonth;
 
 
     public ItemListAdapter_cal(Context mContext, List<Item> mItemList) {
-        this.mContext = mContext;
-        this.mItemList = mItemList;
+            this.mContext = mContext;
+            this.mItemList = mItemList;
+            li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -43,17 +57,25 @@ public class ItemListAdapter_cal extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
         View v = View.inflate(mContext, R.layout.sublist_calculate, null);
-        TextView itemName = (TextView) v.findViewById(R.id.name_cal);
-        TextView itemPower = (TextView) v.findViewById(R.id.power_cal);
 
-        final TextView HRPerDay = (TextView) v.findViewById(R.id.hrPerDay);
-        final TextView DayPerMonth = (TextView) v.findViewById(R.id.dayPerMonth);
+        mHelper = new DatabaseHelper(parent.getContext());
+
+//         Bundle bundle  =((Activity) parent.getContext()).getIntent().getExtras();
+//        ต้นฉบับ Intent intent = ((Activity) context).getIntent();
+
+//        if (bundle != null) {
+//            id = bundle.getString(Item.Column.ID);
+//        }
+
+        itemName = (TextView) v.findViewById(R.id.name_cal);
+        itemPower = (TextView) v.findViewById(R.id.power_cal);
+        HRPerDay = (TextView) v.findViewById(R.id.hrPerDay);
+        DayPerMonth = (TextView) v.findViewById(R.id.dayPerMonth);
 
         //LinearLayout mHrPerDay = (LinearLayout)v.findViewById(R.id.hrPerDay_layout);
 
         itemName.setText(mItemList.get(position).getName());
         itemPower.setText(String.valueOf(mItemList.get(position).getPower()) + " WATT");
-
         HRPerDay.setText("Use " + String.valueOf(mItemList.get(position).getHrPerDay()) + " Hour/Day");
         DayPerMonth.setText("Use " + String.valueOf(mItemList.get(position).getDayPerMonth()) + " Day/Month");
 
@@ -79,6 +101,8 @@ public class ItemListAdapter_cal extends BaseAdapter {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
+
 
                             }
                         }
@@ -134,6 +158,7 @@ public class ItemListAdapter_cal extends BaseAdapter {
         v.setTag(mItemList.get(position).getId());
         return v;
     }
+
 }
 
 
