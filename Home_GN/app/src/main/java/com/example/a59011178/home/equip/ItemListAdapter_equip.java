@@ -43,7 +43,8 @@ public class ItemListAdapter_equip extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, final ViewGroup parent) {
-        View v = View.inflate(mContext, R.layout.sublist_euipment,null);
+        View v = View.inflate(mContext, R.layout.sublist_equipment,null);
+
         TextView itemName = (TextView)v.findViewById(R.id.name_equip);
         TextView itemPower = (TextView)v.findViewById(R.id.power_equip);
         TextView itemMin = (TextView)v.findViewById(R.id.min_equip);

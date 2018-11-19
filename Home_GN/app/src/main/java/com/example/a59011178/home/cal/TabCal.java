@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,7 +22,6 @@ import com.example.a59011178.home.R;
 
 import java.util.List;
 
-import static android.media.CamcorderProfile.get;
 
 public class TabCal extends Fragment implements View.OnClickListener  {
 
@@ -34,16 +34,17 @@ public class TabCal extends Fragment implements View.OnClickListener  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tabcal, container, false);
 
-        lvItem = (ListView)rootView.findViewById(R.id.listView_cal);
-        mHelp = new DatabaseHelper(this.getContext());
+        lvItem = (ListView) rootView.findViewById(R.id.listView_cal);
+        mHelp = new DatabaseHelper(getContext());
         mItemList = mHelp.getItemList();
 
-        adapter = new ItemListAdapter_cal(this.getActivity(), mItemList);
+        adapter = new ItemListAdapter_cal(getActivity(), mItemList);
         lvItem.setAdapter(adapter);
         registerForContextMenu(lvItem);
 
 
         FloatingActionButton cal = (FloatingActionButton)rootView.findViewById(R.id.cal_now);
+
         cal.setOnClickListener(this);
 
         return rootView;
@@ -61,7 +62,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), EmptyActivity.class);
+        Intent intent = new Intent(getActivity(), ResultActivity.class);
         startActivity(intent);
     }
 }
