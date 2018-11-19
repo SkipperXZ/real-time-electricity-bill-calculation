@@ -24,7 +24,7 @@
             android:label="@string/add_title"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity android:name=".edit.EditActivity" />
-        <activity android:name=".cal.EmptyActivity"></activity>
+        <activity android:name=".cal.ResultActivity"></activity>
     </application>
 
 </manifest>
