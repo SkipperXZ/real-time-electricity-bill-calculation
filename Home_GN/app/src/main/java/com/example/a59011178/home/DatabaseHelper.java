@@ -164,4 +164,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             sqLiteDatabase.close();
         }
     }
+
+    public void deleteItem(String id){
+
+        sqLiteDatabase = this.getWritableDatabase();
+
+        sqLiteDatabase.delete(Item.TABLE, Item.Column.ID + " = " + id, null);
+
+        sqLiteDatabase.close();
+
+
+    }
 }
