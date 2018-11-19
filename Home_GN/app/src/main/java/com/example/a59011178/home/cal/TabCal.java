@@ -50,6 +50,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
         registerForContextMenu(lvItem);
 
 
+
         FloatingActionButton cal = (FloatingActionButton)rootView.findViewById(R.id.cal_now);
 
         cal.setOnClickListener(this);
@@ -58,14 +59,19 @@ public class TabCal extends Fragment implements View.OnClickListener  {
     }
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
+        //System.out.println("--------------------------------------"+lvItem.getCheckedItemPosition());
+
         if (v.getId() == R.id.listView_cal) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            Item item =(Item) lvItem.getAdapter().getItem(info.position);
+            menu.setHeaderTitle(item.getName());
             String[] menuItems = getResources().getStringArray(R.array.menu);
             for (int i = 0; i < menuItems.length; i++) {
                 menu.add(Menu.NONE, i, i, menuItems[i]);
             }
         }
     }
+
 
     @Override
     public void onClick(View v) {

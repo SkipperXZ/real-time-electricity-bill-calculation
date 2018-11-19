@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a59011178.home.Item;
 import com.example.a59011178.home.R;
+import com.example.a59011178.home.timer.CountUpTimer;
 
 import java.util.List;
 
@@ -20,6 +23,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
 
     private Context mContext;
     private List<Item> mItemList;
+    CountUpTimer timer;
 
     public ItemListAdapter_equip(Context mContext, List<Item> mItemList) {
         this.mContext = mContext;
@@ -42,12 +46,15 @@ public class ItemListAdapter_equip extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, final ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
+
         View v = View.inflate(mContext, R.layout.sublist_equipment,null);
 
         TextView itemName = (TextView)v.findViewById(R.id.name_equip);
         TextView itemPower = (TextView)v.findViewById(R.id.power_equip);
-        TextView itemMin = (TextView)v.findViewById(R.id.min_equip);
+        final TextView itemMin = (TextView)v.findViewById(R.id.min_equip);
+        final Switch   timeSwitch =(Switch)v.findViewById(R.id.on_off);
+
 
 //        TextView itemType = (TextView)v.findViewById(R.id.Type);
 //        TextView itemAbility = (TextView)v.findViewById(R.id.Ability);
@@ -96,6 +103,31 @@ public class ItemListAdapter_equip extends BaseAdapter {
                 dialog.show();
             }
         });
+
+        timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int pos = position;
+                    final int hr = mItemList.get(position).getHr();
+                    if(isChecked) {
+
+                        itemMin.setText(String.valueOf(hr));
+                        timer = new CountUpTimer( 1000000000,  mItemList.get(position)) {
+                            public void onTick(int second) {
+                                itemMin.setText(String.valueOf(timer.getInitTime() + second));
+                            }
+                        };
+                        timer.start();
+                    }
+                    else{
+                        if(timer != null){
+                            mItemList.get(position).setHr(timer.getInitTime() + timer.getSecond());
+                            timer.cancel();
+                        }
+                    }
+            }
+        });
+
 
         return v;
     }
