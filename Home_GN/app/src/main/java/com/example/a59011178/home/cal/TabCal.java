@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a59011178.home.AddItemActivity;
 import com.example.a59011178.home.DatabaseHelper;
 import com.example.a59011178.home.Item;
 import com.example.a59011178.home.R;
@@ -57,6 +58,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
 
         return rootView;
     }
+
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
         //System.out.println("--------------------------------------"+lvItem.getCheckedItemPosition());
@@ -65,11 +67,46 @@ public class TabCal extends Fragment implements View.OnClickListener  {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
             Item item =(Item) lvItem.getAdapter().getItem(info.position);
             menu.setHeaderTitle(item.getName());
-            String[] menuItems = getResources().getStringArray(R.array.menu);
-            for (int i = 0; i < menuItems.length; i++) {
-                menu.add(Menu.NONE, i, i, menuItems[i]);
-            }
+//            String[] menuItems = getResources().getStringArray(R.array.menu);
+//            for (int i = 0; i < menuItems.length; i++) {
+//                menu.add(Menu.NONE, i, i, menuItems[i]);
+//            }
+            getActivity().getMenuInflater().inflate(R.menu.equip_options, menu);
+            super.onCreateContextMenu(menu, v, menuInfo);
         }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Item item1 = (Item) lvItem.getAdapter().getItem(info.position);
+        switch (item.getItemId())
+        {
+            case R.id.goToEdit:
+                Intent intent = new Intent(getContext(),AddItemActivity.class);
+
+                intent.putExtra(Item.Column.ID, item1.getId());
+                intent.putExtra(Item.Column.NAME, item1.getName());
+                intent.putExtra(Item.Column.TYPE, item1.getType());
+                intent.putExtra(Item.Column.POWER, item1.getPower());
+                intent.putExtra(Item.Column.ABILITY, item1.getAbility());
+                intent.putExtra(Item.Column.HRperDay, item1.getHrPerDay());
+                intent.putExtra(Item.Column.DAYperMONTH, item1.getDayPerMonth());
+
+                startActivity(intent);
+
+//                Toast toast = Toast.makeText ( getContext(), "Edit: " + item1.getName() , Toast.LENGTH_LONG );
+//                toast.show ( );
+
+                break;
+            case R.id.goToDelete:
+
+//                Toast toast2 = Toast.makeText ( getContext(), "Delete: " + item1.getName(), Toast.LENGTH_LONG );
+//                toast2.show ( );
+
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 
 
