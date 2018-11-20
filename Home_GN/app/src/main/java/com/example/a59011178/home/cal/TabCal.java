@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -140,16 +141,19 @@ public class TabCal extends Fragment implements View.OnClickListener  {
 
 
     @Override
+
     public void onClick(View v) {
         
         float result = calculatenow();
 
         android.support.v7.app.AlertDialog.Builder mBuilder = new android.support.v7.app.AlertDialog.Builder(getContext());
+
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         View mView =  inflater.inflate(R.layout.activity_result, null);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Your electricity fee this month");
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.AppTheme));
+        builder.setTitle(R.string.result_title);
         builder.setMessage(String.valueOf(result)+" Baht");
         builder.setPositiveButton("OK", null);
 

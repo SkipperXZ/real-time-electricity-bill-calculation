@@ -38,6 +38,7 @@
     <string name="edit">Edit</string>
     <string name="ok">OK</string>
     <string name="cancel">CANCEL</string>
+    <string name="result_title">Your electricity fee this month</string>
 
 
 </resources>
