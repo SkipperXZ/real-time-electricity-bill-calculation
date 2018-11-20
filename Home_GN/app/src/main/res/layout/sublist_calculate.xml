@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/border3">
+
+
+        <TextView
+            android:id="@+id/name_cal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/euip_name"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:id="@+id/hrPerDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/power_cal"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:onClick="clickHandler"
+            android:text="@string/use3" />
+
+
+        <TextView
+            android:id="@+id/power_cal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:text="@string/unit"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/dayPerMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="13dp"
+            android:clickable="true"
+            android:onClick="clickHandler"
+            android:text="@string/use2" />
+
+    </RelativeLayout>
+
+</LinearLayout>
