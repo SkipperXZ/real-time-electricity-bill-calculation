@@ -151,11 +151,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Your electricity fee this month");
         builder.setMessage(String.valueOf(result)+" Baht");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                Toast.makeText(getContext(),"Completed", Toast.LENGTH_SHORT).show();
-            }
-        });
+        builder.setPositiveButton("OK", null);
 
         mBuilder.setView(mView);
         builder.show();
