@@ -152,13 +152,18 @@ public class TabCal extends Fragment implements View.OnClickListener  {
 
         View mView =  inflater.inflate(R.layout.activity_result, null);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.AppTheme));
-        builder.setTitle(R.string.result_title);
-        builder.setMessage(String.valueOf(result)+" Baht");
-        builder.setPositiveButton("OK", null);
+        final TextView mText = (TextView) mView.findViewById(R.id.textresult);
+        final TextView mResult = (TextView) mView.findViewById(R.id.bahtresult);
+        Button btnOK = (Button) mView.findViewById(R.id.backcal);
+
+        mResult.setText(String.valueOf(result)+"Baht");
+       // AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.AppTheme));
+       // builder.setTitle(R.string.result_title);
+       // mBuilder.setMessage(String.valueOf(result)+" Baht");
+       // builder.setPositiveButton("OK", null);
 
         mBuilder.setView(mView);
-        builder.show();
+        mBuilder.show();
 
     }
 
