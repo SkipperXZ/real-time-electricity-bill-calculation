@@ -31,16 +31,6 @@
         android:textColor="#abaaaa"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/backcal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/border2"
-        android:text="OK"
-        android:textAlignment="center"
-        android:textColor="#ffffff" />
 
     <!--</LinearLayout>-->
 

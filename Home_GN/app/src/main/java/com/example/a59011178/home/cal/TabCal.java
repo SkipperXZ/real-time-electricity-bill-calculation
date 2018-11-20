@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -155,13 +156,14 @@ public class TabCal extends Fragment implements View.OnClickListener  {
 
         final TextView mText = (TextView) mView.findViewById(R.id.textresult);
         final TextView mResult = (TextView) mView.findViewById(R.id.bahtresult);
-        Button btnOK = (Button) mView.findViewById(R.id.backcal);
 
-        mResult.setText(String.valueOf(result)+"Baht");
+       // Button btnOK = (Button) mView.findViewById(R.id.backcal);
+
+        mResult.setText(String.valueOf(result)+" Baht");
        // AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.AppTheme));
        // builder.setTitle(R.string.result_title);
        // mBuilder.setMessage(String.valueOf(result)+" Baht");
-       // builder.setPositiveButton("OK", null);
+       mBuilder.setPositiveButton("OK", null);
 
         mBuilder.setView(mView);
         mBuilder.show();
