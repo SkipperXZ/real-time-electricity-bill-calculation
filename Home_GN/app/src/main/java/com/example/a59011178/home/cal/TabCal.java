@@ -38,9 +38,11 @@ import java.util.List;
 public class TabCal extends Fragment implements View.OnClickListener  {
 
     private ListView lvItem;
-    private ItemListAdapter_cal adapter;
+
     private List<Item> mItemList;
     private DatabaseHelper mHelp;
+
+    private ItemListAdapter_cal adapter;
 
 
     @Override
@@ -48,16 +50,14 @@ public class TabCal extends Fragment implements View.OnClickListener  {
         View rootView = inflater.inflate(R.layout.fragment_tabcal, container, false);
 
         lvItem = (ListView) rootView.findViewById(R.id.listView_cal);
-        mHelp = new DatabaseHelper(getContext());
+        mHelp = new DatabaseHelper(this.getContext());
         mItemList = mHelp.getItemList();
 
-        adapter = new ItemListAdapter_cal(getActivity(), mItemList);
+        adapter = new ItemListAdapter_cal(this.getActivity(), mItemList);
         lvItem.setAdapter(adapter);
         registerForContextMenu(lvItem);
 
-
         FloatingActionButton cal = (FloatingActionButton)rootView.findViewById(R.id.cal_now);
-
         cal.setOnClickListener(this);
 
         return rootView;
@@ -131,6 +131,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
                 builder.setNegativeButton(getString(android.R.string.cancel), null);
 
                 builder.show();
+
 //                Toast toast2 = Toast.makeText ( getContext(), "Delete: " + item1.getName(), Toast.LENGTH_LONG );
 //                toast2.show ( );
 
@@ -143,7 +144,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
     @Override
 
     public void onClick(View v) {
-        
+
         float result = calculatenow();
 
         android.support.v7.app.AlertDialog.Builder mBuilder = new android.support.v7.app.AlertDialog.Builder(getContext());

@@ -13,6 +13,9 @@ public class TabGraph extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tabgraph, container, false);
+
+
+
         return rootView;
     }
 }
