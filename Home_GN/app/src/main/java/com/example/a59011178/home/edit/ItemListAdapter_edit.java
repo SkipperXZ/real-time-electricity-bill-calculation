@@ -2,6 +2,7 @@ package com.example.a59011178.home.edit;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -67,7 +68,7 @@ public class ItemListAdapter_edit extends BaseAdapter {
         itemDayPerMonth.setText("Use " + String.valueOf(mItemList.get(position).getDayPerMonth()) + " Day/Month");
 
         v.setTag(mItemList.get(position).getId());
-<<<<<<< HEAD
+
         TextView mShowDialog = (TextView) v.findViewById(R.id.offset);
         mShowDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,8 +105,6 @@ public class ItemListAdapter_edit extends BaseAdapter {
             }
         });
 
-=======
->>>>>>> master
         return v;
     }
 }

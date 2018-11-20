@@ -26,12 +26,6 @@ public class ItemListAdapter_equip extends BaseAdapter {
 
     private Context mContext;
     private List<Item> mItemList;
-<<<<<<< HEAD
-    CountUpTimer timer;
-    TimePicker timePicker;
-=======
-
->>>>>>> master
 
     public ItemListAdapter_equip(Context mContext, List<Item> mItemList) {
         this.mContext = mContext;
