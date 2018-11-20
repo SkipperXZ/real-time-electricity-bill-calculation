@@ -21,7 +21,6 @@ import java.util.List;
 
 public class ItemListAdapter_cal extends BaseAdapter {
 
-    DatabaseHelper mHelper;
     LayoutInflater li;
     private String id = "";
     private Item mItem;
@@ -29,7 +28,6 @@ public class ItemListAdapter_cal extends BaseAdapter {
     private Context mContext;
     private List<Item> mItemList;
     private DatabaseHelper mDBHelper;
-
 
     public ItemListAdapter_cal(Context mContext, List<Item> mItemList) {
         this.mContext = mContext;
@@ -56,7 +54,7 @@ public class ItemListAdapter_cal extends BaseAdapter {
     public View getView(final int position, View convertView, final ViewGroup parent) {
         View v = View.inflate(mContext, R.layout.sublist_calculate, null);
 
-        mHelper = new DatabaseHelper(parent.getContext());
+        mDBHelper = new DatabaseHelper(parent.getContext());
 
 //         Bundle bundle  =((Activity) parent.getContext()).getIntent().getExtras();
 //        ต้นฉบับ Intent intent = ((Activity) context).getIntent();
