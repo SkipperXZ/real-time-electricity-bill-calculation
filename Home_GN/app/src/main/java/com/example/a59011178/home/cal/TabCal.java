@@ -163,7 +163,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
        // AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.AppTheme));
        // builder.setTitle(R.string.result_title);
        // mBuilder.setMessage(String.valueOf(result)+" Baht");
-       mBuilder.setPositiveButton("OK", null);
+        mBuilder.setPositiveButton("OK", null);
 
         mBuilder.setView(mView);
         mBuilder.show();
