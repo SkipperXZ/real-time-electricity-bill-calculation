@@ -24,9 +24,8 @@
             android:name=".AddItemActivity"
             android:label="@string/add_title"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:screenOrientation="portrait" />
-        <activity android:name=".edit.EditActivity" android:screenOrientation="portrait" />
-        <activity android:name=".cal.ResultActivity" android:screenOrientation="portrait" ></activity>
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".edit.EditActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".cal.ResultActivity" android:screenOrientation="portrait"></activity>
     </application>
-
 </manifest>
