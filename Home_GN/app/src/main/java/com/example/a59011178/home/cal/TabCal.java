@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v4.app.DialogFragment;
 
 import com.example.a59011178.home.AddItemActivity;
 import com.example.a59011178.home.DatabaseHelper;
@@ -55,6 +56,10 @@ public class TabCal extends Fragment implements View.OnClickListener  {
         lvItem.setAdapter(adapter);
         registerForContextMenu(lvItem);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         FloatingActionButton cal = (FloatingActionButton)rootView.findViewById(R.id.cal_now);
         cal.setOnClickListener(this);
 
@@ -141,12 +146,30 @@ public class TabCal extends Fragment implements View.OnClickListener  {
 
     @Override
     public void onClick(View v) {
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> master
         float result = calculatenow();
 
-        Intent intent = new Intent(getActivity(), ResultActivity.class);
-        intent.putExtra("total",result);
-        startActivity(intent);
+        android.support.v7.app.AlertDialog.Builder mBuilder = new android.support.v7.app.AlertDialog.Builder(getContext());
+        LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View mView =  inflater.inflate(R.layout.activity_result, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Your electricity fee this month");
+        builder.setMessage(String.valueOf(result)+" Baht");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(getContext(),
+                        "OK", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mBuilder.setView(mView);
+        builder.show();
+
     }
 
     private float calculatenow() {
