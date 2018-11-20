@@ -23,7 +23,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
 
     private Context mContext;
     private List<Item> mItemList;
-    CountUpTimer timer;
+
 
     public ItemListAdapter_equip(Context mContext, List<Item> mItemList) {
         this.mContext = mContext;
@@ -112,26 +112,32 @@ public class ItemListAdapter_equip extends BaseAdapter {
         });
 
         timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
+            CountUpTimer timer ;
+            int hr = mItemList.get(position).getHr();
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int pos = position;
-                    final int hr = mItemList.get(position).getHr();
-                    if(isChecked) {
+                    int pos = position;
 
+                    if(isChecked) {
+                        hr =mItemList.get(position).getHr();
                         itemMin.setText(String.valueOf(hr));
-                        timer = new CountUpTimer( 1000000000,  mItemList.get(position)) {
+                        timer = new CountUpTimer( 2000000000) {
                             public void onTick(int second) {
-                                itemMin.setText(String.valueOf(timer.getInitTime() + second));
+                                itemMin.setText(String.valueOf(hr + second));
+                            }
+                            @Override
+                            public void onFinish(){
+                                mItemList.get(position).setHr(hr + timer.getSecond()+1);
+                                hr =  mItemList.get(position).getHr();
+                                this.start();
                             }
                         };
                         timer.start();
                     }
                     else{
-                        if(timer != null){
-                            mItemList.get(position).setHr(timer.getInitTime() + timer.getSecond());
+                            mItemList.get(position).setHr(hr + timer.getSecond());
                             timer.cancel();
-                        }
+                            timer = null;
                     }
             }
         });
