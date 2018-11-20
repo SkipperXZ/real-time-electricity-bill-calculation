@@ -165,7 +165,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void updateHRperDay(String id, int hr){
-
         sqLiteDatabase  = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 

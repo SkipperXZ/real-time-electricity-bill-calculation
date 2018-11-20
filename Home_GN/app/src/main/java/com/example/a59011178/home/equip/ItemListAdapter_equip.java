@@ -19,6 +19,7 @@ import com.example.a59011178.home.Item;
 import com.example.a59011178.home.R;
 import com.example.a59011178.home.timer.CountUpTimer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -68,6 +69,10 @@ public class ItemListAdapter_equip extends BaseAdapter {
         TextView itemPower = (TextView)v.findViewById(R.id.power_equip);
         final TextView itemMin = (TextView)v.findViewById(R.id.min_equip);
         final Switch   timeSwitch =(Switch)v.findViewById(R.id.on_off);
+
+
+
+
 
         itemName.setText(mItemList.get(position).getName());
         itemPower.setText("(" + String.valueOf(mItemList.get(position).getPower()) + "W)");
@@ -129,6 +134,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
                         timer = new CountUpTimer( 2000000000) {
                             public void onTick(int second) {
                                 itemMin.setText(String.valueOf(hr + second));
+                                mItemList.get(position).setHr(hr + timer.getSecond());
                             }
                             @Override
                             public void onFinish(){
@@ -148,7 +154,13 @@ public class ItemListAdapter_equip extends BaseAdapter {
         });
 
 
+<<<<<<< Updated upstream
       return v;
+=======
+
+
+        return v;
+>>>>>>> Stashed changes
     }
 
 
