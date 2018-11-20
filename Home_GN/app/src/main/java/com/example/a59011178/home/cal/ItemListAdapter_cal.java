@@ -27,16 +27,12 @@ public class ItemListAdapter_cal extends BaseAdapter {
 
     private Context mContext;
     private List<Item> mItemList;
-    private TextView itemName;
-    private TextView itemPower;
-    private TextView HRPerDay;
-    private TextView DayPerMonth;
 
 
     public ItemListAdapter_cal(Context mContext, List<Item> mItemList) {
-            this.mContext = mContext;
-            this.mItemList = mItemList;
-            li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.mContext = mContext;
+        this.mItemList = mItemList;
+        li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -67,15 +63,17 @@ public class ItemListAdapter_cal extends BaseAdapter {
 //            id = bundle.getString(Item.Column.ID);
 //        }
 
-        itemName = (TextView) v.findViewById(R.id.name_cal);
-        itemPower = (TextView) v.findViewById(R.id.power_cal);
-        HRPerDay = (TextView) v.findViewById(R.id.hrPerDay);
-        DayPerMonth = (TextView) v.findViewById(R.id.dayPerMonth);
+        TextView itemName = (TextView)v.findViewById(R.id.name_cal);
+        TextView itemPower = (TextView)v.findViewById(R.id.power_cal);
+
+        final TextView HRPerDay = (TextView)v.findViewById(R.id.hrPerDay);
+        final TextView DayPerMonth = (TextView)v.findViewById(R.id.dayPerMonth);
 
         //LinearLayout mHrPerDay = (LinearLayout)v.findViewById(R.id.hrPerDay_layout);
 
         itemName.setText(mItemList.get(position).getName());
         itemPower.setText(String.valueOf(mItemList.get(position).getPower()) + " WATT");
+
         HRPerDay.setText("Use " + String.valueOf(mItemList.get(position).getHrPerDay()) + " Hour/Day");
         DayPerMonth.setText("Use " + String.valueOf(mItemList.get(position).getDayPerMonth()) + " Day/Month");
 

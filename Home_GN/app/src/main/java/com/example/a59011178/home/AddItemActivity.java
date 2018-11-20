@@ -77,8 +77,24 @@ public class AddItemActivity extends AppCompatActivity {
             mHrPerDay.setText(String.valueOf(getHrPerDay));
             mDayPerMonth.setText(String.valueOf(getDayPerMount));
 
-            //mAbility
+            RadioButton radio1 = (RadioButton)findViewById(R.id.radioButton);
+            RadioButton radio2 = (RadioButton)findViewById(R.id.radioButton2);
+            RadioButton radio3 = (RadioButton)findViewById(R.id.radioButton3);
 
+            switch (getAbility){
+                case "Always on" :
+                    radio1.setChecked(true);
+                    break;
+                case "Manual/On-Off":
+                    radio2.setChecked(true);
+                    break;
+                case "Time Offset":
+                    radio3.setChecked(true);
+                    break;
+                case "Set time":
+                    radio3.setChecked(true);
+                    break;
+            }
         }
 
         getWatt.setOnClickListener(new View.OnClickListener() {

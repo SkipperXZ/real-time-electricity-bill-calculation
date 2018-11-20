@@ -165,6 +165,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void updateHRperDay(int Hr){
+
+
+    }
+
+    public void updateDayPerMonth(int Day){
+
+
+    }
+
     public void deleteItem(String id){
 
         sqLiteDatabase = this.getWritableDatabase();
