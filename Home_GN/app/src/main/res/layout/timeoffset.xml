@@ -8,56 +8,28 @@
     android:orientation="vertical"
     android:padding="5dp">
 
-    <!--<RelativeLayout
-        //android:layout_width="match_parent"
-        //android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:orientation="vertical"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/border3">-->
 
     <TextView
-        android:id="@+id/timeoffset"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="5dp"
-        android:text="@string/timeoffset"
-        android:textColor="#d87973"
-        android:textSize="20sp" />
+        android:text="Time offset"
+        android:layout_margin="5dp"/>
 
-    <EditText
-        android:id="@+id/editText"
+    <TimePicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/timePicker"
         android:layout_gravity="center"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/border3"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/euip_name"
-        android:textAlignment="center" />
+        android:timePickerMode="spinner"/>
 
-    <EditText
-        android:id="@+id/editText7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:inputType="time" />
+
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:background="@drawable/border2"
@@ -65,8 +37,5 @@
         android:textAlignment="center"
         android:textColor="#ffffff" />
 
-        <!--</LinearLayout>-->
-
-    <!--</RelativeLayout>-->
 
 </LinearLayout>

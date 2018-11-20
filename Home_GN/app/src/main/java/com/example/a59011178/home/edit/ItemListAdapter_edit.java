@@ -82,15 +82,15 @@ public class ItemListAdapter_edit extends BaseAdapter {
                 LayoutInflater inflater = (LayoutInflater)parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
                 View mView =  inflater.inflate(R.layout.timeoffset, null);
-                final EditText mName = (EditText) mView.findViewById(R.id.editText);
-                final EditText mTime = (EditText) mView.findViewById(R.id.editText7);
-                Button mAdd = (Button) mView.findViewById(R.id.button3);
+ //               final EditText mName = (EditText) mView.findViewById(R.id.editText);
+ //               final EditText mTime = (EditText) mView.findViewById(R.id.editText7);
+ //               Button mAdd = (Button) mView.findViewById(R.id.button3);
                 //final Intent intent = new Intent(AddTime.this,);
 
                 //Intent intent = new Intent(parent.getContext(),AddTime2.class);
                 //mContext.startActivity(intent);
 
-                mAdd.setOnClickListener(new View.OnClickListener() {
+    /*            mAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //Toast.makeText(HomeActivity.this, "success", Toast.LENGTH_LONG).show();
@@ -103,7 +103,7 @@ public class ItemListAdapter_edit extends BaseAdapter {
 
                     }
                 });
-                mBuilder.setView(mView);
+ */               mBuilder.setView(mView);
                 android.support.v7.app.AlertDialog dialog = mBuilder.create();
                 dialog.show();
             }
