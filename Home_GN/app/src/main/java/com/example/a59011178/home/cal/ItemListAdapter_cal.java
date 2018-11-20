@@ -125,7 +125,7 @@ public class ItemListAdapter_cal extends BaseAdapter {
 
             private void numberPickerDay() {
                 final NumberPicker myNumPick = new NumberPicker(parent.getContext());
-                myNumPick.setMaxValue(31); 
+                myNumPick.setMaxValue(31);
                 myNumPick.setMinValue(0);
                 NumberPicker.OnValueChangeListener dayChange = new NumberPicker.OnValueChangeListener() {
                     @Override
