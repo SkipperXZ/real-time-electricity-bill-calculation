@@ -124,23 +124,23 @@ public class ItemListAdapter_cal extends BaseAdapter {
             }
 
             private void numberPickerDay() {
-                NumberPicker myNumPick = new NumberPicker(parent.getContext());
-                myNumPick.setMaxValue(31);
+                final NumberPicker myNumPick = new NumberPicker(parent.getContext());
+                myNumPick.setMaxValue(31); 
                 myNumPick.setMinValue(0);
-                NumberPicker.OnValueChangeListener hrChange = new NumberPicker.OnValueChangeListener() {
+                NumberPicker.OnValueChangeListener dayChange = new NumberPicker.OnValueChangeListener() {
                     @Override
                     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                         DayPerMonth.setText("Use " + newVal + " Day/Month");
                     }
                 };
-                myNumPick.setOnValueChangedListener(hrChange);
+                myNumPick.setOnValueChangedListener(dayChange);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext()).setView(myNumPick);
                 builder.setTitle("Days you use per month");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                int newHr = Integer.parseInt(DayPerMonth.getText().toString());
+                                mDBHelper.updateDayPerMonth( nowID, myNumPick.getValue());
                             }
                         }
                 );

@@ -179,17 +179,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }
 
-    public void updateDayPerMonth(Item item){
+    public void updateDayPerMonth(String id, int day){
 
         sqLiteDatabase  = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(Item.Column.DAYperMONTH, item.getDayPerMonth());
+        values.put(Item.Column.DAYperMONTH, day);
 
         int row = sqLiteDatabase.update(Item.TABLE,
                 values,
                 Item.Column.ID + " = ? ",
-                new String[] { String.valueOf(item.getId()) });
+                new String[] {id});
 
         sqLiteDatabase.close();
 
