@@ -153,15 +153,6 @@ public class ItemListAdapter_equip extends BaseAdapter {
             }
         });
 
-
-<<<<<<< Updated upstream
       return v;
-=======
-
-
-        return v;
->>>>>>> Stashed changes
     }
-
-
 }
