@@ -21,7 +21,11 @@ public class TabEquip extends Fragment {
     private List<Item> mItemList;
     private DatabaseHelper mHelp;
 
+
+
+
     @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tabequip, container, false);
@@ -35,7 +39,9 @@ public class TabEquip extends Fragment {
 
         return rootView;
 
+
     }
+
 }
 
 
