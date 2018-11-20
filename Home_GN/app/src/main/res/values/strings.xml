@@ -39,5 +39,7 @@
     <string name="ok">OK</string>
     <string name="cancel">CANCEL</string>
     <string name="result_title">Your electricity fee this month is</string>
+    <string name="hour">Hour</string>
+    <string name="minute">Minute</string>
 
 </resources>

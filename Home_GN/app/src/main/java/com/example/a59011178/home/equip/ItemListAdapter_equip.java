@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -93,11 +94,18 @@ public class ItemListAdapter_equip extends BaseAdapter {
 
             View mView =  inflater.inflate(R.layout.timeoffset, null);
 
-          final TimePicker timePicker = (TimePicker)mView.findViewById(R.id.timePicker);
-                timePicker.setIs24HourView(true);
-                timePicker.isShown();
+          final NumberPicker hour = (NumberPicker) mView.findViewById(R.id.numberPicker);
+                hour.setMinValue(0);
+                hour.setMaxValue(48);
 
-               Button mAdd = (Button) mView.findViewById(R.id.button3);
+          final NumberPicker minute = (NumberPicker) mView.findViewById(R.id.numberPicker1);
+                minute.setMinValue(0);
+                minute.setMaxValue(60);
+
+
+
+
+                Button mAdd = (Button) mView.findViewById(R.id.button3);
 //                final Intent intent = new Intent(AddTime.this,);
 //
 //                Intent intent = new Intent(parent.getContext(),AddTime2.class);
@@ -153,6 +161,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
             }
         });
 
-      return v;
+
+        return v;
     }
 }
