@@ -144,7 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void updateItem(Item item) {
-        {
+
             sqLiteDatabase  = this.getWritableDatabase();
             ContentValues values = new ContentValues();
 
@@ -162,16 +162,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     new String[] { String.valueOf(item.getId()) });
 
             sqLiteDatabase.close();
-        }
     }
 
-    public void updateHRperDay(int Hr){
+    public void updateHRperDay(String id, int hr){
 
+        sqLiteDatabase  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
 
+        values.put(Item.Column.HRperDay, hr);
+
+        int row = sqLiteDatabase.update(Item.TABLE,
+                values,
+                Item.Column.ID + " = ? ",
+                new String[] {id});
+
+        sqLiteDatabase.close();
     }
 
-    public void updateDayPerMonth(int Day){
+    public void updateDayPerMonth(Item item){
 
+        sqLiteDatabase  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Item.Column.DAYperMONTH, item.getDayPerMonth());
+
+        int row = sqLiteDatabase.update(Item.TABLE,
+                values,
+                Item.Column.ID + " = ? ",
+                new String[] { String.valueOf(item.getId()) });
+
+        sqLiteDatabase.close();
 
     }
 

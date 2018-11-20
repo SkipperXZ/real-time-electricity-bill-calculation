@@ -56,10 +56,6 @@ public class TabCal extends Fragment implements View.OnClickListener  {
         lvItem.setAdapter(adapter);
         registerForContextMenu(lvItem);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         FloatingActionButton cal = (FloatingActionButton)rootView.findViewById(R.id.cal_now);
         cal.setOnClickListener(this);
 
@@ -146,11 +142,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
 
     @Override
     public void onClick(View v) {
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> master
         float result = calculatenow();
 
         android.support.v7.app.AlertDialog.Builder mBuilder = new android.support.v7.app.AlertDialog.Builder(getContext());
