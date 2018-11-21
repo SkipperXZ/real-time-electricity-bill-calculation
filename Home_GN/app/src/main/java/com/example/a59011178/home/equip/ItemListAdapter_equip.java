@@ -36,13 +36,11 @@ public class ItemListAdapter_equip extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-
         return getCount();
     }
 
     @Override
     public int getItemViewType(int position) {
-
         return position;
     }
 
@@ -175,13 +173,14 @@ public class ItemListAdapter_equip extends BaseAdapter {
                     itemMin.setText(secToHR(hr));
                     timer = new CountUpTimer(2000000000) {
                         public void onTick(int second) {
-                            itemMin.setText(secToHR(hr + second));
-                            mItemList.get(position).setHr(hr + timer.getSecond());
+                            hr = mItemList.get(position).getHr();
+                            itemMin.setText(secToHR(hr + 1));
+                            mItemList.get(position).setHr(hr + 1);
                         }
 
                         @Override
                         public void onFinish() {
-                            mItemList.get(position).setHr(hr + timer.getSecond() + 1);
+                            mItemList.get(position).setHr(hr + 2);
                             hr = mItemList.get(position).getHr();
                             this.start();
                         }
@@ -203,6 +202,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
         int sec = (hr*3600)+(min*60);
 
         return sec;
+
     }
 
     public String secToHR(int sec){
