@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.a59011178.home.cal.TabCal;
 import com.example.a59011178.home.edit.EditActivity;
@@ -21,6 +22,9 @@ import com.example.a59011178.home.equip.TabEquip;
 import com.example.a59011178.home.graph.TabGraph;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private long backPressedTime;
+    private Toast backToast;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -67,9 +71,20 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }
-
         );
+    }
 
+    @Override
+    public void onBackPressed(){
+        if (backPressedTime + 1000 > System.currentTimeMillis()){
+            backToast.cancel();
+            super.onBackPressed();
+            return;
+        } else {
+            backToast = Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
 
     @Override
