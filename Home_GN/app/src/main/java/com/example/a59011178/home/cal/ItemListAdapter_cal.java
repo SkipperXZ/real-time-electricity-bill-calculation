@@ -56,13 +56,6 @@ public class ItemListAdapter_cal extends BaseAdapter {
 
         mDBHelper = new DatabaseHelper(parent.getContext());
 
-//         Bundle bundle  =((Activity) parent.getContext()).getIntent().getExtras();
-//        ต้นฉบับ Intent intent = ((Activity) context).getIntent();
-
-//        if (bundle != null) {
-//            id = bundle.getString(Item.Column.ID);
-//        }
-
         TextView itemName = (TextView)v.findViewById(R.id.name_cal);
         TextView itemPower = (TextView)v.findViewById(R.id.power_cal);
 
@@ -70,8 +63,6 @@ public class ItemListAdapter_cal extends BaseAdapter {
         final TextView DayPerMonth = (TextView)v.findViewById(R.id.dayPerMonth);
 
         final String nowID = String.valueOf(mItemList.get(position).getId());
-
-        //LinearLayout mHrPerDay = (LinearLayout)v.findViewById(R.id.hrPerDay_layout);
 
         itemName.setText(mItemList.get(position).getName());
         itemPower.setText(String.valueOf(mItemList.get(position).getPower()) + " WATT");
@@ -89,20 +80,14 @@ public class ItemListAdapter_cal extends BaseAdapter {
                 final NumberPicker myNumPick = new NumberPicker(parent.getContext());
                 myNumPick.setMaxValue(24);
                 myNumPick.setMinValue(0);
-                NumberPicker.OnValueChangeListener hrChange = new NumberPicker.OnValueChangeListener() {
-                    @Override
-                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                        HRPerDay.setText("Use " + newVal + " Hour/Day");
-                    }
-                };
 
-                myNumPick.setOnValueChangedListener(hrChange);
                 AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext()).setView(myNumPick);
                 builder.setTitle("Hours you use per day");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 mDBHelper.updateHRperDay( nowID, myNumPick.getValue());
+                                HRPerDay.setText("Use " + myNumPick.getValue() + " Hours/Day");
                             }
                         }
                 );
@@ -127,13 +112,6 @@ public class ItemListAdapter_cal extends BaseAdapter {
                 final NumberPicker myNumPick = new NumberPicker(parent.getContext());
                 myNumPick.setMaxValue(31);
                 myNumPick.setMinValue(0);
-                NumberPicker.OnValueChangeListener dayChange = new NumberPicker.OnValueChangeListener() {
-                    @Override
-                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                        DayPerMonth.setText("Use " + newVal + " Day/Month");
-                    }
-                };
-                myNumPick.setOnValueChangedListener(dayChange);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext()).setView(myNumPick);
                 builder.setTitle("Days you use per month");
@@ -141,6 +119,7 @@ public class ItemListAdapter_cal extends BaseAdapter {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 mDBHelper.updateDayPerMonth( nowID, myNumPick.getValue());
+                                DayPerMonth.setText("Use " + myNumPick.getValue() + " Days/Month");
                             }
                         }
                 );

@@ -194,6 +194,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public void updateHr(String id,int sec){
+
+        sqLiteDatabase  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Item.Column.HR, sec);
+
+        int row = sqLiteDatabase.update(Item.TABLE,
+                values,
+                Item.Column.ID + " = ? ",
+                new String[] {id});
+
+        sqLiteDatabase.close();
+
+    }
+
+    public void updateSwitch(String id,String ab){
+
+        sqLiteDatabase  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Item.Column.ABILITY, ab);
+
+        int row = sqLiteDatabase.update(Item.TABLE,
+                values,
+                Item.Column.ID + " = ? ",
+                new String[] {id});
+
+        sqLiteDatabase.close();
+
+    }
+
     public void deleteItem(String id){
 
         sqLiteDatabase = this.getWritableDatabase();

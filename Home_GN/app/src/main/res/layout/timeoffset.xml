@@ -64,16 +64,38 @@
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/border2"
-        android:text="@string/add"
-        android:textAlignment="center"
-        android:textColor="#ffffff" />
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:gravity="center">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/Plus_time"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:background="@drawable/border2"-->
+            <!--android:text="  Plus time"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#ffffff" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/Delete_time"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:background="@drawable/border2"-->
+            <!--android:text="   Delete time"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#ffffff" />-->
+
+    <!--</LinearLayout>-->
+
+
 
 
 </LinearLayout>
