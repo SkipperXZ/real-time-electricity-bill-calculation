@@ -1,6 +1,8 @@
 package com.example.a59011178.home;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +16,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.example.a59011178.home.edit.EditActivity;
 
@@ -22,19 +26,30 @@ import java.util.Calendar;
 
 public class AddItemActivity extends AppCompatActivity {
 
-    private EditText mName, mPower,  mHrPerDay, mDayPerMonth ;
+    private EditText mName, mPower ;
     private RadioGroup mAbility;
+    private TextView mStart,mEnd;
     private Button add,getWatt;
     private DatabaseHelper mHelper;
     private AutoCompleteTextView mType;
     private LinearLayout mpower_Layout;
+    static final int START_TIME_ID=0;
+    static final int END_TIME_ID=1;
+    public int hour,minute;
+    private int chour,cminute;
 
     String[] types = { "Electric fan", "Electric fan", "Air 12000 BTU", "Air 15000 BTU", "Air 18000 BTU", "Vacuum bottle", "Electric rice cooker", "Water heater", "Microwave", "Toaster", "Electric iron", "Dry iron", "Incandescent lamb bulbs", "Compact-fluorescent bulbs", "Fluorescent bulbs", "LED lighting", "Television 14 inch.", "Television 20 inch.", "Television 24 inch.", "Computer", "Refrigerator 4 cubic", "Refrigerator 6 cubic", "Refrigerator 12 cubic", "Washing machine", "Hair dryer", "Vacuum cleaner", "Modem, Router", "Telephone", "Tablet", "Power bank"};
 
     String myAbility;
 
     private int ID = -1;
+    public AddItemActivity(){
 
+        final Calendar calendar=Calendar.getInstance();
+        chour=calendar.get(Calendar.HOUR_OF_DAY);
+        cminute=calendar.get(Calendar.MINUTE);
+
+    }
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +69,8 @@ public class AddItemActivity extends AppCompatActivity {
         mType = (AutoCompleteTextView) findViewById(R.id.type);
         mPower = (EditText) findViewById(R.id.power);
         mAbility = (RadioGroup) this.findViewById(R.id.ability);
-        mHrPerDay = (EditText) findViewById(R.id.a_hrPerDay);
-        mDayPerMonth = (EditText) findViewById(R.id.a_dayPerMonth);
+        mStart = (TextView) findViewById(R.id.edit_start_time);
+        mEnd = (TextView) findViewById(R.id.edit_end_time);
         getWatt = (Button) findViewById(R.id.getdefault);
 
         Bundle bundle = getIntent().getExtras();
@@ -74,8 +89,6 @@ public class AddItemActivity extends AppCompatActivity {
             mName.setText(getName);
             mType.setText(getType);
             mPower.setText(String.valueOf(getPower));
-            mHrPerDay.setText(String.valueOf(getHrPerDay));
-            mDayPerMonth.setText(String.valueOf(getDayPerMount));
 
             RadioButton radio1 = (RadioButton)findViewById(R.id.radioButton);
             RadioButton radio2 = (RadioButton)findViewById(R.id.radioButton2);
@@ -96,6 +109,21 @@ public class AddItemActivity extends AppCompatActivity {
                     break;
             }
         }
+        mStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(START_TIME_ID);
+            }
+        });
+        mEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showDialog(END_TIME_ID);
+            }
+        });
+
+
 
         getWatt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,8 +168,8 @@ public class AddItemActivity extends AppCompatActivity {
                         item.setType(mType.getText().toString());
                         item.setPower(Integer.parseInt(mPower.getText().toString()));
                         item.setAbility(myAbility);
-                        item.setHrPerDay(Integer.parseInt(mHrPerDay.getText().toString()));
-                        item.setDayPerMonth(Integer.parseInt(mDayPerMonth.getText().toString()));
+                        item.setHrPerDay(8);
+                        item.setDayPerMonth(30);
                         item.setDate(currentDate);
 
                         if (ID == -1){
@@ -243,6 +271,36 @@ public class AddItemActivity extends AppCompatActivity {
             default:  powerVal = 0; break;
         }
         mPower.setText(String.valueOf(powerVal));
+    }
+    private TimePickerDialog.OnTimeSetListener mStartTime=new TimePickerDialog.OnTimeSetListener()
+    {
+        public void onTimeSet(TimePicker view, int hourofday, int min)
+        {
+            hour=hourofday;
+            minute=min;
+        }
+    };
+
+    private TimePickerDialog.OnTimeSetListener mEndTime=new TimePickerDialog.OnTimeSetListener()
+    {
+        public void onTimeSet(TimePicker view,int hourofday,int min)
+        {
+            hour=hourofday;
+            minute=min;
+        }
+    };
+
+    @Override
+    protected Dialog onCreateDialog(int id)
+    {
+        switch (id)
+        {
+            case START_TIME_ID:
+                return new TimePickerDialog(this,R.style.DialogTheme,mStartTime,chour,cminute,true);
+            case END_TIME_ID:
+                return new TimePickerDialog(this,R.style.DialogTheme,mEndTime,chour,cminute,true);
+        }
+        return null;
     }
 
 }

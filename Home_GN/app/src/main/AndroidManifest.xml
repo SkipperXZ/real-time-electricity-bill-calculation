@@ -23,8 +23,10 @@
         <activity
             android:name=".AddItemActivity"
             android:label="@string/add_title"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:screenOrientation="portrait"></activity>
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity android:name=".edit.EditActivity" android:screenOrientation="portrait"></activity>
     </application>
 </manifest>

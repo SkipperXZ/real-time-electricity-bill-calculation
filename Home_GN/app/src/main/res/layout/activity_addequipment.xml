@@ -3,206 +3,134 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp">
 
         <LinearLayout
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:orientation="vertical">
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/euipName"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_weight="1"
+                android:text="@string/euip_name"
+                android:textColor="#ff8b84"
+                android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/euipName"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/euip_name"
-                    android:textColor="#ff8b84"
-                    android:textSize="20sp" />
-
-                <EditText
-                    android:id="@+id/item_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border1"
-                    android:ems="10"
-                    android:inputType="text" />
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/item_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                android:layout_weight="1"
+                android:background="@drawable/border1"
+                android:ems="10"
+                android:inputType="text" />
 
-                <TextView
-                    android:id="@+id/textType"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/type"
-                    android:textColor="#ff8b84"
-                    android:textSize="20sp" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border1"
-                    android:ems="10"
-                    android:inputType="text"/>
-
-                <Button
-                    android:id="@+id/getdefault"
-                    android:layout_width="120dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/border2"
-                    android:textSize="9dp"
-                    android:text="Get watt"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textpower"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/default_unit"
-                    android:textColor="#ff8b84"
-                    android:textSize="20sp" />
-
-                <EditText
-                    android:id="@+id/power"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border1"
-                    android:ems="10"
-                    android:inputType="number" />
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_marginLeft="5dp"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:id="@+id/t"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/use4"
-                    android:textColor="#ff8b84"
-                    android:textSize="20sp" />
-
-                <EditText
-                    android:id="@+id/a_hrPerDay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border1"
-                    android:ems="10"
-                    android:inputType="number" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
-                    android:text="@string/timeunit1" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:id="@+id/t1"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/use4"
-                    android:textColor="#ff8b84"
-                    android:textSize="20sp" />
-
-                <EditText
-                    android:id="@+id/a_dayPerMonth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border1"
-                    android:ems="10"
-                    android:inputType="number" />
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="120dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/timeunit2" />
-
-            </LinearLayout>
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginBottom="94dp"
-            android:orientation="vertical"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="0dp">
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textType"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/type"
+                android:textColor="#ff8b84"
+                android:textSize="20sp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border1"
+                android:ems="10"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/getdefault"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/border2"
+                android:text="Get watt"
+                android:textSize="9dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/textpower"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/default_unit"
+                android:textColor="#ff8b84"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border1"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/border2"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="30dp"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/textability"
@@ -219,8 +147,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="5dp"
                     android:id="@+id/ability">
+
 
                     <RadioButton
                         android:id="@+id/radioButton"
@@ -236,7 +165,7 @@
                         android:id="@+id/radioButton2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_weight="1"
                         android:buttonTint="#ffffff"
                         android:text="@string/manual"
@@ -247,29 +176,59 @@
                         android:id="@+id/radioButton3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_weight="1"
                         android:buttonTint="#ffffff"
-                        android:text="@string/timeoffset"
+                        android:text="Time set"
                         android:textColor="#ffffff"
                         android:textSize="15sp" />
 
                 </RadioGroup>
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center"
+                    >
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/edit_start_time"
+                     android:text="Start time"
+                     android:textColor="#ffff"
+                     />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textColor="#ffff"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edit_end_time"
+                        android:text="End Time"
+                        android:textColor="#ffff"
+                            />
+                </LinearLayout>
+
         </LinearLayout>
 
         <Button
             android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="37dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/border2"
             android:text="@string/add"
             android:textColor="#ffffff"/>
 
 
-    </RelativeLayout>
 
 </LinearLayout>
