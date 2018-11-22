@@ -10,7 +10,7 @@ public class Item implements Comparable<Item> {
     private String name, type, ability, date;
 
     public static final String DATABASE_NAME = "eve_item.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 5;
     public static final String TABLE = "item";
 
     @Override
@@ -30,6 +30,10 @@ public class Item implements Comparable<Item> {
         public static final String DATE = "date";
         public static final String TIME = "time";
         public static final String TOTALMONEY = "totalMoney";
+        public static final String STAGE = "stage";
+        public static final String TIME_ON = "time_on";
+        public static final String TIME_OFF = "time_off";
+
 
     }
 
