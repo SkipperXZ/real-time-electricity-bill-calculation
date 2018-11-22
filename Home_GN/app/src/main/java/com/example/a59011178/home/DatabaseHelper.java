@@ -234,6 +234,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public void updateStage(String id,Boolean nowStage){
+
+        sqLiteDatabase  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Item.Column.STAGE, nowStage);
+
+        int row = sqLiteDatabase.update(Item.TABLE,
+                values,
+                Item.Column.ID + " = ? ",
+                new String[] {id});
+
+        sqLiteDatabase.close();
+
+    }
+
     public void deleteItem(String id){
 
         sqLiteDatabase = this.getWritableDatabase();
@@ -244,4 +260,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     }
+
 }

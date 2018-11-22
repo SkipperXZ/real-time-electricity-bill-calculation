@@ -1,5 +1,6 @@
 package com.example.a59011178.home.graph;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,10 +9,6 @@ import android.view.ViewGroup;
 
 import com.example.a59011178.home.DatabaseHelper;
 import com.example.a59011178.home.Item;
-import android.graphics.Color;
-
-import java.util.ArrayList;
-
 import com.example.a59011178.home.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.ValueDependentColor;
@@ -26,7 +23,7 @@ public class TabGraph extends Fragment {
     private List<Item> mItemList;
     private DatabaseHelper mHelp;
 
-    BarGraphSeries series = new BarGraphSeries<DataPoint> (new DataPoint[0]);
+    BarGraphSeries series = new BarGraphSeries<DataPoint>(new DataPoint[0]);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,10 +70,10 @@ public class TabGraph extends Fragment {
 
         DataPoint[] dp = new DataPoint[size];
 
-        String[] columns={""};
+        String[] columns = {""};
 
-        for (int i = 0; i < size ; i ++){
-            dp[i] = new DataPoint(money[i],id[i]);
+        for (int i = 0; i < size; i++) {
+            dp[i] = new DataPoint(money[i], id[i]);
         }
 
         return null;
@@ -110,7 +107,7 @@ public class TabGraph extends Fragment {
         for (int i = 0; i < size; i++) {
             Item nowItem = mItemList.get(i);
             int id = nowItem.getId();
-            
+
             allDate[i] = id;
         }
         return allDate;

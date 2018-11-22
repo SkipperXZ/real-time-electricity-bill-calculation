@@ -76,6 +76,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
         itemName.setText(mItemList.get(position).getName());
         itemPower.setText("(" + String.valueOf(mItemList.get(position).getPower()) + "W)");
         itemMin.setText(secToHR(mItemList.get(position).getHr()));
+        //timeSwitch.setChecked(mItemList.get(position).getStage());
 
         v.setTag(mItemList.get(position).getId());
 
@@ -171,6 +172,8 @@ public class ItemListAdapter_equip extends BaseAdapter {
                 if (isChecked) {
                     hr = mItemList.get(position).getHr();
                     itemMin.setText(secToHR(hr));
+                    mItemList.get(position).setButtonState(true);
+                    mDBHelper.updateStage(nowID,true);
                     timer = new CountUpTimer(2000000000) {
                         public void onTick(int second) {
                             hr = mItemList.get(position).getHr();
@@ -187,6 +190,8 @@ public class ItemListAdapter_equip extends BaseAdapter {
                     };
                     timer.start();
                 } else {
+                    mItemList.get(position).setButtonState(false);
+                    mDBHelper.updateStage(nowID,false);
                     mItemList.get(position).setHr(hr + timer.getSecond());
                     timer.cancel();
                     timer = null;

@@ -6,8 +6,11 @@ import java.util.Date;
 
 public class Item implements Comparable<Item> {
 
+
+
     private int power, hr ,id, hrPerDay, dayPerMonth, time, totalMoney;
     private String name, type, ability, date;
+    private boolean buttonState = false;
 
     public static final String DATABASE_NAME = "eve_item.db";
     public static final int DATABASE_VERSION = 5;
@@ -95,6 +98,10 @@ public class Item implements Comparable<Item> {
         this.ability = ability;
     }
 
+    public void setButtonState(boolean buttonState) {
+        this.buttonState = buttonState;
+    }
+
     public void setDate(String date) {
         this.date = date;
     }
@@ -143,5 +150,8 @@ public class Item implements Comparable<Item> {
         return date;
     }
 
+    public boolean isButtonState() {
+        return buttonState;
+    }
 }
 
