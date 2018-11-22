@@ -13,6 +13,9 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private final String TAG = getClass().getSimpleName();
+    private static final String DATABASE_ALTER = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.STAGE + " string;" ;
+    private static final String DATABASE_ALTER2 = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.TIME_ON + " string;" ;
+    private static final String DATABASE_ALTER3 = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.TIME_OFF + " string;" ;
 
     private SQLiteDatabase sqLiteDatabase;
 
@@ -22,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_ITEM_TABLE = String.format("CREATE TABLE %s" + "(%s INTEGER PRIMARY KEY  AUTOINCREMENT, %s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s INTEGER, %s INTEGER, %s INTEGER, %s INTEGER, %s TEXT)",
+        String CREATE_ITEM_TABLE = String.format("CREATE TABLE %s" + "(%s INTEGER PRIMARY KEY  AUTOINCREMENT, %s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s INTEGER DEFAULT 8, %s INTEGER DEFAULT 30, %s INTEGER , %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
                 Item.TABLE,
                 Item.Column.ID,
                 Item.Column.POWER,
@@ -34,7 +37,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Item.Column.DAYperMONTH,
                 Item.Column.TIME,
                 Item.Column.TOTALMONEY,
-                Item.Column.DATE);
+                Item.Column.DATE,
+                Item.Column.STAGE,
+                Item.Column.TIME_ON,
+                Item.Column.TIME_OFF);
 
         Log.i(TAG, CREATE_ITEM_TABLE);
 
@@ -43,13 +49,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String DROP_ITEM_TABLE = "DROP TABLE IF EXISTS " + Item.TABLE;
-
-        db.execSQL(DROP_ITEM_TABLE);
-
-        Log.i(TAG, "Upgrade Database from " + oldVersion + " to " + newVersion);
-
-        onCreate(db);
+        if (oldVersion < 2){
+            db.execSQL(DATABASE_ALTER);
+        }
+        if (oldVersion < 3){
+            db.execSQL(DATABASE_ALTER2);
+        }
+        if (oldVersion < 4){
+            db.execSQL(DATABASE_ALTER3);
+        }
     }
 
     public List<Item> getItemList() {
