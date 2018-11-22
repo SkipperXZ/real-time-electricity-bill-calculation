@@ -32,6 +32,7 @@ public class TabEquip extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_tabequip, container, false);
         final TextView totalWatt = (TextView)rootView.findViewById(R.id.totalunit);
         final TextView totalBaht = (TextView)rootView.findViewById(R.id.expens);

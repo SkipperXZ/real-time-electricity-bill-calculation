@@ -41,5 +41,23 @@
     <string name="result_title">Your electricity fee this month is</string>
     <string name="hour">Hour</string>
     <string name="minute">Minute</string>
+    <string name="app_regis">Register</string>
+    <string name="login_title">Devahoy</string>
+    <string name="username_title">Email</string>
+    <string name="password_title">Password</string>
+    <string name="password_confirm_title">Confirm Password</string>
+    <string name="button_login">Login</string>
+    <string name="button_register">Register</string>
+    <string name="register">Do not have an account? Register here</string>
+    <string name="minimum_password">6 Characters</string>
+    <string name="auth_failed">Authentic failed</string>
+    <string name="welcome">Welcome you success fully login</string>
+    <string name="login_error_message">Username or Password is incorrect.</string>
+    <string name="register_error_message">Register failed, Try again!</string>
+    <string name="register_password_error">Password does not match</string>
+    <string name="register_success">Register Successful</string>
+
+    <string name="welcome_message">Welcome to Devahoy</string>
+
 
 </resources>

@@ -61,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-        
+        mViewPager.setCurrentItem(1);
         FloatingActionButton buttonAddMore = (FloatingActionButton)findViewById(R.id.fab);
 
         buttonAddMore.setOnClickListener( new View.OnClickListener() {
@@ -128,13 +128,13 @@ public class HomeActivity extends AppCompatActivity {
             //Returning the current tab
             switch (position){
                 case 0 :
-                    TabEquip tab1 =  new TabEquip();
+                    TabCal tab1 =  new TabCal();
                     return tab1;
                 case 1 :
-                    TabGraph tab2 = new TabGraph();
+                    TabEquip tab2 = new TabEquip();
                     return tab2;
                 case 2 :
-                    TabCal tab3 = new TabCal();
+                    TabGraph tab3 = new TabGraph();
                     return tab3;
                 default:
                     return null;
