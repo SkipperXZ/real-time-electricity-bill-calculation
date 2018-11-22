@@ -1,15 +1,31 @@
 package com.example.a59011178.home.graph;
 
-import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.DropBoxManager;
 import android.support.v4.app.Fragment;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a59011178.home.DatabaseHelper;
 import com.example.a59011178.home.Item;
+import android.graphics.Color;
+
+import java.util.ArrayList;
+
 import com.example.a59011178.home.R;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.BarGraphSeries;
@@ -18,101 +34,101 @@ import com.jjoe64.graphview.series.DataPoint;
 import java.util.List;
 
 
-public class TabGraph extends Fragment {
+public class TabGraph extends Fragment  {
 
     private List<Item> mItemList;
     private DatabaseHelper mHelp;
-
-    BarGraphSeries series = new BarGraphSeries<DataPoint>(new DataPoint[0]);
-
+    List<PieEntry> entries = new ArrayList<PieEntry>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mHelp = new DatabaseHelper(this.getContext());
+        mItemList=mHelp.getItemList();
         View rootView = inflater.inflate(R.layout.fragment_tabgraph, container, false);
-        DataPoint dataPoint;
+        PieChart chart = (PieChart)rootView.findViewById(R.id.pieChart);
+        chart = initChart(chart);
 
-        getDataPoint();
+        Legend l = chart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(false);
+        l.setEnabled(false);
 
-        //split here
-        GraphView graph = rootView.findViewById(R.id.graph);
+        entries= new ArrayList<PieEntry>();
+        for (Item data : mItemList) {
+            entries.add(new PieEntry(data.getPower(),data.getName()));
+        }
+        PieDataSet dataSet = new PieDataSet(entries, "Name");
+        ArrayList<Integer> colors = new ArrayList<>();
 
-        graph.addSeries(series);
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+            colors.add(c);
 
-// styling
-        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
-            @Override
-            public int get(DataPoint data) {
-                return Color.rgb((int) data.getX() * 255 / 4, (int) Math.abs(data.getY() * 255 / 6), 100);
-            }
-        });
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
 
-        series.setSpacing(50);
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
 
-// draw values on top
-        series.setDrawValuesOnTop(true);
-        series.setValuesOnTopColor(Color.RED);
-//series.setValuesOnTopSize(50);
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
+
+        colors.add(ColorTemplate.getHoloBlue());
+
+        dataSet.setColors(colors);
 
 
-        //not after root
+        PieData pieData = new  PieData(dataSet);
+        pieData.setValueTextColor(Color.WHITE);
+        pieData.setValueTextSize(11f);
+        //  pieData.setValueTypeface(tfLight);
+        chart.setData(pieData);
+        chart.invalidate(); // refresh
+        chart.setCenterText(generateCenterSpannableText());
+
+
 
         return rootView;
     }
+    private SpannableString generateCenterSpannableText() {
 
-    private DataPoint[] getDataPoint() {
-
-        mHelp = new DatabaseHelper(getContext());
-        mItemList = mHelp.getItemList();
-        int size = mItemList.size();
-
-        int money[] = getMoney();
-        int id[] = getDay();
-
-        DataPoint[] dp = new DataPoint[size];
-
-        String[] columns = {""};
-
-        for (int i = 0; i < size; i++) {
-            dp[i] = new DataPoint(money[i], id[i]);
-        }
-
-        return null;
+        SpannableString s = new SpannableString("POWER");
+        return s;
     }
 
-    //getDB
-    public int[] getMoney() {
+    private PieChart initChart(PieChart chart){
+        chart.setCenterText(generateCenterSpannableText());
 
-        mHelp = new DatabaseHelper(getContext());
-        mItemList = mHelp.getItemList();
+        chart.setExtraOffsets(20.f, 0.f, 20.f, 0.f);
 
-        int size = mItemList.size();
-        int[] allMoney = new int[size];
+        chart.setDrawHoleEnabled(true);
+        chart.setHoleColor(Color.WHITE);
 
-        for (int i = 0; i < size; i++) {
-            Item nowItem = mItemList.get(i);
-            int TotalMoney = nowItem.getTotalMoney();
-            allMoney[i] = TotalMoney;
-        }
-        return allMoney;
+        chart.setTransparentCircleColor(Color.WHITE);
+        chart.setTransparentCircleAlpha(110);
+
+        chart.setHoleRadius(58f);
+        chart.setTransparentCircleRadius(61f);
+
+        chart.setDrawCenterText(true);
+
+        chart.setRotationAngle(0);
+        chart.setRotationEnabled(true);
+        chart.setHighlightPerTapEnabled(true);
+        chart.animateY(1400, Easing.EaseInOutQuad);
+        return chart;
     }
-
-    public int[] getDay() {
-
-        mHelp = new DatabaseHelper(getContext());
-        mItemList = mHelp.getItemList();
-
-        int size = mItemList.size();
-        int[] allDate = new int[size];
-
-        for (int i = 0; i < size; i++) {
-            Item nowItem = mItemList.get(i);
-            int id = nowItem.getId();
-
-            allDate[i] = id;
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
         }
-        return allDate;
     }
-
 }
 
 

@@ -27,11 +27,10 @@
             android:text="@string/month"
             android:textSize="20sp" />
 
-        <com.jjoe64.graphview.GraphView
-            android:layout_width="match_parent"
-            android:layout_height="150dip"
-            android:id="@+id/graph" />
-
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_width="352dp"
+            android:layout_height="329dp" />
 
         <!--<TextView
             android:id="@+id/textView4"

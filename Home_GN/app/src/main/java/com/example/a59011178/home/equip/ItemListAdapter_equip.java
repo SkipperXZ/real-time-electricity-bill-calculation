@@ -162,6 +162,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
             }
         });
 
+        timeSwitch.setChecked(mItemList.get(position).isButtonState());
         timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             CountUpTimer timer;
             int hr = mItemList.get(position).getHr();
