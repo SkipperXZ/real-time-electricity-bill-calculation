@@ -27,14 +27,20 @@
             android:text="@string/month"
             android:textSize="20sp" />
 
-        <TextView
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="150dip"
+            android:id="@+id/graph" />
+
+
+        <!--<TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
-            android:layout_weight="1" />
+            android:layout_weight="1" /> !-->
 
         <TextView
             android:id="@+id/textView5"
