@@ -106,6 +106,13 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.action_Edit_Equip:
                 startActivity(new Intent(HomeActivity.this, EditActivity.class));
                 break;
+            case R.id.action_cut_out:
+                DatabaseHelper mHelper = new DatabaseHelper(HomeActivity.this);
+                mHelper.cutOut();
+
+                Intent intent = new Intent(HomeActivity.this, AddItemActivity.class);
+                startActivity(intent);
+                break;
         }
 
         return true;

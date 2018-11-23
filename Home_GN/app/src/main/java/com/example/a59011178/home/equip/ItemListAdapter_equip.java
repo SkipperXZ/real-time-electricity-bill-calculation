@@ -23,8 +23,11 @@ import com.example.a59011178.home.timer.CountUpTimer;
 
 import java.util.List;
 
+import static com.google.android.gms.common.internal.safeparcel.SafeParcelable.NULL;
+
 public class ItemListAdapter_equip extends BaseAdapter {
 
+    LayoutInflater li;
     private Context mContext;
     private List<Item> mItemList;
     private DatabaseHelper mDBHelper;
@@ -32,6 +35,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
     public ItemListAdapter_equip(Context mContext, List<Item> mItemList) {
         this.mContext = mContext;
         this.mItemList = mItemList;
+        li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -80,6 +84,15 @@ public class ItemListAdapter_equip extends BaseAdapter {
 
         //timeSwitch.setChecked(mItemList.get(position).getStage());
 
+        if (mItemList.get(position).getTime_on() != null && mItemList.get(position).getTime_off() != null ){
+            itemShowTime.setText("Ontime " + mItemList.get(position).getTime_on() + " - " + mItemList.get(position).getTime_off());
+        }
+
+        boolean state = Boolean.parseBoolean(mItemList.get(position).getState());
+
+        timeSwitch.setChecked(state);
+
+        v.setTag(mItemList.get(position).getId());
 
         viewHolder.mShowDialog.setOnClickListener(new View.OnClickListener() {
             @Override

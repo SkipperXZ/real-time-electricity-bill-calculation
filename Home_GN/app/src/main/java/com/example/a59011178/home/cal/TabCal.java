@@ -39,10 +39,8 @@ import java.util.List;
 public class TabCal extends Fragment implements View.OnClickListener  {
 
     private ListView lvItem;
-
     private List<Item> mItemList;
     private DatabaseHelper mHelp;
-
     private ItemListAdapter_cal adapter;
 
 
