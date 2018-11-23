@@ -70,14 +70,6 @@ public class ItemListAdapter_equip extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-
-
-
-
-
-
-
-
         mDBHelper = new DatabaseHelper(parent.getContext());
         final String nowID = String.valueOf(mItemList.get(position).getId());
 
@@ -115,8 +107,8 @@ public class ItemListAdapter_equip extends BaseAdapter {
                                 int databaseSec = mItemList.get(position).getHr();
                                 int nowSec = getSec + databaseSec;
 
-                        mItemList.get(position).setHr(nowSec);
-                        viewHolder.itemMin.setText(secToHR(nowSec));
+                                mItemList.get(position).setHr(nowSec);
+                                viewHolder.itemMin.setText(secToHR(nowSec));
 
                                 mDBHelper.updateHr(nowID, nowSec);
 
@@ -140,8 +132,8 @@ public class ItemListAdapter_equip extends BaseAdapter {
                                     int nowSec = databaseSec - getSec;
                                     mDBHelper.updateHr(nowID, nowSec);
 
-                            mItemList.get(position).setHr(nowSec);
-                            viewHolder.itemMin.setText(secToHR(nowSec));
+                                    mItemList.get(position).setHr(nowSec);
+                                    viewHolder.itemMin.setText(secToHR(nowSec));
 
                                     Toast toast = Toast.makeText(parent.getContext(), "Delete time for " + hour.getValue() + " hour and " + minute.getValue() + " minute",  Toast.LENGTH_SHORT);
                                     toast.show();
@@ -165,9 +157,6 @@ public class ItemListAdapter_equip extends BaseAdapter {
                 mBuilder.show();
             }
         });
-        viewHolder.timeSwitch.setChecked(mItemList.get(position).isButtonState());
-        viewHolder.timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
         viewHolder.timeSwitch.setChecked(mItemList.get(position).isButtonState());
         viewHolder.timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -226,8 +215,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
         hour = min / 60;
         min -= hour * 60;
 
-
-        return String.format("%02d:%02d:%02d", hour, min, sec);
+        return hour + ":" + min + ":" + sec;
     }
 
     private class ViewHolder {
