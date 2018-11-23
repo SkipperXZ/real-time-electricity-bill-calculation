@@ -5,33 +5,24 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v4.app.DialogFragment;
 
 import com.example.a59011178.home.AddItemActivity;
 import com.example.a59011178.home.DatabaseHelper;
 import com.example.a59011178.home.HomeActivity;
 import com.example.a59011178.home.Item;
 import com.example.a59011178.home.R;
-import com.example.a59011178.home.equip.AddTime2;
-
 
 import java.util.List;
 
@@ -188,7 +179,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
             float dayPerMonth = nowItem.getDayPerMonth();
             float bahtUnit = 7;
 
-            float sum = hrPerDay*power*dayPerMonth*bahtUnit/1000;
+            float sum = hrPerDay*power*dayPerMonth*bahtUnit/10000;
 
             total += sum;
 

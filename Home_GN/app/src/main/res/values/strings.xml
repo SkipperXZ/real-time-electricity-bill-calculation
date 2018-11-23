@@ -56,6 +56,7 @@
     <string name="register_error_message">Register failed, Try again!</string>
     <string name="register_password_error">Password does not match</string>
     <string name="register_success">Register Successful</string>
+    <string name="Baht">Baht</string>
 
     <string name="welcome_message">Welcome to Devahoy</string>
 
