@@ -12,4 +12,11 @@
         android:orderInCategory="100"
         android:title="Edit Equipment"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_cut_out"
+        android:orderInCategory="100"
+        android:title="Cut out"
+        app:showAsAction="never" />
+
 </menu>

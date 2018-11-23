@@ -23,8 +23,11 @@ import com.example.a59011178.home.timer.CountUpTimer;
 
 import java.util.List;
 
+import static com.google.android.gms.common.internal.safeparcel.SafeParcelable.NULL;
+
 public class ItemListAdapter_equip extends BaseAdapter {
 
+    LayoutInflater li;
     private Context mContext;
     private List<Item> mItemList;
     private DatabaseHelper mDBHelper;
@@ -32,6 +35,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
     public ItemListAdapter_equip(Context mContext, List<Item> mItemList) {
         this.mContext = mContext;
         this.mItemList = mItemList;
+        li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -62,21 +66,28 @@ public class ItemListAdapter_equip extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
+        View v = View.inflate(mContext, R.layout.sublist_equipment, null);
+
         mDBHelper = new DatabaseHelper(parent.getContext());
         final String nowID = String.valueOf(mItemList.get(position).getId());
 
-        View v = View.inflate(mContext, R.layout.sublist_equipment, null);
-
         TextView itemName = (TextView) v.findViewById(R.id.name_equip);
         TextView itemPower = (TextView) v.findViewById(R.id.power_equip);
-
+        TextView itemShowTime = (TextView) v.findViewById(R.id.show_onOff_time);
         final TextView itemMin = (TextView) v.findViewById(R.id.min_equip);
         final Switch timeSwitch = (Switch) v.findViewById(R.id.on_off);
 
         itemName.setText(mItemList.get(position).getName());
         itemPower.setText("(" + String.valueOf(mItemList.get(position).getPower()) + "W)");
         itemMin.setText(secToHR(mItemList.get(position).getHr()));
-        //timeSwitch.setChecked(mItemList.get(position).getStage());
+
+        if (mItemList.get(position).getTime_on() != null && mItemList.get(position).getTime_off() != null ){
+            itemShowTime.setText("Ontime " + mItemList.get(position).getTime_on() + " - " + mItemList.get(position).getTime_off());
+        }
+
+        boolean state = Boolean.parseBoolean(mItemList.get(position).getState());
+
+        timeSwitch.setChecked(state);
 
         v.setTag(mItemList.get(position).getId());
 
@@ -162,8 +173,8 @@ public class ItemListAdapter_equip extends BaseAdapter {
             }
         });
 
-        timeSwitch.setChecked(mItemList.get(position).isButtonState());
-        timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//        timeSwitch.setChecked(mItemList.get(position).isButtonState());
+            timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             CountUpTimer timer;
             int hr = mItemList.get(position).getHr();
 
