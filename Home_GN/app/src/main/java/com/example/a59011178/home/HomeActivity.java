@@ -1,6 +1,7 @@
 package com.example.a59011178.home;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -20,9 +21,13 @@ import com.example.a59011178.home.cal.TabCal;
 import com.example.a59011178.home.edit.EditActivity;
 import com.example.a59011178.home.equip.TabEquip;
 import com.example.a59011178.home.graph.TabGraph;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private FirebaseAuth auth;
     private long backPressedTime;
     private Toast backToast;
 
@@ -103,8 +108,12 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.action_settings:
                 startActivity(new Intent(HomeActivity.this, AddItemActivity.class));
                 break;
-            case R.id.action_Edit_Equip:
-                startActivity(new Intent(HomeActivity.this, EditActivity.class));
+            case R.id.action_Log_out:
+
+                FirebaseAuth.getInstance().signOut();
+                Intent i=new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(i);
+
                 break;
             case R.id.action_cut_out:
                 DatabaseHelper mHelper = new DatabaseHelper(HomeActivity.this);
