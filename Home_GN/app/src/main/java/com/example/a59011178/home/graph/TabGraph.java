@@ -1,23 +1,15 @@
 package com.example.a59011178.home.graph;
 
-import android.graphics.Typeface;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.DropBoxManager;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a59011178.home.DatabaseHelper;
 import com.example.a59011178.home.Item;
-import android.graphics.Color;
-
-import java.util.ArrayList;
-
 import com.example.a59011178.home.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -26,11 +18,8 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.ValueDependentColor;
-import com.jjoe64.graphview.series.BarGraphSeries;
-import com.jjoe64.graphview.series.DataPoint;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -42,6 +31,7 @@ public class TabGraph extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         mHelp = new DatabaseHelper(this.getContext());
         mItemList=mHelp.getItemList();
         View rootView = inflater.inflate(R.layout.fragment_tabgraph, container, false);
@@ -57,8 +47,11 @@ public class TabGraph extends Fragment  {
 
         entries= new ArrayList<PieEntry>();
         for (Item data : mItemList) {
-            entries.add(new PieEntry(data.getPower(),data.getName()));
+            entries.add(new PieEntry(data.getPower()*data.getHrPerDay()*data.getDayPerMonth()*7/10000,data.getName()));
+
         }
+
+
         PieDataSet dataSet = new PieDataSet(entries, "Name");
         ArrayList<Integer> colors = new ArrayList<>();
 
@@ -73,7 +66,6 @@ public class TabGraph extends Fragment  {
 
         for (int c : ColorTemplate.LIBERTY_COLORS)
             colors.add(c);
-
         for (int c : ColorTemplate.PASTEL_COLORS)
             colors.add(c);
 
@@ -92,11 +84,12 @@ public class TabGraph extends Fragment  {
 
 
 
+
         return rootView;
     }
     private SpannableString generateCenterSpannableText() {
 
-        SpannableString s = new SpannableString("POWER");
+        SpannableString s = new SpannableString("Usage Fee (Baht)");
         return s;
     }
 

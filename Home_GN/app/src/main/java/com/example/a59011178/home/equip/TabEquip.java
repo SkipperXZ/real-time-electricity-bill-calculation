@@ -47,7 +47,10 @@ public class TabEquip extends Fragment implements View.OnClickListener {
         mItemList = mHelp.getItemList();
 
         adapter = new ItemListAdapter_equip(this.getActivity(), mItemList);
-        lvItem.setAdapter(adapter);
+
+        if (!mItemList.isEmpty()){
+            lvItem.setAdapter(adapter);
+        }
 
         if(realTimeElectricTimer ==null) {
             realTimeElectricTimer = new CountUpTimer(2000000000) {

@@ -296,36 +296,6 @@ public class AddItemActivity extends AppCompatActivity {
         }
         mPower.setText(String.valueOf(powerVal));
     }
-//    private TimePickerDialog.OnTimeSetListener mStartTime=new TimePickerDialog.OnTimeSetListener()
-//    {
-//        public void onTimeSet(TimePicker view, int hourofday, int min)
-//        {
-//            hour=hourofday;
-//            minute=min;
-//        }
-//    };
-//
-//    private TimePickerDialog.OnTimeSetListener mEndTime=new TimePickerDialog.OnTimeSetListener()
-//    {
-//        public void onTimeSet(TimePicker view,int hourofday,int min)
-//        {
-//            hour=hourofday;
-//            minute=min;
-//        }
-//    };
-//
-//    @Override
-//    protected Dialog onCreateDialog(int id)
-//    {
-//        switch (id)
-//        {
-//            case START_TIME_ID:
-//                return new TimePickerDialog(this,R.style.DialogTheme,mStartTime,chour,cminute,true);
-//            case END_TIME_ID:
-//                return new TimePickerDialog(this,R.style.DialogTheme,mEndTime,chour,cminute,true);
-//        }
-//        return null;
-//    }
 
     private String getTime(int hr, int min){
         return String.format("%02d:%02d", hr, min);
