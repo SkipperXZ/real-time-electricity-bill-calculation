@@ -22,8 +22,6 @@ import java.util.List;
 public class ItemListAdapter_cal extends BaseAdapter {
 
     LayoutInflater li;
-    private String id = "";
-    private Item mItem;
 
     private Context mContext;
     private List<Item> mItemList;

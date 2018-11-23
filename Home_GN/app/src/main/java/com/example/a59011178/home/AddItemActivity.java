@@ -1,7 +1,6 @@
 package com.example.a59011178.home;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,8 +18,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.example.a59011178.home.edit.EditActivity;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -33,6 +30,7 @@ public class AddItemActivity extends AppCompatActivity {
     private DatabaseHelper mHelper;
     private AutoCompleteTextView mType;
     private LinearLayout mpower_Layout;
+    private Item item = new Item();
     static final int START_TIME_ID=0;
     static final int END_TIME_ID=1;
     public int hour,minute;
@@ -104,25 +102,45 @@ public class AddItemActivity extends AppCompatActivity {
                 case "Time Offset":
                     radio3.setChecked(true);
                     break;
-                case "Set time":
+                case "Time set":
                     radio3.setChecked(true);
+//                    mStart.setText("Start "+hourOfDay+":"+minutes+" ");
+//                    mEnd.setText(" Stop "+hourOfDay+":"+minutes);
                     break;
             }
         }
+
         mStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog(START_TIME_ID);
+                TimePickerDialog start_timePickerDialog = new TimePickerDialog(AddItemActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        String time_on = getTime(hourOfDay, minutes);
+                        item.setTime_on(time_on);
+                        mStart.setText(time_on);
+                    }
+                }, chour, cminute, true);
+
+                start_timePickerDialog.show();
             }
         });
+
         mEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TimePickerDialog end_timePickerDialog = new TimePickerDialog(AddItemActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        String time_off = getTime(hourOfDay, minutes);
+                        item.setTime_off(time_off);
+                        mEnd.setText(time_off);
+                    }
+                }, chour + 1, cminute, true);
 
-                showDialog(END_TIME_ID);
+                end_timePickerDialog.show();
             }
         });
-
 
 
         getWatt.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +156,7 @@ public class AddItemActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton radioButton = (RadioButton) AddItemActivity.this.findViewById(checkedId);
                 myAbility = radioButton.getText().toString();
+
             }
         });
 
@@ -162,8 +181,6 @@ public class AddItemActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Item item = new Item();
-
                         item.setName(mName.getText().toString());
                         item.setType(mType.getText().toString());
                         item.setPower(Integer.parseInt(mPower.getText().toString()));
@@ -172,8 +189,15 @@ public class AddItemActivity extends AppCompatActivity {
                         item.setDayPerMonth(30);
                         item.setDate(currentDate);
 
+                        if (myAbility == "Always on"){
+                            item.setState("true");
+
+                        }else {
+                            item.setState("false");
+                        }
+
                         if (ID == -1){
-                            mHelper.addItem(item);
+                            mHelper.addItemWithSetTime(item);
                         } else {
                             item.setId(ID);
                             mHelper.updateItem(item);
@@ -272,35 +296,9 @@ public class AddItemActivity extends AppCompatActivity {
         }
         mPower.setText(String.valueOf(powerVal));
     }
-    private TimePickerDialog.OnTimeSetListener mStartTime=new TimePickerDialog.OnTimeSetListener()
-    {
-        public void onTimeSet(TimePicker view, int hourofday, int min)
-        {
-            hour=hourofday;
-            minute=min;
-        }
-    };
 
-    private TimePickerDialog.OnTimeSetListener mEndTime=new TimePickerDialog.OnTimeSetListener()
-    {
-        public void onTimeSet(TimePicker view,int hourofday,int min)
-        {
-            hour=hourofday;
-            minute=min;
-        }
-    };
-
-    @Override
-    protected Dialog onCreateDialog(int id)
-    {
-        switch (id)
-        {
-            case START_TIME_ID:
-                return new TimePickerDialog(this,R.style.DialogTheme,mStartTime,chour,cminute,true);
-            case END_TIME_ID:
-                return new TimePickerDialog(this,R.style.DialogTheme,mEndTime,chour,cminute,true);
-        }
-        return null;
+    private String getTime(int hr, int min){
+        return String.format("%02d:%02d", hr, min);
     }
 
 }

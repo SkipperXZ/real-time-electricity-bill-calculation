@@ -35,16 +35,6 @@ public class ItemListAdapter_equip extends BaseAdapter {
     }
 
     @Override
-    public int getViewTypeCount() {
-        return getCount();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return position;
-    }
-
-    @Override
     public int getCount() {
         return mItemList.size();
     }
@@ -60,28 +50,39 @@ public class ItemListAdapter_equip extends BaseAdapter {
     }
 
     @Override
+    public int getViewTypeCount() {
+        return getCount();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+    @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
+        final ViewHolder viewHolder;
+
+        if (convertView == null) {
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.sublist_equipment, null);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
 
         mDBHelper = new DatabaseHelper(parent.getContext());
         final String nowID = String.valueOf(mItemList.get(position).getId());
 
-        View v = View.inflate(mContext, R.layout.sublist_equipment, null);
 
-        TextView itemName = (TextView) v.findViewById(R.id.name_equip);
-        TextView itemPower = (TextView) v.findViewById(R.id.power_equip);
 
-        final TextView itemMin = (TextView) v.findViewById(R.id.min_equip);
-        final Switch timeSwitch = (Switch) v.findViewById(R.id.on_off);
+        viewHolder.itemName.setText(mItemList.get(position).getName());
+        viewHolder.itemPower.setText("(" + String.valueOf(mItemList.get(position).getPower()) + "W)");
+        viewHolder.itemMin.setText(secToHR(mItemList.get(position).getHr()));
 
-        itemName.setText(mItemList.get(position).getName());
-        itemPower.setText("(" + String.valueOf(mItemList.get(position).getPower()) + "W)");
-        itemMin.setText(secToHR(mItemList.get(position).getHr()));
         //timeSwitch.setChecked(mItemList.get(position).getStage());
 
-        v.setTag(mItemList.get(position).getId());
 
-        final TextView mShowDialog = (TextView) v.findViewById(R.id.offset);
-        mShowDialog.setOnClickListener(new View.OnClickListener() {
+        viewHolder.mShowDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(parent.getContext());
@@ -97,74 +98,68 @@ public class ItemListAdapter_equip extends BaseAdapter {
                 minute.setMaxValue(59);
 
 //                Button mAdd = (Button) mView.findViewById(R.id.Plus_time);
-//                Button mDelete = (Button) mView.findViewById(R.id.Delete_time);
+//               Button mDelete = (Button) mView.findViewById(R.id.Delete_time);
 
                 mBuilder.setPositiveButton("Plus time", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        int getSec = hrToSec(hour.getValue(),minute.getValue());
-                        int databaseSec = mItemList.get(position).getHr();
-                        int nowSec = getSec + databaseSec;
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int getSec = hrToSec(hour.getValue(),minute.getValue());
+                                int databaseSec = mItemList.get(position).getHr();
+                                int nowSec = getSec + databaseSec;
 
-                        mItemList.get(position).setHr(nowSec);
-                        itemMin.setText(secToHR(nowSec));
+                                mItemList.get(position).setHr(nowSec);
+                                viewHolder.itemMin.setText(secToHR(nowSec));
 
-                        mDBHelper.updateHr(nowID, nowSec);
+                                mDBHelper.updateHr(nowID, nowSec);
 
-                        Toast toast = Toast.makeText(parent.getContext(), "Plus time for " + hour.getValue() + " hour and " + minute.getValue() + " minute",  Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-                }
+                                Toast toast = Toast.makeText(parent.getContext(), "Plus time for " + hour.getValue() + " hour and " + minute.getValue() + " minute",  Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        }
                 );
 
                 mBuilder.setNegativeButton("Delete time", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        int getSec = hrToSec(hour.getValue(),minute.getValue());
-                        int databaseSec = mItemList.get(position).getHr();
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int getSec = hrToSec(hour.getValue(),minute.getValue());
+                                int databaseSec = mItemList.get(position).getHr();
 
-                        if(databaseSec < getSec){
-                            Toast toast = Toast.makeText(parent.getContext(), "Time can not be negative.",  Toast.LENGTH_SHORT);
-                            toast.show();
+                                if(databaseSec < getSec){
+                                    Toast toast = Toast.makeText(parent.getContext(), "Time can not be negative.",  Toast.LENGTH_SHORT);
+                                    toast.show();
 
-                        }else {
-                            int nowSec = databaseSec - getSec;
-                            mDBHelper.updateHr(nowID, nowSec);
+                                }else {
+                                    int nowSec = databaseSec - getSec;
+                                    mDBHelper.updateHr(nowID, nowSec);
 
-                            mItemList.get(position).setHr(nowSec);
-                            itemMin.setText(secToHR(nowSec));
+                                    mItemList.get(position).setHr(nowSec);
+                                    viewHolder.itemMin.setText(secToHR(nowSec));
 
-                            Toast toast = Toast.makeText(parent.getContext(), "Delete time for " + hour.getValue() + " hour and " + minute.getValue() + " minute",  Toast.LENGTH_SHORT);
-                            toast.show();
+                                    Toast toast = Toast.makeText(parent.getContext(), "Delete time for " + hour.getValue() + " hour and " + minute.getValue() + " minute",  Toast.LENGTH_SHORT);
+                                    toast.show();
+                                }
+                            }
                         }
-                    }
-                }
                 );
 
 //                mAdd.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
-//
 //                    }
 //                });
-//
 //                mDelete.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
-//
 //                    }
 //                });
-//
 //                AlertDialog dialog = mBuilder.create();
-
                 mBuilder.setView(mView);
                 mBuilder.show();
             }
         });
+        viewHolder.timeSwitch.setChecked(mItemList.get(position).isButtonState());
+        viewHolder.timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-        timeSwitch.setChecked(mItemList.get(position).isButtonState());
-        timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            CountUpTimer timer;
             int hr = mItemList.get(position).getHr();
 
             @Override
@@ -172,13 +167,13 @@ public class ItemListAdapter_equip extends BaseAdapter {
 
                 if (isChecked) {
                     hr = mItemList.get(position).getHr();
-                    itemMin.setText(secToHR(hr));
+                    viewHolder.itemMin.setText(secToHR(hr));
                     mItemList.get(position).setButtonState(true);
                     mDBHelper.updateStage(nowID,true);
-                    timer = new CountUpTimer(2000000000) {
+                    viewHolder.timer = new CountUpTimer(2000000000) {
                         public void onTick(int second) {
                             hr = mItemList.get(position).getHr();
-                            itemMin.setText(secToHR(hr + 1));
+                            viewHolder.itemMin.setText(secToHR(hr + 1));
                             mItemList.get(position).setHr(hr + 1);
                         }
 
@@ -189,19 +184,18 @@ public class ItemListAdapter_equip extends BaseAdapter {
                             this.start();
                         }
                     };
-                    timer.start();
+                    viewHolder.timer.start();
                 } else {
-                    mItemList.get(position).setButtonState(false);
-                    mDBHelper.updateStage(nowID,false);
-                    mItemList.get(position).setHr(hr + timer.getSecond());
-                    timer.cancel();
-                    timer = null;
+                    if(viewHolder.timer != null) {
+                        mItemList.get(position).setButtonState(false);
+                        mDBHelper.updateStage(nowID, false);
+                        viewHolder.timer.cancel();
+                        viewHolder.timer = null;
+                    }
                 }
             }
         });
-
-
-        return v;
+        return convertView;
     }
 
     public int hrToSec(int hr, int min){
@@ -224,4 +218,22 @@ public class ItemListAdapter_equip extends BaseAdapter {
         return hour + ":" + min + ":" + sec;
     }
 
+    private class ViewHolder {
+        public TextView item_name;
+        public Switch timeSwitch;
+        public TextView itemName;
+        public TextView itemPower;
+        public TextView itemMin;
+        public TextView mShowDialog;
+        public CountUpTimer timer;
+
+        public ViewHolder(View convertView) {
+            item_name  = (TextView) convertView.findViewById(R.id.item_name);
+            timeSwitch = (Switch) convertView.findViewById(R.id.on_off);
+            itemName = (TextView) convertView.findViewById(R.id.name_equip);
+            itemPower = (TextView) convertView.findViewById(R.id.power_equip);
+            itemMin = (TextView) convertView.findViewById(R.id.min_equip);
+            mShowDialog = (TextView)convertView.findViewById(R.id.offset);
+        }
+    }
 }

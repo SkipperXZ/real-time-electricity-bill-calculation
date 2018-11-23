@@ -30,7 +30,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="@string/unit"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/show_onOff_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                />
 
         </LinearLayout>
 

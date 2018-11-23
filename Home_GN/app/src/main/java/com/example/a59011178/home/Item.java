@@ -9,7 +9,7 @@ public class Item implements Comparable<Item> {
 
 
     private int power, hr ,id, hrPerDay, dayPerMonth, time, totalMoney;
-    private String name, type, ability, date;
+    private String name, type, ability, date, state, time_on, time_off;
     private boolean buttonState = false;
 
     public static final String DATABASE_NAME = "eve_item.db";
@@ -36,15 +36,13 @@ public class Item implements Comparable<Item> {
         public static final String STAGE = "stage";
         public static final String TIME_ON = "time_on";
         public static final String TIME_OFF = "time_off";
-
-
     }
 
     public Item(){
 
     }
 
-    public Item(int id, int power, int hr, int hrPerDay, int dayPerMonth, int time, int totalMoney, String name, String type, String ability, String date) {
+    public Item(int id, int power, int hr, int hrPerDay, int dayPerMonth, int time, int totalMoney, String name, String type, String ability, String date, String state, String time_on, String time_off) {
         this.id = id;
         this.power = power;
         this.hr = hr;
@@ -56,6 +54,9 @@ public class Item implements Comparable<Item> {
         this.type = type;
         this.ability = ability;
         this.date = date;
+        this.state = state;
+        this.time_on = time_on;
+        this.time_off = time_off;
     }
 
     public void setPower(int power) {
@@ -106,6 +107,18 @@ public class Item implements Comparable<Item> {
         this.date = date;
     }
 
+    public void setTime_on(String time_on) {
+        this.time_on = time_on;
+    }
+
+    public void setTime_off(String time_off) {
+        this.time_off = time_off;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public int getPower() {
         return power;
     }
@@ -148,6 +161,18 @@ public class Item implements Comparable<Item> {
 
     public String getDate() {
         return date;
+    }
+
+    public String getTime_on() {
+        return time_on;
+    }
+
+    public String getTime_off() {
+        return time_off;
+    }
+
+    public String getState() {
+        return state;
     }
 
     public boolean isButtonState() {

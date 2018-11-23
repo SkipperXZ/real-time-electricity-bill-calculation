@@ -90,7 +90,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex(Item.Column.NAME)),
                     cursor.getString(cursor.getColumnIndex(Item.Column.TYPE)),
                     cursor.getString(cursor.getColumnIndex(Item.Column.ABILITY)),
-                    cursor.getString(cursor.getColumnIndex(Item.Column.DATE))));
+                    cursor.getString(cursor.getColumnIndex(Item.Column.DATE)),
+
+                    cursor.getString(cursor.getColumnIndex(Item.Column.STAGE)),
+                    cursor.getString(cursor.getColumnIndex(Item.Column.TIME_ON)),
+                    cursor.getString(cursor.getColumnIndex(Item.Column.TIME_OFF))
+
+
+            ));
 
             cursor.moveToNext();
         }
@@ -112,6 +119,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(Item.Column.DATE,item.getDate());
         values.put(Item.Column.HRperDay,item.getHrPerDay());
         values.put(Item.Column.DAYperMONTH,item.getDayPerMonth());
+        values.put(Item.Column.STAGE,item.getState());
+
+        sqLiteDatabase.insert(Item.TABLE,null,values);
+
+        sqLiteDatabase.close();
+
+    }
+
+    public void addItemWithSetTime(Item item){
+        sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Item.Column.POWER,item.getPower());
+        values.put(Item.Column.NAME,item.getName());
+        values.put(Item.Column.TYPE,item.getType());
+        values.put(Item.Column.ABILITY,item.getAbility());
+        values.put(Item.Column.DATE,item.getDate());
+        values.put(Item.Column.HRperDay,item.getHrPerDay());
+        values.put(Item.Column.DAYperMONTH,item.getDayPerMonth());
+        values.put(Item.Column.STAGE,item.getState());
+        values.put(Item.Column.TIME_ON,item.getTime_on());
+        values.put(Item.Column.TIME_OFF,item.getTime_off());
 
         sqLiteDatabase.insert(Item.TABLE,null,values);
 
@@ -202,12 +231,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void updateHr(String id,int sec){
+    public void updateHr(String id,int hr){
 
         sqLiteDatabase  = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(Item.Column.HR, sec);
+        values.put(Item.Column.HR, hr);
 
         int row = sqLiteDatabase.update(Item.TABLE,
                 values,
@@ -229,6 +258,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values,
                 Item.Column.ID + " = ? ",
                 new String[] {id});
+
+        sqLiteDatabase.close();
+
+    }
+
+    public void cutOut(){
+
+        sqLiteDatabase  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Item.Column.STAGE, "false");
+
+        int row = sqLiteDatabase.update(Item.TABLE, values,null,null);
 
         sqLiteDatabase.close();
 
