@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:background="#ff8b84"
+    android:background="#ffff"
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
@@ -30,8 +30,8 @@
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#d87973"
+            android:layout_height="50dp"
+            android:background="#a2d29b"
             android:drawableLeft="@drawable/ic_action_email"
             android:hint="@string/username_title"
             android:padding="16dp" />
@@ -39,8 +39,9 @@
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#d87973"
+            android:layout_height="50dp"
+            android:background="#a2d29b"
+            android:layout_marginTop="10dp"
             android:drawableLeft="@drawable/ic_action_pass"
             android:hint="@string/password_title"
             android:inputType="textPassword"
@@ -53,13 +54,14 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/border4"
             android:text="@string/button_login"
-            android:textColor="#ff8b84"
+            android:textColor="#ffff"
             android:textSize="18sp" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginTop="50dp"
             android:layout_gravity="center|bottom"
             android:layout_marginBottom="20dp"
             android:visibility="gone" />
@@ -75,6 +77,6 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="16dp"
         android:text="@string/register"
-        android:textColor="#ffffff" />
+        android:textColor="#6da961" />
 
 </RelativeLayout>

@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="@string/app_name">
@@ -30,9 +29,10 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             app:tabBackground="@color/colorPrimary"
             app:tabIndicatorColor="@color/colorAccent"
-            app:tabTextColor="@color/colorPrimaryDark">
+            app:tabTextColor="@color/colorAccent">
 
 
 
@@ -41,7 +41,8 @@
                 android:id="@+id/Calculate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_text_3" />
+                android:text="@string/tab_text_3"
+                />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/Equipment"
@@ -69,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/colorPrimaryDark"
+        app:backgroundTint="#558667"
         app:srcCompat="@drawable/ic_action_add" />
 
 </android.support.design.widget.CoordinatorLayout>

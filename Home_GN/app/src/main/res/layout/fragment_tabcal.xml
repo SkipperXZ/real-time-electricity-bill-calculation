@@ -3,12 +3,14 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="#f4f7f5">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton
@@ -20,17 +22,12 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="140dp"
         android:layout_marginRight="16dp"
-        app:backgroundTint="@color/colorButton"
+        app:backgroundTint="@color/colorAccent"
         app:srcCompat="@drawable/ic_action_cal"/>
 
     <ListView
         android:id="@+id/listView_cal"
         android:layout_width="wrap_content"
-        android:layout_height="485dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"></ListView>
+        android:layout_height="450dp"
+        android:layout_marginTop="5dp"></ListView>
 </RelativeLayout>

@@ -16,9 +16,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
-
+    String currentFirebaseUser;
+    int userID;
     private Button bLogin;
     private EditText etUsername, etPassword;
     private TextView registerLink;
@@ -42,37 +44,37 @@ public class LoginActivity extends AppCompatActivity {
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String email = etUsername.getText().toString();
-//                final String password = etPassword.getText().toString();
-//                if (TextUtils.isEmpty(email)) {
-//                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (TextUtils.isEmpty(password)) {
-//                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//
-//                progressBar.setVisibility(View.VISIBLE);
-//
-//                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        progressBar.setVisibility(View.GONE);
-//                        if (!task.isSuccessful()) {
-//                            // there was an error
-//                            if (password.length() < 6) {
-//                                etPassword.setError(getString(R.string.minimum_password));
-//                            } else {
-//                                Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
-//                            }
-//                        } else {
+                String email = etUsername.getText().toString();
+                final String password = etPassword.getText().toString();
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(password)) {
+                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                progressBar.setVisibility(View.VISIBLE);
+
+                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressBar.setVisibility(View.GONE);
+                        if (!task.isSuccessful()) {
+                            // there was an error
+                            if (password.length() < 6) {
+                                etPassword.setError(getString(R.string.minimum_password));
+                            } else {
+                                Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+                            }
+                        } else {
                             Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
                             startActivity(intent);
                             finish();
-//                        }
-//                    }
-//                });
+                        }
+                    }
+                });
             }
 
         });
@@ -88,6 +90,13 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
+        if (auth.getCurrentUser() != null) {
+            currentFirebaseUser = String.valueOf(FirebaseAuth.getInstance().getCurrentUser());
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();Intent passIntent = new Intent(getApplicationContext(), HomeActivity.class);
+            passIntent.putExtra("ID", currentFirebaseUser);
+            passIntent.putExtra("userID", userID);
+            startActivity(passIntent);
+            finish();}
     }
 }
 
