@@ -65,13 +65,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-
-
-
-
-
-
-
+        
 
         mDBHelper = new DatabaseHelper(parent.getContext());
         final String nowID = String.valueOf(mItemList.get(position).getId());
@@ -85,14 +79,11 @@ public class ItemListAdapter_equip extends BaseAdapter {
         //timeSwitch.setChecked(mItemList.get(position).getStage());
 
         if (mItemList.get(position).getTime_on() != null && mItemList.get(position).getTime_off() != null ){
-            itemShowTime.setText("Ontime " + mItemList.get(position).getTime_on() + " - " + mItemList.get(position).getTime_off());
+            viewHolder.itemShowTime.setText("Ontime " + mItemList.get(position).getTime_on() + " - " + mItemList.get(position).getTime_off());
         }
 
         boolean state = Boolean.parseBoolean(mItemList.get(position).getState());
 
-        timeSwitch.setChecked(state);
-
-        v.setTag(mItemList.get(position).getId());
 
         viewHolder.mShowDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,7 +161,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
             }
         });
 
-        viewHolder.timeSwitch.setChecked(mItemList.get(position).isButtonState());
+        viewHolder.timeSwitch.setChecked(state);
         viewHolder.timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             int hr = mItemList.get(position).getHr();
@@ -239,6 +230,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
         public TextView itemMin;
         public TextView mShowDialog;
         public CountUpTimer timer;
+        public TextView itemShowTime;
 
         public ViewHolder(View convertView) {
             item_name  = (TextView) convertView.findViewById(R.id.item_name);
@@ -247,6 +239,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
             itemPower = (TextView) convertView.findViewById(R.id.power_equip);
             itemMin = (TextView) convertView.findViewById(R.id.min_equip);
             mShowDialog = (TextView)convertView.findViewById(R.id.offset);
+            itemShowTime = (TextView)convertView.findViewById(R.id.show_onOff_time);
         }
     }
 }
