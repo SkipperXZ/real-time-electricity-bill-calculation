@@ -66,7 +66,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.sublist_equipment, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
@@ -97,7 +97,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
                 minute.setMinValue(0);
                 minute.setMaxValue(59);
 
-//                Button mAdd = (Button) mView.findViewById(R.id.Plus_time);
+//               Button mAdd = (Button) mView.findViewById(R.id.Plus_time);
 //               Button mDelete = (Button) mView.findViewById(R.id.Delete_time);
 
                 mBuilder.setPositiveButton("Plus time", new DialogInterface.OnClickListener() {
@@ -169,7 +169,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
                     hr = mItemList.get(position).getHr();
                     viewHolder.itemMin.setText(secToHR(hr));
                     mItemList.get(position).setButtonState(true);
-                    mDBHelper.updateStage(nowID,true);
+                    mDBHelper.updateState(nowID,true, hr);
                     viewHolder.timer = new CountUpTimer(2000000000) {
                         public void onTick(int second) {
                             hr = mItemList.get(position).getHr();
@@ -188,7 +188,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
                 } else {
                     if(viewHolder.timer != null) {
                         mItemList.get(position).setButtonState(false);
-                        mDBHelper.updateStage(nowID, false);
+                        mDBHelper.updateState(nowID, false,mItemList.get(position).getHr());
                         viewHolder.timer.cancel();
                         viewHolder.timer = null;
                     }
@@ -215,7 +215,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
         hour = min / 60;
         min -= hour * 60;
 
-        return hour + ":" + min + ":" + sec;
+        return String.format("%02d:%02d:%02d", hour, min,sec);
     }
 
     private class ViewHolder {

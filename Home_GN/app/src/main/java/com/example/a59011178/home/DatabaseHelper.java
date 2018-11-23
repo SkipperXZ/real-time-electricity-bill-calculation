@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -276,17 +277,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void updateStage(String id,Boolean nowStage){
+    public void updateState(String id,Boolean nowStage,int sec){
 
         sqLiteDatabase  = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(Item.Column.STAGE, nowStage);
+        String s = nowStage.toString();
+
+        values.put(Item.Column.STAGE, nowStage.toString());
+        values.put(Item.Column.HR, sec);
 
         int row = sqLiteDatabase.update(Item.TABLE,
                 values,
                 Item.Column.ID + " = ? ",
                 new String[] {id});
+
+     //   System.out.println("--------------------------------------"+id+"+ boolen +"+s+" - "+sec);
 
         sqLiteDatabase.close();
 

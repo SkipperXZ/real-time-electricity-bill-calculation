@@ -104,9 +104,9 @@ public class AddItemActivity extends AppCompatActivity {
                     break;
                 case "Time set":
                     radio3.setChecked(true);
-//                    mStart.setText("Start "+hourOfDay+":"+minutes+" ");
-//                    mEnd.setText(" Stop "+hourOfDay+":"+minutes);
                     break;
+
+                default: radio1.setChecked(true);
             }
         }
 
@@ -188,13 +188,6 @@ public class AddItemActivity extends AppCompatActivity {
                         item.setHrPerDay(8);
                         item.setDayPerMonth(30);
                         item.setDate(currentDate);
-
-                        if (myAbility == "Always on"){
-                            item.setState("true");
-
-                        }else {
-                            item.setState("false");
-                        }
 
                         if (ID == -1){
                             mHelper.addItemWithSetTime(item);
