@@ -30,7 +30,8 @@
         </activity>
 
         <activity android:name=".RegisterActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".AddItemActivity"
             android:label="@string/add_title"
@@ -39,6 +40,10 @@
 
         </activity>
         <activity android:name=".edit.EditActivity" android:screenOrientation="portrait"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

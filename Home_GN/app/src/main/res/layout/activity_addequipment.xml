@@ -27,8 +27,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/euip_name"
-                android:textColor="#ff8b84"
-                android:textSize="20sp" />
+                android:textColor="#78b38e"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/item_name"
@@ -60,8 +61,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/type"
-                android:textColor="#ff8b84"
-                android:textSize="20sp" />
+                android:textColor="#78b38e"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <AutoCompleteTextView
                 android:id="@+id/type"
@@ -78,6 +80,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
+                android:textColor="#ffff"
                 android:background="@drawable/border2"
                 android:text="Get watt"
                 android:textSize="9dp" />
@@ -97,8 +100,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/default_unit"
-                android:textColor="#ff8b84"
-                android:textSize="20sp" />
+                android:textColor="#78b38e"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/power"
@@ -127,7 +131,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/border2"
+                android:background="@drawable/border"
                 android:orientation="vertical"
                 android:layout_marginTop="30dp"
                 android:gravity="center">
@@ -136,12 +140,13 @@
                     android:id="@+id/textability"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="@string/ability"
                     android:textColor="#ffffff"
                     android:textSize="20sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:textStyle="bold" />
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -192,28 +197,31 @@
                     android:layout_marginBottom="10dp"
                     android:layout_gravity="center"
                     >
-                 <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:id="@+id/edit_start_time"
-                     android:text="Start time"
-                     android:textColor="#ffff"
-                     />
+
+                    <TextView
+                        android:id="@+id/edit_start_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start time"
+                        android:textColor="#ffff"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" TO "
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
+                        android:text=":"
                         android:textColor="#ffff"
-                        />
+                        android:textStyle="bold" />
+
                     <TextView
+                        android:id="@+id/edit_end_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/edit_end_time"
                         android:text="Stop time"
                         android:textColor="#ffff"
-                            />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
         </LinearLayout>
@@ -221,7 +229,7 @@
         <Button
             android:id="@+id/add"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="20dp"

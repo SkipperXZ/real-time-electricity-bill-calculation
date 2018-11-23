@@ -17,7 +17,7 @@
         android:layout_marginTop="5dp"
         android:text="@string/result_title"
         android:textAlignment="center"
-        android:textColor="#d87973"
+        android:textColor="@color/colorGreen"
         android:textSize="20sp" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_marginTop="5dp"
         android:text="result"
         android:textAlignment="center"
-        android:textColor="#abaaaa"
+        android:textColor="@color/colorAccent"
         android:textSize="20sp" />
 
 

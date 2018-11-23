@@ -17,8 +17,8 @@
     <string name="used_day">Used XXX days</string>
     <string name="cal">Calculate</string>
     <string name="use1">use XXX watts/day</string>
-    <string name="use2">use XXX days/month</string>
-    <string name="use3">use XXX hr/day</string>
+    <string name="use2"><u>use XXX days/month</u></string>
+    <string name="use3"><u>use XXX hr/day </u></string>
     <string name="timeunit1">hr/day</string>
     <string name="timeunit2">day/month</string>
     <string name="use4">Use</string>

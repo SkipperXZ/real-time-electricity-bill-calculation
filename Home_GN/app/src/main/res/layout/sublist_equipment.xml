@@ -6,9 +6,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:layout_weight="1"
-        android:background="@drawable/border3">
+        android:background="#ffff">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -20,9 +23,11 @@
                 android:id="@+id/name_equip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="@string/euip_name"
-                android:textSize="15sp"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/power_equip"
@@ -30,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="@string/unit"
-                android:textSize="15sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/show_onOff_time"
@@ -50,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_weight="1"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"/>
 
         <TextView
@@ -57,9 +63,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
             android:layout_marginBottom="5dp"
             android:text="@string/time_used"
-            android:textSize="15sp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/offset"
@@ -67,9 +74,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginRight="14dp"
+            android:layout_marginBottom="0dp"
             android:drawableLeft="@drawable/ic_action_add1"
-            android:layout_marginBottom="5dp"
-            android:text="@string/time_offset" />
+            android:text="@string/time_offset"
+            android:textSize="12sp" />
 
     </RelativeLayout>
 
