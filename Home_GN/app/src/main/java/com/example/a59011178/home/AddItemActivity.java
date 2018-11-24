@@ -121,11 +121,9 @@ public class AddItemActivity extends AppCompatActivity {
                         mStart.setText(time_on);
                     }
                 }, chour, cminute, true);
-
                 start_timePickerDialog.show();
             }
         });
-
         mEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

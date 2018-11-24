@@ -21,6 +21,7 @@ import com.example.a59011178.home.Item;
 import com.example.a59011178.home.R;
 import com.example.a59011178.home.timer.CountUpTimer;
 
+import org.threeten.bp.Duration;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.LocalTime;
 
@@ -160,17 +161,35 @@ public class ItemListAdapter_equip extends BaseAdapter {
             }
         });
 
+        if(mItemList.get(position).getAbility().equals("Time set") && viewHolder.timeSetTimer == null) {
+            viewHolder.timeSetTimer = new CountUpTimer(2000000000) {
+                public void onTick(int second) {
+                    if (LocalTime.now().isAfter(LocalTime.parse(mItemList.get(position).getTime_on())) && LocalTime.now().isBefore(LocalTime.parse(mItemList.get(position).getTime_off()))&& !Boolean.parseBoolean(mItemList.get(position).getState())) {
+                        mItemList.get(position).setState("true");
+                        viewHolder.timeSwitch.setChecked(Boolean.parseBoolean( mItemList.get(position).getState()));
+                    } else if (LocalTime.now().isAfter(LocalTime.parse(mItemList.get(position).getTime_off())) && Boolean.parseBoolean(mItemList.get(position).getState())) {
+                        mItemList.get(position).setState("false");
+                        viewHolder.timeSwitch.setChecked(Boolean.parseBoolean( mItemList.get(position).getState()));
+                    }
+                }
+                @Override
+                public void onFinish() {
+                    this.start();
+                }
+            };
+                viewHolder.timeSetTimer.start();
+
+            }
+
 
         viewHolder.timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             int hr = mItemList.get(position).getHr();
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (isChecked) {
+                if (isChecked && viewHolder.timer == null) {
                     hr = mItemList.get(position).getHr();
                     mItemList.get(position).setState("true");
                     mItemList.get(position).setTimeLastOn(LocalDateTime.now().toString());
-
                     mDBHelper.updateState(nowID,true, hr);
                     mDBHelper.updateLastTimeOn(nowID,mItemList.get(position).getHr(),LocalDateTime.now().toString());
                             viewHolder.itemMin.setText(secToHR(hr));
@@ -186,6 +205,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
                             mItemList.get(position).setHr(hr + 2);
                             hr = mItemList.get(position).getHr();
                             this.start();
+
                         }
                     };
                     viewHolder.timer.start();
@@ -222,6 +242,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
         min -= hour * 60;
 
         return String.format("%02d:%02d:%02d", hour, min,sec);
+
     }
 
     private class ViewHolder {
@@ -232,6 +253,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
         public TextView itemMin;
         public TextView mShowDialog;
         public CountUpTimer timer;
+        public CountUpTimer timeSetTimer;
 
         public ViewHolder(View convertView) {
             item_name  = (TextView) convertView.findViewById(R.id.item_name);
