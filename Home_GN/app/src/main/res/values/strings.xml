@@ -63,7 +63,7 @@
 
     <string-array name="graph_type">
         <item>Total money</item>
-        <item>Power used</item>
+        <item>Units used</item>
         <item>Time used</item>
     </string-array>
 

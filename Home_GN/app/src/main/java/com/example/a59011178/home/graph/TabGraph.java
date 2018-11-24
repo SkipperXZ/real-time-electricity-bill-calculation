@@ -39,7 +39,6 @@ public class TabGraph extends Fragment  {
                              Bundle savedInstanceState) {
 
         mHelp = new DatabaseHelper(this.getContext());
-        mItemList=mHelp.getItemList();
 
         View rootView = inflater.inflate(R.layout.fragment_tabgraph, container, false);
         chart = (PieChart)rootView.findViewById(R.id.pieChart);
@@ -53,15 +52,16 @@ public class TabGraph extends Fragment  {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mItemList=mHelp.getItemList();
                 String selectedText = mGraph_spinner.getSelectedItem().toString();
                 if(selectedText.equals("Total money")){
                     entries= new ArrayList<PieEntry>();
                     for (Item data : mItemList) {
-                      entries.add(new PieEntry(((float)data.getPower()*(float)mItemList.get(0).getTotalMoney()/3600)/1000,data.getName()));
+                      entries.add(new PieEntry(((float)data.getPower()*(float)mItemList.get(0).getTotalMoney()*data.getHr()/3600)/1000,data.getName()));
                     }
                     chart.setCenterText(new SpannableString("Usage Fee (Baht)"));
 
-                }else if(selectedText.equals("Power used")){
+                }else if(selectedText.equals("Units used")){
                     entries= new ArrayList<PieEntry>();
                     for (Item data : mItemList) {
                         entries.add(new PieEntry((float)data.getPower()*(float)data.getHr(),data.getName()));
