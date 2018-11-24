@@ -90,13 +90,29 @@ public class TabGraph extends Fragment  {
                     colors.add(c);
                 colors.add(ColorTemplate.getHoloBlue());
                 dataSet.setColors(colors);
+                dataSet.setSliceSpace(3f);
+                dataSet.setSelectionShift(5f);
+                dataSet.setValueLinePart1OffsetPercentage(80.f);
+                dataSet.setValueLinePart1Length(0.2f);
+                dataSet.setValueLinePart2Length(0.4f);
+                dataSet.setValueTextColor(Color.BLACK);
+                dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+                Legend l = chart.getLegend();
+
                 PieData pieData = new  PieData(dataSet);
-                pieData.setValueTextColor(Color.WHITE);
+                pieData.setValueTextColor(Color.BLACK);
                 pieData.setValueTextSize(11f);
                 //  pieData.setValueTypeface(tfLight);
+                chart.setEntryLabelColor(Color.BLACK);
                 chart.setData(pieData);
                 chart.notifyDataSetChanged();
                 chart.invalidate(); // refresh
+                chart.animateY(1400, Easing.EaseInOutQuad);
+                l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+                l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+                l.setOrientation(Legend.LegendOrientation.VERTICAL);
+                l.setDrawInside(true);
+                l.setEnabled(true);
 
             }
 
