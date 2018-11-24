@@ -31,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private long backPressedTime;
     private Toast backToast;
+    private DatabaseHelper mHelp;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -52,6 +53,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AndroidThreeTen.init(this);
         setContentView(R.layout.activity_home);
+
+//        mHelp = new DatabaseHelper(HomeActivity.this);
+//        mHelp.allChangeToManual();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -151,6 +155,7 @@ public class HomeActivity extends AppCompatActivity {
                     return tab1;
                 case 1 :
                     TabEquip tab2 = new TabEquip();
+
                     return tab2;
                 case 2 :
                     TabGraph tab3 = new TabGraph();

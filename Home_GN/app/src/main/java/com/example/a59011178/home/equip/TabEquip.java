@@ -52,6 +52,8 @@ public class TabEquip extends Fragment implements View.OnClickListener {
         mHelp = new DatabaseHelper(this.getContext());
         mItemList = mHelp.getItemList();
 
+        final int unit = mItemList.get(0).getTotalMoney();
+
         adapter = new ItemListAdapter_equip(this.getActivity(), mItemList);
 
         if (!mItemList.isEmpty()){
@@ -68,7 +70,7 @@ public class TabEquip extends Fragment implements View.OnClickListener {
                         }
 
                     totalWatt.setText(String.format("%.2f",electricUsage)+" Watt");
-                    totalBaht.setText(String.format("%.4f",(electricUsage/1000)*8)+" Baht");
+                    totalBaht.setText(String.format("%.4f",(electricUsage/1000)*unit)+" Baht");
                     }
 
                 }
@@ -95,83 +97,6 @@ public class TabEquip extends Fragment implements View.OnClickListener {
 
         }
         return rootView;
-    }
-
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
-        //System.out.println("--------------------------------------"+lvItem.getCheckedItemPosition());
-
-        if (v.getId() == R.id.listView_equip) {
-            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-            Item item =(Item) lvItem.getAdapter().getItem(info.position);
-            menu.setHeaderTitle(item.getName());
-//            String[] menuItems = getResources().getStringArray(R.array.menu);
-//            for (int i = 0; i < menuItems.length; i++) {
-//                menu.add(Menu.NONE, i, i, menuItems[i]);
-//            }
-            getActivity().getMenuInflater().inflate(R.menu.equip_options, menu);
-            super.onCreateContextMenu(menu, v, menuInfo);
-        }
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item){
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Item item1 = (Item) lvItem.getAdapter().getItem(info.position);
-        switch (item.getItemId())
-        {
-            case R.id.goToEdit:
-                Intent intent = new Intent(getContext(),AddItemActivity.class);
-
-                intent.putExtra(Item.Column.ID, item1.getId());
-                intent.putExtra(Item.Column.NAME, item1.getName());
-                intent.putExtra(Item.Column.TYPE, item1.getType());
-                intent.putExtra(Item.Column.POWER, item1.getPower());
-                intent.putExtra(Item.Column.ABILITY, item1.getAbility());
-                intent.putExtra(Item.Column.HRperDay, item1.getHrPerDay());
-                intent.putExtra(Item.Column.DAYperMONTH, item1.getDayPerMonth());
-
-                startActivity(intent);
-
-//                Toast toast = Toast.makeText ( getContext(), "Edit: " + item1.getName() , Toast.LENGTH_LONG );
-//                toast.show ( );
-
-                break;
-            case R.id.goToDelete:
-
-                AlertDialog.Builder builder =
-                        new AlertDialog.Builder(getContext());
-                builder.setTitle("Delete this equipment?");
-                builder.setMessage("Are you sure to delete " + item1.getName() + "?");
-
-                final String thisID = String.valueOf(item1.getId());
-
-                builder.setPositiveButton(getString(android.R.string.ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                mHelp.deleteItem(thisID);
-
-                                Toast.makeText(getContext(), "Deleted", Toast.LENGTH_LONG).show();
-
-                                Intent BackpressedIntent = new Intent();
-                                BackpressedIntent .setClass(getContext(),HomeActivity.class);
-                                BackpressedIntent .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(BackpressedIntent);
-                                getActivity().finish();
-                            }
-                        });
-
-                builder.setNegativeButton(getString(android.R.string.cancel), null);
-
-                builder.show();
-
-//                Toast toast2 = Toast.makeText ( getContext(), "Delete: " + item1.getName(), Toast.LENGTH_LONG );
-//                toast2.show ( );
-
-                break;
-        }
-        return super.onContextItemSelected(item);
     }
 
     @Override

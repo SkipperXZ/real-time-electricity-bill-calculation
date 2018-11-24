@@ -28,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_ITEM_TABLE = String.format("CREATE TABLE %s" + "(%s INTEGER PRIMARY KEY  AUTOINCREMENT, %s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s INTEGER DEFAULT 8, %s INTEGER DEFAULT 30, %s INTEGER , %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s TEXT,  %s INTEGER,  %s TEXT)",
+        String CREATE_ITEM_TABLE = String.format("CREATE TABLE %s" + "(%s INTEGER PRIMARY KEY  AUTOINCREMENT, %s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s TEXT DEFAULT 'Manual/On-Off', %s INTEGER DEFAULT 8, %s INTEGER DEFAULT 30, %s INTEGER , %s INTEGER DEFAULT 7, %s TEXT, %s TEXT, %s TEXT DEFAULT '00:00', %s TEXT DEFAULT '00:00', %s INTEGER, %s TEXT)",
                 Item.TABLE,
                 Item.Column.ID,
                 Item.Column.POWER,
@@ -259,6 +259,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.close();
 
     }
+
     public void updateLastTimeOn(String id,int hrLastTime,String timeLastOn){
 
         sqLiteDatabase  = this.getWritableDatabase();
@@ -298,6 +299,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(Item.Column.STAGE, "false");
+
+        int row = sqLiteDatabase.update(Item.TABLE, values,null,null);
+
+        sqLiteDatabase.close();
+
+    }
+
+    public void allChangeToManual(){
+
+        sqLiteDatabase  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Item.Column.ABILITY, "Manual/On-Off");
+
+        int row = sqLiteDatabase.update(Item.TABLE, values,null,null);
+
+        sqLiteDatabase.close();
+
+    }
+
+    public void changeUint(int unit){
+
+        sqLiteDatabase  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Item.Column.TOTALMONEY, unit);
 
         int row = sqLiteDatabase.update(Item.TABLE, values,null,null);
 

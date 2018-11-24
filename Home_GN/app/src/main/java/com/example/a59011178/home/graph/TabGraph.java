@@ -45,12 +45,12 @@ public class TabGraph extends Fragment  {
         l.setDrawInside(false);
         l.setEnabled(false);
 
+        final int unit = mItemList.get(0).getTotalMoney(); // THIS IS UNIT ---------------------------------------------------------------
+
         entries= new ArrayList<PieEntry>();
         for (Item data : mItemList) {
-            entries.add(new PieEntry(data.getPower()*data.getHrPerDay()*data.getDayPerMonth()*7/10000,data.getName()));
-
+            entries.add(new PieEntry(data.getPower()*data.getHrPerDay()*data.getDayPerMonth()*unit/10000,data.getName()));
         }
-
 
         PieDataSet dataSet = new PieDataSet(entries, "Name");
         ArrayList<Integer> colors = new ArrayList<>();
