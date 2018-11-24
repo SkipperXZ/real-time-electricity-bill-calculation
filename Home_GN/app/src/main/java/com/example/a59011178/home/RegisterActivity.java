@@ -32,12 +32,11 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         auth = FirebaseAuth.getInstance();
 
-
         lEmail = findViewById(R.id.email);
         lPass = findViewById(R.id.password);
         lCon = findViewById(R.id.confirm_password);
         bRe = findViewById(R.id.button_register);
-        progressBar =  findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
 
         //Todo Continue Development
 
@@ -59,10 +58,13 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(!password.equals(confirmpass)){
-                    Toast.makeText(getApplicationContext(),"Password Not matching",Toast.LENGTH_SHORT).show();
+                if (!password.equals(confirmpass)) {
+                    Toast.makeText(getApplicationContext(), "Password Not matching", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
+
                 progressBar.setVisibility(View.VISIBLE);
 
                 //Todo Authen App
@@ -81,6 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
             }
+
 
 
             protected void onResume() {

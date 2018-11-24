@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    >
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:text="Account"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:drawableRight="@drawable/ic_action_click"
+        android:layout_weight="1"
+        android:text="Password"
+        android:gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:text="General"
+        android:textSize="20sp"
+        android:gravity="center_vertical"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:drawableRight="@drawable/ic_action_click"
+        android:text="Energy Charge" />
+
+</LinearLayout>

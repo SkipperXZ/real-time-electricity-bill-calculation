@@ -108,7 +108,8 @@ public class HomeActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml. action_Edit_Equip
         switch (item.getItemId()) {
             case R.id.action_settings:
-                startActivity(new Intent(HomeActivity.this, AddItemActivity.class));
+                Intent i2=new Intent(getApplicationContext(),SettingActivity.class);
+                startActivity(i2);
                 break;
             case R.id.action_Log_out:
 
