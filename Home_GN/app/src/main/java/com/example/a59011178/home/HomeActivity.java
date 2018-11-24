@@ -24,6 +24,7 @@ import com.example.a59011178.home.graph.TabGraph;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -49,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidThreeTen.init(this);
         setContentView(R.layout.activity_home);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -22,6 +22,9 @@ import com.example.a59011178.home.Item;
 import com.example.a59011178.home.R;
 import com.example.a59011178.home.timer.CountUpTimer;
 
+import org.threeten.bp.Duration;
+import org.threeten.bp.LocalDateTime;
+
 import java.util.List;
 
 
@@ -41,6 +44,8 @@ public class TabEquip extends Fragment implements View.OnClickListener {
 
         final TextView totalWatt = (TextView)rootView.findViewById(R.id.totalunit);
         final TextView totalBaht = (TextView)rootView.findViewById(R.id.expens);
+
+
 
         lvItem = (ListView)rootView.findViewById(R.id.listView_equip);
         mHelp = new DatabaseHelper(this.getContext());
@@ -72,9 +77,14 @@ public class TabEquip extends Fragment implements View.OnClickListener {
             realTimeElectricTimer.start();
         }
 
+        for (Item e:mItemList) {
+            if (Boolean.parseBoolean(e.getState())) {
+                e.setHr(e.getHrLastOn() + (int) Duration.between(LocalDateTime.parse(e.getTimeLastOn()), LocalDateTime.now()).getSeconds());
+            }
+
+
+        }
         return rootView;
-
-
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {

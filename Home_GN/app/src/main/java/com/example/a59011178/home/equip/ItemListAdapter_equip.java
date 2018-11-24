@@ -21,6 +21,9 @@ import com.example.a59011178.home.Item;
 import com.example.a59011178.home.R;
 import com.example.a59011178.home.timer.CountUpTimer;
 
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.LocalTime;
+
 import java.util.List;
 
 public class ItemListAdapter_equip extends BaseAdapter {
@@ -80,7 +83,6 @@ public class ItemListAdapter_equip extends BaseAdapter {
         viewHolder.itemMin.setText(secToHR(mItemList.get(position).getHr()));
 
         //timeSwitch.setChecked(mItemList.get(position).getStage());
-
 
         viewHolder.mShowDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,19 +159,21 @@ public class ItemListAdapter_equip extends BaseAdapter {
                 mBuilder.show();
             }
         });
-        viewHolder.timeSwitch.setChecked(mItemList.get(position).isButtonState());
+
+
         viewHolder.timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
             int hr = mItemList.get(position).getHr();
-
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if (isChecked) {
                     hr = mItemList.get(position).getHr();
-                    viewHolder.itemMin.setText(secToHR(hr));
-                    mItemList.get(position).setButtonState(true);
+                    mItemList.get(position).setState("true");
+                    mItemList.get(position).setTimeLastOn(LocalDateTime.now().toString());
+
                     mDBHelper.updateState(nowID,true, hr);
+                    mDBHelper.updateLastTimeOn(nowID,mItemList.get(position).getHr(),LocalDateTime.now().toString());
+                            viewHolder.itemMin.setText(secToHR(hr));
                     viewHolder.timer = new CountUpTimer(2000000000) {
                         public void onTick(int second) {
                             hr = mItemList.get(position).getHr();
@@ -187,14 +191,16 @@ public class ItemListAdapter_equip extends BaseAdapter {
                     viewHolder.timer.start();
                 } else {
                     if(viewHolder.timer != null) {
-                        mItemList.get(position).setButtonState(false);
+                        mItemList.get(position).setState("false");
                         mDBHelper.updateState(nowID, false,mItemList.get(position).getHr());
                         viewHolder.timer.cancel();
                         viewHolder.timer = null;
                     }
                 }
             }
+
         });
+        viewHolder.timeSwitch.setChecked(Boolean.parseBoolean( mItemList.get(position).getState()));
         return convertView;
     }
 
@@ -236,4 +242,5 @@ public class ItemListAdapter_equip extends BaseAdapter {
             mShowDialog = (TextView)convertView.findViewById(R.id.offset);
         }
     }
+
 }

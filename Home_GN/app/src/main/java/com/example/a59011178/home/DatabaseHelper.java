@@ -259,6 +259,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.close();
 
     }
+    public void updateLastTimeOn(String id,int hrLastTime,String timeLastOn){
+
+        sqLiteDatabase  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Item.Column.HR_LAST_ON, hrLastTime);
+        values.put(Item.Column.TIME_LAST_ON, timeLastOn);
+
+        int row = sqLiteDatabase.update(Item.TABLE,
+                values,
+                Item.Column.ID + " = ? ",
+                new String[] {id});
+
+        sqLiteDatabase.close();
+
+    }
 
     public void updateSwitch(String id,String ab){
 

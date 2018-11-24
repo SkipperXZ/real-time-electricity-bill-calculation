@@ -185,6 +185,14 @@ public class Item implements Comparable<Item> {
         return state;
     }
 
+    public String getTimeLastOn() {
+        return timeLastOn;
+    }
+
+    public void setTimeLastOn(String timeLastOn) {
+        this.timeLastOn = timeLastOn;
+    }
+
     public int getHrLastOn() {
         return hrLastOn;
     }
