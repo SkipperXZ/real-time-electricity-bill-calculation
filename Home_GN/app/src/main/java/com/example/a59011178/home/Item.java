@@ -8,12 +8,12 @@ public class Item implements Comparable<Item> {
 
 
 
-    private int power, hr ,id, hrPerDay, dayPerMonth, time, totalMoney;
-    private String name, type, ability, date, state, time_on, time_off;
+    private int power, hr ,id, hrPerDay, dayPerMonth, time, totalMoney, hrLastOn;
+    private String name, type, ability, date, state, time_on, time_off, timeLastOn;
     private boolean buttonState = false;
 
-    public static final String DATABASE_NAME = "eve_item.db";
-    public static final int DATABASE_VERSION = 5;
+    public static final String DATABASE_NAME = "eve_item2.db";
+    public static final int DATABASE_VERSION = 8;
     public static final String TABLE = "item";
 
     @Override
@@ -36,13 +36,15 @@ public class Item implements Comparable<Item> {
         public static final String STAGE = "stage";
         public static final String TIME_ON = "time_on";
         public static final String TIME_OFF = "time_off";
+        public static final String HR_LAST_ON = "hrLastOn";
+        public static final String TIME_LAST_ON = "timeLastOn";
     }
 
     public Item(){
 
     }
 
-    public Item(int id, int power, int hr, int hrPerDay, int dayPerMonth, int time, int totalMoney, String name, String type, String ability, String date, String state, String time_on, String time_off) {
+    public Item(int id, int power, int hr, int hrPerDay, int dayPerMonth, int time, int totalMoney, String name, String type, String ability, String date, String state, String time_on, String time_off, int hrLastOn, String timeLastOn) {
         this.id = id;
         this.power = power;
         this.hr = hr;
@@ -57,6 +59,9 @@ public class Item implements Comparable<Item> {
         this.state = state;
         this.time_on = time_on;
         this.time_off = time_off;
+        this.hrLastOn = hrLastOn;
+        this.timeLastOn =timeLastOn;
+
     }
 
     public void setPower(int power) {
@@ -119,6 +124,11 @@ public class Item implements Comparable<Item> {
         this.state = state;
     }
 
+    public void setHrLastOn(int hrLastOn) {
+        this.hrLastOn = hrLastOn;
+    }
+
+
     public int getPower() {
         return power;
     }
@@ -173,6 +183,18 @@ public class Item implements Comparable<Item> {
 
     public String getState() {
         return state;
+    }
+
+    public String getTimeLastOn() {
+        return timeLastOn;
+    }
+
+    public void setTimeLastOn(String timeLastOn) {
+        this.timeLastOn = timeLastOn;
+    }
+
+    public int getHrLastOn() {
+        return hrLastOn;
     }
 
     public boolean isButtonState() {

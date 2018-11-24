@@ -17,6 +17,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_ALTER = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.STAGE + " string;" ;
     private static final String DATABASE_ALTER2 = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.TIME_ON + " string;" ;
     private static final String DATABASE_ALTER3 = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.TIME_OFF + " string;" ;
+    private static final String DATABASE_ALTER4 = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.TIME_LAST_ON + " string;" ;
+    private static final String DATABASE_ALTER5 = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.HR_LAST_ON + " int;" ;
 
     private SQLiteDatabase sqLiteDatabase;
 
@@ -26,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_ITEM_TABLE = String.format("CREATE TABLE %s" + "(%s INTEGER PRIMARY KEY  AUTOINCREMENT, %s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s INTEGER DEFAULT 8, %s INTEGER DEFAULT 30, %s INTEGER , %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
+        String CREATE_ITEM_TABLE = String.format("CREATE TABLE %s" + "(%s INTEGER PRIMARY KEY  AUTOINCREMENT, %s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s INTEGER DEFAULT 8, %s INTEGER DEFAULT 30, %s INTEGER , %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s TEXT,  %s INTEGER,  %s TEXT)",
                 Item.TABLE,
                 Item.Column.ID,
                 Item.Column.POWER,
@@ -41,7 +43,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Item.Column.DATE,
                 Item.Column.STAGE,
                 Item.Column.TIME_ON,
-                Item.Column.TIME_OFF);
+                Item.Column.TIME_OFF,
+                Item.Column.HR_LAST_ON,
+                Item.Column.TIME_LAST_ON);
 
         Log.i(TAG, CREATE_ITEM_TABLE);
 
@@ -58,6 +62,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         if (oldVersion < 4){
             db.execSQL(DATABASE_ALTER3);
+        }
+        if (oldVersion < 6){
+            db.execSQL(DATABASE_ALTER4);
+        }
+        if (oldVersion < 7){
+            db.execSQL(DATABASE_ALTER5);
         }
     }
 
@@ -95,8 +105,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                     cursor.getString(cursor.getColumnIndex(Item.Column.STAGE)),
                     cursor.getString(cursor.getColumnIndex(Item.Column.TIME_ON)),
-                    cursor.getString(cursor.getColumnIndex(Item.Column.TIME_OFF))
+                    cursor.getString(cursor.getColumnIndex(Item.Column.TIME_OFF)),
 
+                    cursor.getInt(cursor.getColumnIndex(Item.Column.HR_LAST_ON)),
+                    cursor.getString(cursor.getColumnIndex(Item.Column.TIME_LAST_ON))
 
             ));
 
@@ -238,6 +250,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(Item.Column.HR, hr);
+
+        int row = sqLiteDatabase.update(Item.TABLE,
+                values,
+                Item.Column.ID + " = ? ",
+                new String[] {id});
+
+        sqLiteDatabase.close();
+
+    }
+    public void updateLastTimeOn(String id,int hrLastTime,String timeLastOn){
+
+        sqLiteDatabase  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Item.Column.HR_LAST_ON, hrLastTime);
+        values.put(Item.Column.TIME_LAST_ON, timeLastOn);
 
         int row = sqLiteDatabase.update(Item.TABLE,
                 values,
