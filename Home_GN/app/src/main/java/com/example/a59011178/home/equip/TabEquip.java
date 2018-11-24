@@ -58,7 +58,7 @@ public class TabEquip extends Fragment implements View.OnClickListener {
             lvItem.setAdapter(adapter);
         }
 
-        if(realTimeElectricTimer ==null) {
+        if(realTimeElectricTimer ==null && !mItemList.isEmpty()) {
             realTimeElectricTimer = new CountUpTimer(2000000000) {
                 public void onTick(int second) {
                     float electricUsage = 0;
@@ -66,7 +66,6 @@ public class TabEquip extends Fragment implements View.OnClickListener {
                         for (Item e : mItemList) {
                             electricUsage += (((float)e.getHr()*(float) e.getPower())/(float)3600);
                         }
-
                     totalWatt.setText(String.format("%.2f",electricUsage)+" Watt");
                     totalBaht.setText(String.format("%.4f",(electricUsage/1000)*mItemList.get(0).getTotalMoney())+" Baht");
                     }
