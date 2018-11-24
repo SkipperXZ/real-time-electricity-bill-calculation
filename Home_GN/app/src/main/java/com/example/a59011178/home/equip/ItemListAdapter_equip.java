@@ -21,6 +21,10 @@ import com.example.a59011178.home.Item;
 import com.example.a59011178.home.R;
 import com.example.a59011178.home.timer.CountUpTimer;
 
+import org.threeten.bp.Duration;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.LocalTime;
+
 import java.util.List;
 
 public class ItemListAdapter_equip extends BaseAdapter {
@@ -66,7 +70,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.sublist_equipment, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
@@ -80,7 +84,6 @@ public class ItemListAdapter_equip extends BaseAdapter {
         viewHolder.itemMin.setText(secToHR(mItemList.get(position).getHr()));
 
         //timeSwitch.setChecked(mItemList.get(position).getStage());
-
 
         viewHolder.mShowDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +100,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
                 minute.setMinValue(0);
                 minute.setMaxValue(59);
 
-//                Button mAdd = (Button) mView.findViewById(R.id.Plus_time);
+//               Button mAdd = (Button) mView.findViewById(R.id.Plus_time);
 //               Button mDelete = (Button) mView.findViewById(R.id.Delete_time);
 
                 mBuilder.setPositiveButton("Plus time", new DialogInterface.OnClickListener() {
@@ -157,19 +160,39 @@ public class ItemListAdapter_equip extends BaseAdapter {
                 mBuilder.show();
             }
         });
-        viewHolder.timeSwitch.setChecked(mItemList.get(position).isButtonState());
+
+        if(mItemList.get(position).getAbility().equals("Time set") && viewHolder.timeSetTimer == null) {
+            viewHolder.timeSetTimer = new CountUpTimer(2000000000) {
+                public void onTick(int second) {
+                    if (LocalTime.now().isAfter(LocalTime.parse(mItemList.get(position).getTime_on())) && LocalTime.now().isBefore(LocalTime.parse(mItemList.get(position).getTime_off()))&& !Boolean.parseBoolean(mItemList.get(position).getState())) {
+                        mItemList.get(position).setState("true");
+                        viewHolder.timeSwitch.setChecked(Boolean.parseBoolean( mItemList.get(position).getState()));
+                    } else if (LocalTime.now().isAfter(LocalTime.parse(mItemList.get(position).getTime_off())) && Boolean.parseBoolean(mItemList.get(position).getState())) {
+                        mItemList.get(position).setState("false");
+                        viewHolder.timeSwitch.setChecked(Boolean.parseBoolean( mItemList.get(position).getState()));
+                    }
+                }
+                @Override
+                public void onFinish() {
+                    this.start();
+                }
+            };
+                viewHolder.timeSetTimer.start();
+
+            }
+
+
         viewHolder.timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
             int hr = mItemList.get(position).getHr();
-
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (isChecked) {
+                if (isChecked && viewHolder.timer == null) {
                     hr = mItemList.get(position).getHr();
-                    viewHolder.itemMin.setText(secToHR(hr));
-                    mItemList.get(position).setButtonState(true);
-                    mDBHelper.updateStage(nowID,true);
+                    mItemList.get(position).setState("true");
+                    mItemList.get(position).setTimeLastOn(LocalDateTime.now().toString());
+                    mDBHelper.updateState(nowID,true, hr);
+                    mDBHelper.updateLastTimeOn(nowID,mItemList.get(position).getHr(),LocalDateTime.now().toString());
+                            viewHolder.itemMin.setText(secToHR(hr));
                     viewHolder.timer = new CountUpTimer(2000000000) {
                         public void onTick(int second) {
                             hr = mItemList.get(position).getHr();
@@ -182,19 +205,22 @@ public class ItemListAdapter_equip extends BaseAdapter {
                             mItemList.get(position).setHr(hr + 2);
                             hr = mItemList.get(position).getHr();
                             this.start();
+
                         }
                     };
                     viewHolder.timer.start();
                 } else {
                     if(viewHolder.timer != null) {
-                        mItemList.get(position).setButtonState(false);
-                        mDBHelper.updateStage(nowID, false);
+                        mItemList.get(position).setState("false");
+                        mDBHelper.updateState(nowID, false,mItemList.get(position).getHr());
                         viewHolder.timer.cancel();
                         viewHolder.timer = null;
                     }
                 }
             }
+
         });
+        viewHolder.timeSwitch.setChecked(Boolean.parseBoolean( mItemList.get(position).getState()));
         return convertView;
     }
 
@@ -215,7 +241,8 @@ public class ItemListAdapter_equip extends BaseAdapter {
         hour = min / 60;
         min -= hour * 60;
 
-        return hour + ":" + min + ":" + sec;
+        return String.format("%02d:%02d:%02d", hour, min,sec);
+
     }
 
     private class ViewHolder {
@@ -226,6 +253,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
         public TextView itemMin;
         public TextView mShowDialog;
         public CountUpTimer timer;
+        public CountUpTimer timeSetTimer;
 
         public ViewHolder(View convertView) {
             item_name  = (TextView) convertView.findViewById(R.id.item_name);
@@ -236,4 +264,5 @@ public class ItemListAdapter_equip extends BaseAdapter {
             mShowDialog = (TextView)convertView.findViewById(R.id.offset);
         }
     }
+
 }

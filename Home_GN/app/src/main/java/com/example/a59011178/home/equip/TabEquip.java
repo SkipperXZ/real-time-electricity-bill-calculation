@@ -22,6 +22,10 @@ import com.example.a59011178.home.Item;
 import com.example.a59011178.home.R;
 import com.example.a59011178.home.timer.CountUpTimer;
 
+import org.threeten.bp.Duration;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.LocalTime;
+
 import java.util.List;
 
 
@@ -42,6 +46,8 @@ public class TabEquip extends Fragment implements View.OnClickListener {
         final TextView totalWatt = (TextView)rootView.findViewById(R.id.totalunit);
         final TextView totalBaht = (TextView)rootView.findViewById(R.id.expens);
 
+
+
         lvItem = (ListView)rootView.findViewById(R.id.listView_equip);
         mHelp = new DatabaseHelper(this.getContext());
         mItemList = mHelp.getItemList();
@@ -60,9 +66,11 @@ public class TabEquip extends Fragment implements View.OnClickListener {
                         for (Item e : mItemList) {
                             electricUsage += (((float)e.getHr()*(float) e.getPower())/(float)3600);
                         }
+
                     totalWatt.setText(String.format("%.2f",electricUsage)+" Watt");
                     totalBaht.setText(String.format("%.4f",(electricUsage/1000)*8)+" Baht");
                     }
+
                 }
 
                 @Override
@@ -72,9 +80,21 @@ public class TabEquip extends Fragment implements View.OnClickListener {
             realTimeElectricTimer.start();
         }
 
+        for (Item e:mItemList) {
+            if (Boolean.parseBoolean(e.getState())) {
+                e.setHr(e.getHrLastOn() + (int) Duration.between(LocalDateTime.parse(e.getTimeLastOn()), LocalDateTime.now()).getSeconds());
+            }
+            if(e.getAbility().equals("Time set")) {
+                if (LocalTime.now().isAfter(LocalTime.parse(e.getTime_on())) && LocalTime.now().isBefore(LocalTime.parse(e.getTime_off()))&& !Boolean.parseBoolean(e.getState())) {
+                    e.setState("true");
+                } else if (LocalTime.now().isAfter(LocalTime.parse(e.getTime_off())) && Boolean.parseBoolean(e.getState())) {
+                    e.setState("false");
+                }
+            }
+
+
+        }
         return rootView;
-
-
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
