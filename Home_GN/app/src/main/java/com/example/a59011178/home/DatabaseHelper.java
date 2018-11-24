@@ -17,6 +17,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_ALTER = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.STAGE + " string;" ;
     private static final String DATABASE_ALTER2 = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.TIME_ON + " string;" ;
     private static final String DATABASE_ALTER3 = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.TIME_OFF + " string;" ;
+    private static final String DATABASE_ALTER4 = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.TIME_LAST_ON + " string;" ;
+    private static final String DATABASE_ALTER5 = "ALTER TABLE " + Item.TABLE + " ADD COLUMN " + Item.Column.HR_LAST_ON + " int;" ;
 
     private SQLiteDatabase sqLiteDatabase;
 
@@ -59,6 +61,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (oldVersion < 4){
             db.execSQL(DATABASE_ALTER3);
         }
+        if (oldVersion < 5){
+            db.execSQL(DATABASE_ALTER4);
+        }
+        if (oldVersion < 6){
+            db.execSQL(DATABASE_ALTER5);
+        }
     }
 
     public List<Item> getItemList() {
@@ -95,7 +103,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                     cursor.getString(cursor.getColumnIndex(Item.Column.STAGE)),
                     cursor.getString(cursor.getColumnIndex(Item.Column.TIME_ON)),
-                    cursor.getString(cursor.getColumnIndex(Item.Column.TIME_OFF))
+                    cursor.getString(cursor.getColumnIndex(Item.Column.TIME_OFF)),
+
+                    cursor.getInt(cursor.getColumnIndex(Item.Column.HR_LAST_ON)),
+                    cursor.getString(cursor.getColumnIndex(Item.Column.TIME_LAST_ON))
 
 
             ));
