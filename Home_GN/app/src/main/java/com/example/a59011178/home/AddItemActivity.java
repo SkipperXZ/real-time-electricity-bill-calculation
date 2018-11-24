@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -17,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,6 +37,8 @@ public class AddItemActivity extends AppCompatActivity {
     static final int END_TIME_ID=1;
     public int hour,minute;
     private int chour,cminute;
+    int checkTimeOn = 0;
+    int checkTimeOff = 0;
 
     String[] types = { "Electric fan", "Electric fan", "Air 12000 BTU", "Air 15000 BTU", "Air 18000 BTU", "Vacuum bottle", "Electric rice cooker", "Water heater", "Microwave", "Toaster", "Electric iron", "Dry iron", "Incandescent lamb bulbs", "Compact-fluorescent bulbs", "Fluorescent bulbs", "LED lighting", "Television 14 inch.", "Television 20 inch.", "Television 24 inch.", "Computer", "Refrigerator 4 cubic", "Refrigerator 6 cubic", "Refrigerator 12 cubic", "Washing machine", "Hair dryer", "Vacuum cleaner", "Modem, Router", "Telephone", "Tablet", "Power bank"};
 
@@ -83,6 +87,8 @@ public class AddItemActivity extends AppCompatActivity {
             String getName = bundle.getString(Item.Column.NAME);
             String getType = bundle.getString(Item.Column.TYPE);
             String getAbility = bundle.getString(Item.Column.ABILITY);
+            String getTime_on = bundle.getString(Item.Column.TIME_ON);
+            String getTime_off = bundle.getString(Item.Column.TIME_OFF);
 
             mName.setText(getName);
             mType.setText(getType);
@@ -104,6 +110,8 @@ public class AddItemActivity extends AppCompatActivity {
                     break;
                 case "Time set":
                     radio3.setChecked(true);
+                    mStart.setText(getTime_on);
+                    mEnd.setText(getTime_off);
                     break;
 
                 default: radio1.setChecked(true);
@@ -119,6 +127,7 @@ public class AddItemActivity extends AppCompatActivity {
                         String time_on = getTime(hourOfDay, minutes);
                         item.setTime_on(time_on);
                         mStart.setText(time_on);
+                        checkTimeOn +=1;
                     }
                 }, chour, cminute, true);
                 start_timePickerDialog.show();
@@ -133,6 +142,7 @@ public class AddItemActivity extends AppCompatActivity {
                         String time_off = getTime(hourOfDay, minutes);
                         item.setTime_off(time_off);
                         mEnd.setText(time_off);
+                        checkTimeOff +=2;
                     }
                 }, chour + 1, cminute, true);
 
@@ -149,12 +159,11 @@ public class AddItemActivity extends AppCompatActivity {
         });
 
         mAbility.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton radioButton = (RadioButton) AddItemActivity.this.findViewById(checkedId);
                 myAbility = radioButton.getText().toString();
-
+                item.setAbility(myAbility);
             }
         });
 
@@ -182,23 +191,51 @@ public class AddItemActivity extends AppCompatActivity {
                         item.setName(mName.getText().toString());
                         item.setType(mType.getText().toString());
                         item.setPower(Integer.parseInt(mPower.getText().toString()));
-                        item.setAbility(myAbility);
                         item.setHrPerDay(8);
                         item.setDayPerMonth(30);
                         item.setDate(currentDate);
 
-                        if (ID == -1){
-                            mHelper.addItemWithSetTime(item);
+                        if (myAbility.equals("Time set")){
+                            if (checkTimeOn == 0 || checkTimeOff == 0){
+                                Toast.makeText(getApplicationContext(), "Please select a start and stop time", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if (ID == -1){
+                                    mHelper.addItemWithSetTime(item);
+                                    Toast.makeText(getApplicationContext(), "case A", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    item.setId(ID);
+                                    mHelper.updateItemWithSetTime(item);
+                                    Toast.makeText(getApplicationContext(), "case B", Toast.LENGTH_SHORT).show();
+                                }
+
+                                Toast.makeText(getApplicationContext(), "case C", Toast.LENGTH_SHORT).show();
+
+                                Intent BackpressedIntent = new Intent();
+                                BackpressedIntent .setClass(getApplicationContext(),HomeActivity.class);
+                                BackpressedIntent .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(BackpressedIntent );
+                                finish();
+                            }
+
                         } else {
-                            item.setId(ID);
-                            mHelper.updateItem(item);
+                            if (ID == -1){
+                                mHelper.addItem(item);
+                                Toast.makeText(getApplicationContext(), "case D", Toast.LENGTH_SHORT).show();
+                            } else {
+                                item.setId(ID);
+                                mHelper.updateItem(item);
+                                Toast.makeText(getApplicationContext(), "case E", Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getApplicationContext(), "case F", Toast.LENGTH_SHORT).show();
+
+                            Intent BackpressedIntent = new Intent();
+                            BackpressedIntent .setClass(getApplicationContext(),HomeActivity.class);
+                            BackpressedIntent .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(BackpressedIntent );
+                            finish();
                         }
 
-                        Intent BackpressedIntent = new Intent();
-                        BackpressedIntent .setClass(getApplicationContext(),HomeActivity.class);
-                        BackpressedIntent .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(BackpressedIntent );
-                        finish();
+
                     }
                 });
 

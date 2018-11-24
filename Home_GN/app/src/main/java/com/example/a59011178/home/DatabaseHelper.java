@@ -214,6 +214,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             sqLiteDatabase.close();
     }
 
+    public void updateItemWithSetTime(Item item) {
+
+        sqLiteDatabase  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Item.Column.POWER,item.getPower());
+        values.put(Item.Column.NAME,item.getName());
+        values.put(Item.Column.TYPE,item.getType());
+        values.put(Item.Column.HRperDay,item.getHrPerDay());
+        values.put(Item.Column.DAYperMONTH,item.getDayPerMonth());
+        values.put(Item.Column.TIME_ON,item.getTime_on());
+        values.put(Item.Column.TIME_OFF,item.getTime_off());
+
+        int row = sqLiteDatabase.update(Item.TABLE,
+                values,
+                Item.Column.ID + " = ? ",
+                new String[] { String.valueOf(item.getId()) });
+
+        sqLiteDatabase.close();
+    }
+
     public void updateHRperDay(String id, int hr){
         sqLiteDatabase  = this.getWritableDatabase();
         ContentValues values = new ContentValues();

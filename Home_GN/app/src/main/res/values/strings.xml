@@ -61,4 +61,10 @@
     <string name="welcome_message">Welcome to Devahoy</string>
 
 
+    <string-array name="graph_type">
+        <item>Total money</item>
+        <item>Power used</item>
+        <item>Time used</item>
+    </string-array>
+
 </resources>

@@ -7,6 +7,9 @@ import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.a59011178.home.DatabaseHelper;
 import com.example.a59011178.home.Item;
@@ -27,16 +30,37 @@ public class TabGraph extends Fragment  {
 
     private List<Item> mItemList;
     private DatabaseHelper mHelp;
+    private Spinner mGraph_spinner;
     List<PieEntry> entries = new ArrayList<PieEntry>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         mHelp = new DatabaseHelper(this.getContext());
         mItemList=mHelp.getItemList();
+
         View rootView = inflater.inflate(R.layout.fragment_tabgraph, container, false);
+
         PieChart chart = (PieChart)rootView.findViewById(R.id.pieChart);
         chart = initChart(chart);
+
+        mGraph_spinner = (Spinner) rootView.findViewById(R.id.Graph_spinner);
+        String[] spinnerArray = getResources().getStringArray(R.array.graph_type);
+        ArrayAdapter<String> graphArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line,spinnerArray);
+        mGraph_spinner.setAdapter(graphArrayAdapter);
+
+        mGraph_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         Legend l = chart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
@@ -45,11 +69,9 @@ public class TabGraph extends Fragment  {
         l.setDrawInside(false);
         l.setEnabled(false);
 
-        final int unit = mItemList.get(0).getTotalMoney(); // THIS IS UNIT ---------------------------------------------------------------
-
         entries= new ArrayList<PieEntry>();
         for (Item data : mItemList) {
-            entries.add(new PieEntry(data.getPower()*data.getHrPerDay()*data.getDayPerMonth()*unit/10000,data.getName()));
+            entries.add(new PieEntry(data.getPower()*data.getHrPerDay()*data.getDayPerMonth()*mItemList.get(0).getTotalMoney()/10000,data.getName()));
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "Name");
@@ -57,13 +79,10 @@ public class TabGraph extends Fragment  {
 
         for (int c : ColorTemplate.VORDIPLOM_COLORS)
             colors.add(c);
-
         for (int c : ColorTemplate.JOYFUL_COLORS)
             colors.add(c);
-
         for (int c : ColorTemplate.COLORFUL_COLORS)
             colors.add(c);
-
         for (int c : ColorTemplate.LIBERTY_COLORS)
             colors.add(c);
         for (int c : ColorTemplate.PASTEL_COLORS)
@@ -81,9 +100,6 @@ public class TabGraph extends Fragment  {
         chart.setData(pieData);
         chart.invalidate(); // refresh
         chart.setCenterText(generateCenterSpannableText());
-
-
-
 
         return rootView;
     }

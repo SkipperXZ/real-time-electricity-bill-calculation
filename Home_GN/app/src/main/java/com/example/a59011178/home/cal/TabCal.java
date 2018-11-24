@@ -33,8 +33,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
     private List<Item> mItemList;
     private DatabaseHelper mHelp;
     private ItemListAdapter_cal adapter;
-
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tabcal, container, false);
@@ -86,6 +85,8 @@ public class TabCal extends Fragment implements View.OnClickListener  {
                 intent.putExtra(Item.Column.ABILITY, item1.getAbility());
                 intent.putExtra(Item.Column.HRperDay, item1.getHrPerDay());
                 intent.putExtra(Item.Column.DAYperMONTH, item1.getDayPerMonth());
+                intent.putExtra(Item.Column.TIME_ON, item1.getTime_on());
+                intent.putExtra(Item.Column.TIME_OFF, item1.getTime_off());
 
                 startActivity(intent);
 

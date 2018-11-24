@@ -54,8 +54,10 @@ public class HomeActivity extends AppCompatActivity {
         AndroidThreeTen.init(this);
         setContentView(R.layout.activity_home);
 
+// ------------------------------------------------------------------------------------------------->
 //        mHelp = new DatabaseHelper(HomeActivity.this);
 //        mHelp.allChangeToManual();
+// ------------------------------------------------------------------------------------------------->
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

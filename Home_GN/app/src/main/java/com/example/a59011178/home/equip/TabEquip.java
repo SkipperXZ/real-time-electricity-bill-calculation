@@ -52,8 +52,6 @@ public class TabEquip extends Fragment implements View.OnClickListener {
         mHelp = new DatabaseHelper(this.getContext());
         mItemList = mHelp.getItemList();
 
-        final int unit = mItemList.get(0).getTotalMoney();
-
         adapter = new ItemListAdapter_equip(this.getActivity(), mItemList);
 
         if (!mItemList.isEmpty()){
@@ -70,7 +68,7 @@ public class TabEquip extends Fragment implements View.OnClickListener {
                         }
 
                     totalWatt.setText(String.format("%.2f",electricUsage)+" Watt");
-                    totalBaht.setText(String.format("%.4f",(electricUsage/1000)*unit)+" Baht");
+                    totalBaht.setText(String.format("%.4f",(electricUsage/1000)*mItemList.get(0).getTotalMoney())+" Baht");
                     }
 
                 }
