@@ -28,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_ITEM_TABLE = String.format("CREATE TABLE %s" + "(%s INTEGER PRIMARY KEY  AUTOINCREMENT, %s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s INTEGER DEFAULT 8, %s INTEGER DEFAULT 30, %s INTEGER , %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
+        String CREATE_ITEM_TABLE = String.format("CREATE TABLE %s" + "(%s INTEGER PRIMARY KEY  AUTOINCREMENT, %s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s INTEGER DEFAULT 8, %s INTEGER DEFAULT 30, %s INTEGER , %s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s TEXT,  %s INTEGER,  %s TEXT)",
                 Item.TABLE,
                 Item.Column.ID,
                 Item.Column.POWER,
@@ -43,7 +43,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Item.Column.DATE,
                 Item.Column.STAGE,
                 Item.Column.TIME_ON,
-                Item.Column.TIME_OFF);
+                Item.Column.TIME_OFF,
+                Item.Column.HR_LAST_ON,
+                Item.Column.TIME_LAST_ON);
 
         Log.i(TAG, CREATE_ITEM_TABLE);
 
@@ -61,10 +63,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (oldVersion < 4){
             db.execSQL(DATABASE_ALTER3);
         }
-        if (oldVersion < 5){
+        if (oldVersion < 6){
             db.execSQL(DATABASE_ALTER4);
         }
-        if (oldVersion < 6){
+        if (oldVersion < 7){
             db.execSQL(DATABASE_ALTER5);
         }
     }
@@ -107,7 +109,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                     cursor.getInt(cursor.getColumnIndex(Item.Column.HR_LAST_ON)),
                     cursor.getString(cursor.getColumnIndex(Item.Column.TIME_LAST_ON))
-
 
             ));
 
