@@ -51,7 +51,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -80,9 +80,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:textColor="#ffff"
                 android:background="@drawable/border2"
-                android:text="Get watt"
+                android:textAlignment="center"
+                android:text="      Get watt"
+                android:textColor="#ffff"
                 android:textSize="9dp" />
 
         </LinearLayout>
@@ -226,16 +227,18 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/border2"
-            android:text="@string/add"
-            android:textColor="#ffffff"/>
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/border2"
+        android:textAlignment="center"
+        android:text="   add"
+        android:textAllCaps="true"
+        android:textColor="#ffffff" />
 
 
 
