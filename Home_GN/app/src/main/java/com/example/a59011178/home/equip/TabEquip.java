@@ -47,10 +47,10 @@ public class TabEquip extends Fragment implements View.OnClickListener {
         final TextView totalBaht = (TextView)rootView.findViewById(R.id.expens);
 
 
-
         lvItem = (ListView)rootView.findViewById(R.id.listView_equip);
         mHelp = new DatabaseHelper(this.getContext());
         mItemList = mHelp.getItemList();
+
 
         adapter = new ItemListAdapter_equip(this.getActivity(), mItemList);
 

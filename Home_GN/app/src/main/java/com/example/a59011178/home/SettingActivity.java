@@ -63,7 +63,13 @@ public class SettingActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 mDBHelper.changeUint(myNumPick.getValue());
-                                sEnergycharge.setText("Now Your Energy charge is " + myNumPick.getValue() + "Bath/unit");
+                                sEnergycharge.setText("Now Your Energy charge is " + myNumPick.getValue() + " Bath/unit");
+
+                                Toast.makeText(getApplicationContext(), "Now Your Energy charge is " + myNumPick.getValue() + " Bath/unit", Toast.LENGTH_SHORT).show();
+
+                                Intent i=new Intent(getApplicationContext(),HomeActivity.class);
+                                startActivity(i);
+
                             }
                         }
                 );

@@ -85,7 +85,7 @@ public class ItemListAdapter_cal extends BaseAdapter {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 mDBHelper.updateHRperDay( nowID, myNumPick.getValue());
-                                HRPerDay.setText("Use " + myNumPick.getValue() + " Hours/Day");
+                                HRPerDay.setText("Use " + myNumPick.getValue() + " Hour/Day");
                             }
                         }
                 );
@@ -117,7 +117,7 @@ public class ItemListAdapter_cal extends BaseAdapter {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 mDBHelper.updateDayPerMonth( nowID, myNumPick.getValue());
-                                DayPerMonth.setText("Use " + myNumPick.getValue() + " Days/Month");
+                                DayPerMonth.setText("Use " + myNumPick.getValue() + " Day/Month");
                             }
                         }
                 );

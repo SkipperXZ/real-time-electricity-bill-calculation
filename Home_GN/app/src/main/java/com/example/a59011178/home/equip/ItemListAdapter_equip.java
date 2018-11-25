@@ -77,11 +77,18 @@ public class ItemListAdapter_equip extends BaseAdapter {
         mDBHelper = new DatabaseHelper(parent.getContext());
         final String nowID = String.valueOf(mItemList.get(position).getId());
 
-
-
         viewHolder.itemName.setText(mItemList.get(position).getName());
         viewHolder.itemPower.setText("(" + String.valueOf(mItemList.get(position).getPower()) + "W)");
         viewHolder.itemMin.setText(secToHR(mItemList.get(position).getHr()));
+
+        if (mItemList.get(position).getAbility().equals("Time set")){
+            viewHolder.showTime.setText(String.valueOf(mItemList.get(position).getTime_on())+ " - " + String.valueOf(mItemList.get(position).getTime_off()));
+        }
+        if (mItemList.get(position).getAbility().equals("Always on")){
+            viewHolder.showTime.setText("Always on");
+            mItemList.get(position).setState("true");
+            viewHolder.timeSwitch.setClickable(false);
+        }
 
         //timeSwitch.setChecked(mItemList.get(position).getStage());
 
@@ -99,9 +106,6 @@ public class ItemListAdapter_equip extends BaseAdapter {
                 final NumberPicker minute = (NumberPicker) mView.findViewById(R.id.numberPicker1);
                 minute.setMinValue(0);
                 minute.setMaxValue(59);
-
-//               Button mAdd = (Button) mView.findViewById(R.id.Plus_time);
-//               Button mDelete = (Button) mView.findViewById(R.id.Delete_time);
 
                 mBuilder.setPositiveButton("Plus time", new DialogInterface.OnClickListener() {
                             @Override
@@ -145,17 +149,6 @@ public class ItemListAdapter_equip extends BaseAdapter {
                         }
                 );
 
-//                mAdd.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                    }
-//                });
-//                mDelete.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                    }
-//                });
-//                AlertDialog dialog = mBuilder.create();
                 mBuilder.setView(mView);
                 mBuilder.show();
             }
@@ -180,7 +173,6 @@ public class ItemListAdapter_equip extends BaseAdapter {
                 viewHolder.timeSetTimer.start();
 
             }
-
 
         viewHolder.timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             int hr = mItemList.get(position).getHr();
@@ -252,6 +244,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
         public TextView itemPower;
         public TextView itemMin;
         public TextView mShowDialog;
+        public TextView showTime;
         public CountUpTimer timer;
         public CountUpTimer timeSetTimer;
 
@@ -262,6 +255,7 @@ public class ItemListAdapter_equip extends BaseAdapter {
             itemPower = (TextView) convertView.findViewById(R.id.power_equip);
             itemMin = (TextView) convertView.findViewById(R.id.min_equip);
             mShowDialog = (TextView)convertView.findViewById(R.id.offset);
+            showTime = (TextView)convertView.findViewById(R.id.show_onOff_time);
         }
     }
 

@@ -12,8 +12,8 @@ public class Item implements Comparable<Item> {
     private String name, type, ability, date, state, time_on, time_off, timeLastOn;
     private boolean buttonState = false;
 
-    public static final String DATABASE_NAME = "MyItemData.db";
-    public static final int DATABASE_VERSION = 8;
+    public static final String DATABASE_NAME = "MyItemData2.db";
+    public static final int DATABASE_VERSION = 1;
     public static final String TABLE = "item";
 
     @Override

@@ -205,6 +205,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //            values.put(Item.Column.DATE,item.getDate());
             values.put(Item.Column.HRperDay,item.getHrPerDay());
             values.put(Item.Column.DAYperMONTH,item.getDayPerMonth());
+            values.put(Item.Column.ABILITY,item.getAbility());
 
             int row = sqLiteDatabase.update(Item.TABLE,
                     values,
@@ -226,6 +227,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(Item.Column.DAYperMONTH,item.getDayPerMonth());
         values.put(Item.Column.TIME_ON,item.getTime_on());
         values.put(Item.Column.TIME_OFF,item.getTime_off());
+        values.put(Item.Column.ABILITY,item.getAbility());
 
         int row = sqLiteDatabase.update(Item.TABLE,
                 values,
@@ -309,6 +311,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values,
                 Item.Column.ID + " = ? ",
                 new String[] {id});
+
+        sqLiteDatabase.close();
+
+    }
+
+    public void newMonth(){
+
+        sqLiteDatabase  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Item.Column.HR, 0);
+
+        int row = sqLiteDatabase.update(Item.TABLE, values,null,null);
 
         sqLiteDatabase.close();
 

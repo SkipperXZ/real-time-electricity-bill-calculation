@@ -39,6 +39,7 @@ public class AddItemActivity extends AppCompatActivity {
     private int chour,cminute;
     int checkTimeOn = 0;
     int checkTimeOff = 0;
+    int checkAbility = 0;
 
     String[] types = { "Electric fan", "Electric fan", "Air 12000 BTU", "Air 15000 BTU", "Air 18000 BTU", "Vacuum bottle", "Electric rice cooker", "Water heater", "Microwave", "Toaster", "Electric iron", "Dry iron", "Incandescent lamb bulbs", "Compact-fluorescent bulbs", "Fluorescent bulbs", "LED lighting", "Television 14 inch.", "Television 20 inch.", "Television 24 inch.", "Computer", "Refrigerator 4 cubic", "Refrigerator 6 cubic", "Refrigerator 12 cubic", "Washing machine", "Hair dryer", "Vacuum cleaner", "Modem, Router", "Telephone", "Tablet", "Power bank"};
 
@@ -101,20 +102,28 @@ public class AddItemActivity extends AppCompatActivity {
             switch (getAbility){
                 case "Always on" :
                     radio1.setChecked(true);
+                    item.setAbility("Always on");
+                    checkAbility += 1;
                     break;
                 case "Manual/On-Off":
                     radio2.setChecked(true);
+                    item.setAbility("Manual/On-Off");
+                    checkAbility += 1;
                     break;
                 case "Time Offset":
                     radio3.setChecked(true);
+                    item.setAbility("Time Offset");
+                    checkAbility += 1;
                     break;
                 case "Time set":
                     radio3.setChecked(true);
                     mStart.setText(getTime_on);
                     mEnd.setText(getTime_off);
+                    item.setAbility("Time set");
+                    checkAbility += 1;
                     break;
 
-                default: radio1.setChecked(true);
+                default: radio2.setChecked(true); item.setAbility("Manual/On-Off");
             }
         }
 
@@ -142,7 +151,7 @@ public class AddItemActivity extends AppCompatActivity {
                         String time_off = getTime(hourOfDay, minutes);
                         item.setTime_off(time_off);
                         mEnd.setText(time_off);
-                        checkTimeOff +=2;
+                        checkTimeOff +=1;
                     }
                 }, chour + 1, cminute, true);
 
@@ -164,6 +173,7 @@ public class AddItemActivity extends AppCompatActivity {
                 RadioButton radioButton = (RadioButton) AddItemActivity.this.findViewById(checkedId);
                 myAbility = radioButton.getText().toString();
                 item.setAbility(myAbility);
+                checkAbility += 1;
             }
         });
 
@@ -181,34 +191,53 @@ public class AddItemActivity extends AppCompatActivity {
                 builder.setMessage(getString(R.string.add_data_message));
 
                 Calendar c = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyy");
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                 final String currentDate = df.format(c.getTime());
 
                 builder.setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        item.setName(mName.getText().toString());
-                        item.setType(mType.getText().toString());
-                        item.setPower(Integer.parseInt(mPower.getText().toString()));
-                        item.setHrPerDay(8);
-                        item.setDayPerMonth(30);
-                        item.setDate(currentDate);
+                        String sName = mName.getText().toString();
+                        String sType = mType.getText().toString();
+                        String sPower = mPower.getText().toString();
 
-                        if (myAbility.equals("Time set")){
-                            if (checkTimeOn == 0 || checkTimeOff == 0){
-                                Toast.makeText(getApplicationContext(), "Please select a start and stop time", Toast.LENGTH_SHORT).show();
-                            } else {
-                                if (ID == -1){
-                                    mHelper.addItemWithSetTime(item);
-                                    Toast.makeText(getApplicationContext(), "case A", Toast.LENGTH_SHORT).show();
+                        if (TextUtils.isEmpty(sName) || TextUtils.isEmpty(sType) || TextUtils.isEmpty(sPower) || checkAbility == 0){
+                            Toast.makeText(getApplicationContext(),"Please fill in all information.", Toast.LENGTH_SHORT).show();
+                        }else {
+
+                            item.setName(sName);
+                            item.setType(sType);
+                            item.setPower(Integer.parseInt(sPower));
+                            item.setHrPerDay(8);
+                            item.setDayPerMonth(30);
+                            item.setDate(currentDate);
+
+                            if (item.getAbility().equals("Time set")){
+                                if (checkTimeOn == 0 || checkTimeOff == 0){
+                                    Toast.makeText(getApplicationContext(), "Please select a start and stop time", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    item.setId(ID);
-                                    mHelper.updateItemWithSetTime(item);
-                                    Toast.makeText(getApplicationContext(), "case B", Toast.LENGTH_SHORT).show();
+                                    if (ID == -1){
+                                        mHelper.addItemWithSetTime(item);
+                                    } else {
+                                        item.setId(ID);
+                                        mHelper.updateItemWithSetTime(item);
+                                    }
+
+                                    Intent BackpressedIntent = new Intent();
+                                    BackpressedIntent .setClass(getApplicationContext(),HomeActivity.class);
+                                    BackpressedIntent .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(BackpressedIntent );
+                                    finish();
                                 }
 
-                                Toast.makeText(getApplicationContext(), "case C", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if (ID == -1){
+                                    mHelper.addItem(item);
+                                } else {
+                                    item.setId(ID);
+                                    mHelper.updateItem(item);
+                                }
 
                                 Intent BackpressedIntent = new Intent();
                                 BackpressedIntent .setClass(getApplicationContext(),HomeActivity.class);
@@ -217,24 +246,7 @@ public class AddItemActivity extends AppCompatActivity {
                                 finish();
                             }
 
-                        } else {
-                            if (ID == -1){
-                                mHelper.addItem(item);
-                                Toast.makeText(getApplicationContext(), "case D", Toast.LENGTH_SHORT).show();
-                            } else {
-                                item.setId(ID);
-                                mHelper.updateItem(item);
-                                Toast.makeText(getApplicationContext(), "case E", Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getApplicationContext(), "case F", Toast.LENGTH_SHORT).show();
-
-                            Intent BackpressedIntent = new Intent();
-                            BackpressedIntent .setClass(getApplicationContext(),HomeActivity.class);
-                            BackpressedIntent .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(BackpressedIntent );
-                            finish();
                         }
-
 
                     }
                 });
@@ -284,19 +296,19 @@ public class AddItemActivity extends AppCompatActivity {
                 break;
             case "Dry iron" :  powerVal = 1750;
                 break;
-            case "Incandescent lamp bulbs" :  powerVal = 100;
+            case "Incandescent lamb bulbs" :  powerVal = 100;
                 break;
             case "Compact-fluorescent bulbs" :  powerVal = 20;
                 break;
-            case "Fluorescent lamp" :  powerVal = 36;
+            case "Fluorescent bulbs" :  powerVal = 36;
                 break;
             case "LED lighting" :  powerVal = 18;
                 break;
-            case "Television 14 inch" :  powerVal = 120;
+            case "Television 14 inch." :  powerVal = 120;
                 break;
-            case "Television 20 inch" :  powerVal = 200;
+            case "Television 20 inch." :  powerVal = 200;
                 break;
-            case "Television 24 inch" :  powerVal = 250;
+            case "Television 24 inch." :  powerVal = 250;
                 break;
             case "Computer" :  powerVal = 550;
                 break;
@@ -312,7 +324,7 @@ public class AddItemActivity extends AppCompatActivity {
                 break;
             case "Vacuum cleaner" :  powerVal = 1000;
                 break;
-            case "Modem,Router" :  powerVal = 10;
+            case "Modem, Router" :  powerVal = 10;
                 break;
             case "Telephone" :  powerVal = 10;
                 break;

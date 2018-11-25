@@ -1,9 +1,11 @@
 package com.example.a59011178.home;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -125,11 +127,33 @@ public class HomeActivity extends AppCompatActivity {
 
                 break;
             case R.id.action_cut_out:
-                DatabaseHelper mHelper = new DatabaseHelper(HomeActivity.this);
-                mHelper.cutOut();
+                final DatabaseHelper mHelper = new DatabaseHelper(HomeActivity.this);
 
-                Intent intent = new Intent(HomeActivity.this, AddItemActivity.class);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+
+                builder.setTitle("Start new month");
+                builder.setMessage("Are you sure to reset all money?\n(All your equipment are remain)");
+
+                builder.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mHelper.cutOut();
+                        mHelper.newMonth();
+                        Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "Start new month", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                builder.setNegativeButton("Maybe next time", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                builder.show();
+
                 break;
         }
 

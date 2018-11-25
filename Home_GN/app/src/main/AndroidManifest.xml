@@ -34,7 +34,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".AddItemActivity"
-            android:label="@string/add_title"
+            android:label="Equipment"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait">
 
