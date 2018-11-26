@@ -176,7 +176,7 @@ public class TabCal extends Fragment implements View.OnClickListener  {
             float power = nowItem.getPower();
             float hrPerDay = nowItem.getHrPerDay();
             float dayPerMonth = nowItem.getDayPerMonth();
-            float bahtUnit = 7;
+            float bahtUnit = mItemList.get(0).getTotalMoney();
 
             float sum = hrPerDay*power*dayPerMonth*bahtUnit/10000;
 

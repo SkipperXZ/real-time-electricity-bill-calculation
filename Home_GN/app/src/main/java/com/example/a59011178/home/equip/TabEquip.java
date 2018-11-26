@@ -67,7 +67,7 @@ public class TabEquip extends Fragment implements View.OnClickListener {
                             electricUsage += (((float)e.getHr()*(float) e.getPower())/(float)3600);
                         }
                     totalWatt.setText(String.format("%.2f",electricUsage)+" Watt");
-                    totalBaht.setText(String.format("%.4f",(electricUsage/1000)*mItemList.get(0).getTotalMoney())+" Baht");
+                    totalBaht.setText(String.format("%.4f",(electricUsage/10000)*mItemList.get(0).getTotalMoney())+" Baht");
                     }
 
                 }
