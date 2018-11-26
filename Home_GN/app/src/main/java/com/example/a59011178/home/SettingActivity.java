@@ -67,8 +67,11 @@ public class SettingActivity extends AppCompatActivity {
 
                                 Toast.makeText(getApplicationContext(), "Now Your Energy charge is " + myNumPick.getValue() + " Bath/unit", Toast.LENGTH_SHORT).show();
 
-                                Intent i=new Intent(getApplicationContext(),HomeActivity.class);
-                                startActivity(i);
+                                Intent BackpressedIntent = new Intent();
+                                BackpressedIntent .setClass(getApplicationContext(),HomeActivity.class);
+                                BackpressedIntent .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(BackpressedIntent );
+                                finish();
 
                             }
                         }

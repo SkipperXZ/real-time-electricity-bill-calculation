@@ -54,15 +54,14 @@ public class UpdatePassword extends AppCompatActivity{
                                     {
                                         Toast.makeText(getApplicationContext(),"Your password has been chaged",Toast.LENGTH_LONG).show();
                                         auth.signOut();
-                                        finish();
-                                        Intent i = new Intent(UpdatePassword.this,LoginActivity.class);
+                                        Intent i = new Intent(UpdatePassword.this, LoginActivity.class);
+                                        i.setFlags(i.FLAG_ACTIVITY_NEW_TASK | i.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(i);
+                                        finish();
                                     }
                                 else {
                                         Toast.makeText(getApplicationContext(),"Password cold not be changed",Toast.LENGTH_LONG).show();
                                     }
-
-
                                 }
 
                             });

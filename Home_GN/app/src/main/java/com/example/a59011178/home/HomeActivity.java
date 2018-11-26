@@ -122,8 +122,11 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.action_Log_out:
 
                 FirebaseAuth.getInstance().signOut();
-                Intent i=new Intent(getApplicationContext(),LoginActivity.class);
-                startActivity(i);
+                Intent BackpressedIntent = new Intent();
+                BackpressedIntent .setClass(getApplicationContext(),LoginActivity.class);
+                BackpressedIntent .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(BackpressedIntent );
+                finish();
 
                 break;
             case R.id.action_cut_out:
@@ -141,6 +144,7 @@ public class HomeActivity extends AppCompatActivity {
                         mHelper.newMonth();
                         Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                         startActivity(intent);
+                        finish();
                         Toast.makeText(getApplicationContext(), "Start new month", Toast.LENGTH_SHORT).show();
                     }
                 });
