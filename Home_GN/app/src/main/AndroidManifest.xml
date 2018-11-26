@@ -5,8 +5,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/untitled_1"
-        android:label="@string/app_name"
+        android:icon="@drawable/icon"
+        android:label="USAGE"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -24,7 +24,7 @@
         </activity>
 
         <activity android:name=".HomeActivity"
-            android:label="@string/app_name"
+            android:label="HOME"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
         </activity>
