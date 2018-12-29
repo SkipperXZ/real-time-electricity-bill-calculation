@@ -1,5 +1,7 @@
 # real-time-electricity-bill-calculation
 
+<h3>Platform Android(JAVA)</h3>
+
 <img src = "https://i.imgur.com/0uekkuH.png"> 
 <img src = "https://i.imgur.com/2DPeZcy.png">  
 <img src = "https://i.imgur.com/RQoId93.png"> 
